@@ -136,8 +136,17 @@ nav {
   -webkit-backdrop-filter: blur(16px);
   backdrop-filter: blur(16px);
   border-bottom: 1px solid rgba(255,255,255,0.07);
-  /* Fallback per browser senza backdrop-filter */
   background: rgba(13,13,13,0.97) \9;
+  -webkit-transform: translateY(0);
+  transform: translateY(0);
+  -webkit-transition: -webkit-transform 0.35s cubic-bezier(0.4,0,0.2,1), opacity 0.35s;
+  transition: transform 0.35s cubic-bezier(0.4,0,0.2,1), opacity 0.35s;
+  opacity: 1;
+}
+nav.nav-hidden {
+  -webkit-transform: translateY(-110%);
+  transform: translateY(-110%);
+  opacity: 0;
 }
  
 .nav-logo {
@@ -322,16 +331,17 @@ nav {
 .hero-title {
   font-family: 'Barlow Condensed', 'Arial Black', sans-serif;
   font-weight: 900;
-  font-size: clamp(3.2rem, 12vw, 9rem);
-  line-height: 0.92;
+  font-size: clamp(2.4rem, 9vw, 8rem);
+  line-height: 0.95;
   text-transform: uppercase;
   color: var(--white);
   margin-bottom: 1.25rem;
   letter-spacing: -0.01em;
-  /* Evita overflow su schermi stretti */
   word-break: break-word;
-  -webkit-hyphens: auto;
-  hyphens: auto;
+  overflow-wrap: break-word;
+  -webkit-hyphens: none;
+  hyphens: none;
+  max-width: 100%;
 }
 .hero-title .gold { color: var(--gold); display: block; }
  
@@ -916,7 +926,7 @@ footer a:hover { color: var(--gold); }
   .nav-hamburger { display: -webkit-flex; display: flex; }
  
   .hero { padding: 0 1rem 3rem; }
-  .hero-title { font-size: clamp(2.8rem, 14vw, 5rem); }
+  .hero-title { font-size: clamp(2.2rem, 11vw, 4rem); line-height: 0.97; }
  
   .buy-section { padding: var(--sp-xl) 1rem; }
   .buy-inner {
@@ -978,7 +988,7 @@ footer a:hover { color: var(--gold); }
   .btn-nav { padding: 0.5rem 0.9rem; font-size: 0.73rem; }
  
   .hero { padding: 0 0.9rem 2.5rem; }
-  .hero-title { font-size: clamp(2.4rem, 16vw, 3.8rem); line-height: 0.95; }
+  .hero-title { font-size: clamp(2rem, 13vw, 3.2rem); line-height: 0.97; }
   .hero-eyebrow { font-size: 0.62rem; gap: 0.4rem; }
   .hero-eyebrow-line { width: 16px; }
   .meta-pill { font-size: 0.68rem; padding: 0.35rem 0.8rem; }
@@ -1026,8 +1036,8 @@ footer a:hover { color: var(--gold); }
   <ul class="nav-links" aria-label="Link sezioni">
     <li><a href="#libro">Il Libro</a></li>
     <li><a href="#daniela">Daniela</a></li>
-    <li><a href="#contenuti">Contenuti</a></li>
     <li><a href="#testimonianze">Recensioni</a></li>
+    <li><a href="#acquista">Acquista</a></li>
   </ul>
  
   <a href="#acquista" class="btn-nav">🛒 Acquista — €14,90</a>
@@ -1043,8 +1053,8 @@ footer a:hover { color: var(--gold); }
   <button class="close-btn" aria-label="Chiudi menu" onclick="document.getElementById('mobileNav').classList.remove('open')">✕</button>
   <a href="#libro"         onclick="document.getElementById('mobileNav').classList.remove('open')">Il Libro</a>
   <a href="#daniela"       onclick="document.getElementById('mobileNav').classList.remove('open')">Daniela</a>
-  <a href="#contenuti"     onclick="document.getElementById('mobileNav').classList.remove('open')">Contenuti</a>
   <a href="#testimonianze" onclick="document.getElementById('mobileNav').classList.remove('open')">Recensioni</a>
+  <a href="#acquista"      onclick="document.getElementById('mobileNav').classList.remove('open')">Acquista</a>
   <a href="#acquista" class="btn-nav" onclick="document.getElementById('mobileNav').classList.remove('open')">🛒 Acquista — €14,90</a>
 </div>
  
@@ -1352,6 +1362,36 @@ document.querySelectorAll('.faq-q').forEach(function(btn) {
 document.getElementById('mobileNav').addEventListener('click', function(e) {
   if (e.target === this) this.classList.remove('open');
 });
+ 
+// Navbar hide on scroll down — show on scroll up
+(function() {
+  var nav = document.querySelector('nav');
+  var lastY = 0;
+  var ticking = false;
+ 
+  window.addEventListener('scroll', function() {
+    if (!ticking) {
+      window.requestAnimationFrame(function() {
+        var currentY = window.pageYOffset || document.documentElement.scrollTop;
+        // Non nascondere nei primi 80px (sopra la navbar stessa)
+        if (currentY <= 80) {
+          nav.classList.remove('nav-hidden');
+        } else if (currentY > lastY) {
+          // Scrollando giù → nascondi
+          nav.classList.add('nav-hidden');
+          // Chiudi anche il menu mobile se aperto
+          document.getElementById('mobileNav').classList.remove('open');
+        } else {
+          // Scrollando su → mostra
+          nav.classList.remove('nav-hidden');
+        }
+        lastY = currentY;
+        ticking = false;
+      });
+      ticking = true;
+    }
+  }, { passive: true });
+})();
 </script>
  
 </body>
