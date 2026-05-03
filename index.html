@@ -566,6 +566,133 @@ nav.nav-hidden {
 }
 .trust-item { font-size: 0.75rem; color: rgba(255,255,255,0.38); white-space: nowrap; }
  
+/* Hero scroll down */
+.hero-scroll-down {
+  display: -webkit-inline-flex;
+  display: inline-flex;
+  -webkit-flex-direction: column;
+  flex-direction: column;
+  -webkit-align-items: center;
+  align-items: center;
+  gap: 0.4rem;
+  color: rgba(255,255,255,0.55);
+  text-decoration: none;
+  -webkit-transition: color 0.2s;
+  transition: color 0.2s;
+  -webkit-animation: bounce 2.5s ease-in-out infinite;
+  animation: bounce 2.5s ease-in-out infinite;
+}
+.hero-scroll-down:hover { color: var(--gold); }
+.scroll-arrow { font-size: 1.5rem; line-height: 1; }
+.scroll-label { font-size: 0.68rem; letter-spacing: 0.15em; text-transform: uppercase; font-weight: 600; }
+@-webkit-keyframes bounce { 0%,100%{-webkit-transform:translateY(0);transform:translateY(0);} 50%{-webkit-transform:translateY(6px);transform:translateY(6px);} }
+@keyframes bounce { 0%,100%{transform:translateY(0);} 50%{transform:translateY(6px);} }
+ 
+/* Promo widget */
+.promo-widget {
+  background: var(--white);
+  border: 2px solid #c0392b;
+  border-radius: 14px;
+  padding: 1.25rem 1.5rem;
+  position: relative;
+  overflow: hidden;
+}
+.promo-widget::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 4px;
+  background: #c0392b;
+}
+.promo-tag {
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #c0392b;
+  margin-bottom: 0.85rem;
+}
+.promo-main {
+  display: -webkit-flex;
+  display: flex;
+  -webkit-align-items: center;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 0.85rem;
+  -webkit-flex-wrap: wrap;
+  flex-wrap: wrap;
+}
+.promo-book-price, .promo-shipping {
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: column;
+  flex-direction: column;
+  gap: 0.1rem;
+}
+.promo-label {
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #888;
+}
+.promo-free {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 900;
+  font-size: 2rem;
+  color: #c0392b;
+  line-height: 1;
+  letter-spacing: 0.02em;
+}
+.promo-divider {
+  font-size: 1.5rem;
+  font-weight: 300;
+  color: #ccc;
+  line-height: 1;
+}
+.promo-amount {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 900;
+  font-size: 2rem;
+  color: var(--black);
+  line-height: 1;
+}
+.promo-note {
+  font-size: 0.75rem;
+  color: #666;
+  border-top: 1px solid #f0f0f0;
+  padding-top: 0.75rem;
+}
+.promo-note strong { color: #c0392b; }
+ 
+/* Trust widgets */
+.trust-widgets {
+  display: -webkit-flex;
+  display: flex;
+  gap: 0.75rem;
+  -webkit-flex-wrap: wrap;
+  flex-wrap: wrap;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(255,255,255,0.08);
+}
+.trust-widget {
+  display: -webkit-flex;
+  display: flex;
+  -webkit-align-items: center;
+  align-items: center;
+  gap: 0.65rem;
+  -webkit-flex: 1 1 calc(33.33% - 0.5rem);
+  flex: 1 1 calc(33.33% - 0.5rem);
+  min-width: 130px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 10px;
+  padding: 0.75rem 0.9rem;
+}
+.tw-icon { font-size: 1.3rem; flex-shrink: 0; line-height: 1; }
+.tw-title { font-size: 0.78rem; font-weight: 700; color: var(--white); line-height: 1.2; }
+.tw-sub { font-size: 0.68rem; color: rgba(255,255,255,0.4); margin-top: 0.1rem; }
+ 
 /* ═══════════════════════════════════════════════
    STATS
 ═══════════════════════════════════════════════ */
@@ -943,7 +1070,8 @@ footer a:hover { color: var(--gold); }
   .buy-info { -webkit-align-items: center; align-items: center; text-align: center; }
   .buy-badge { margin: 0 auto; }
   .buy-price-row { -webkit-justify-content: center; justify-content: center; }
-  .trust-row { -webkit-justify-content: center; justify-content: center; }
+  .trust-widgets { -webkit-justify-content: center; justify-content: center; }
+  .trust-widget { -webkit-flex: 1 1 100%; flex: 1 1 100%; }
  
   .stats-section { padding: 0 1rem var(--sp-xl); }
   .stats-grid {
@@ -1091,12 +1219,10 @@ footer a:hover { color: var(--gold); }
     </div>
  
     <div class="hero-cta">
-      <a href="#acquista" class="btn-primary">🛒 Acquista il libro</a>
-      <div class="hero-price">
-        <span class="price-label">Prezzo</span>
-        <span class="price-val">€14,90</span>
-        <span class="price-note">spedizione inclusa</span>
-      </div>
+      <a href="#acquista" class="hero-scroll-down" aria-label="Scopri di più">
+        <span class="scroll-arrow">↓</span>
+        <span class="scroll-label">Scopri il libro</span>
+      </a>
     </div>
  
   </div>
@@ -1123,16 +1249,41 @@ footer a:hover { color: var(--gold); }
       <div class="buy-badge">Disponibile ora</div>
       <div class="buy-title">Il libro di<br><span>Daniela Modina</span></div>
       <p class="buy-desc">Un percorso autentico tra cura, ascolto e trasformazione. Le esperienze reali di Margherita, Sonia, Vittoria e molte altre — raccontate con empatia e il Metodo 80/20 di Daniela.</p>
-      <div class="buy-price-row">
-        <div class="big-price">€14,90</div>
-        <div class="price-aside">Pagamento sicuro<br>via Stripe<br>Spedizione in Italia</div>
+      <!-- Widget prezzo promo -->
+      <div class="promo-widget">
+        <div class="promo-tag">🎁 OFFERTA SPECIALE</div>
+        <div class="promo-main">
+          <div class="promo-book-price">
+            <span class="promo-label">Il libro</span>
+            <span class="promo-free">GRATIS</span>
+          </div>
+          <div class="promo-divider">+</div>
+          <div class="promo-shipping">
+            <span class="promo-label">Paghi solo la spedizione</span>
+            <span class="promo-amount">€9,99</span>
+          </div>
+        </div>
+        <div class="promo-note">Totale: <strong>€9,99</strong> — il libro è completamente gratuito</div>
       </div>
-      <a href="INSERISCI_LINK_STRIPE_QUI" class="btn-primary">🛒 Acquista ora</a>
-      <div class="trust-row">
-        <span class="trust-item">⭐ 4.9 / 5</span>
-        <span class="trust-item">🔒 Stripe sicuro</span>
-        <span class="trust-item">📦 Spedizione IT</span>
-        <span class="trust-item">500+ copie vendute</span>
+ 
+      <a href="INSERISCI_LINK_STRIPE_QUI" class="btn-primary">🛒 Ricevi il libro — solo €9,99</a>
+ 
+      <!-- Trust widgets -->
+      <div class="trust-widgets">
+        <div class="trust-widget">
+          <div class="tw-icon">🔒</div>
+          <div class="tw-text">
+            <div class="tw-title">Pagamento sicuro</div>
+            <div class="tw-sub">Protetto da Stripe</div>
+          </div>
+        </div>
+        <div class="trust-widget">
+          <div class="tw-icon">📦</div>
+          <div class="tw-text">
+            <div class="tw-title">Spedizione in Italia</div>
+            <div class="tw-sub">Consegna 3–5 giorni</div>
+          </div>
+        </div>
       </div>
     </div>
  
@@ -1332,11 +1483,11 @@ footer a:hover { color: var(--gold); }
     Inizia il tuo<br>percorso di
     <span class="gold">Rinascita</span>
   </h2>
-  <p class="cta-sub">Un libro che accompagna. Da tenere sul comodino, da regalare a chi ami.</p>
+  <p class="cta-sub">Il libro è <strong style="color:var(--gold);">completamente gratuito</strong> — paghi solo €9,99 di spedizione.</p>
   <a href="INSERISCI_LINK_STRIPE_QUI" class="btn-primary" style="font-size:1rem; padding:1rem 2.2rem;">
-    🛒 Acquista ora — €14,90
+    🛒 Ricevi il libro — solo €9,99
   </a>
-  <p class="cta-note">Solo <strong>€14,90</strong> · Pagamento sicuro Stripe · Spedizione in tutta Italia</p>
+  <p class="cta-note">Libro <strong>GRATIS</strong> · Solo €9,99 di spedizione · Pagamento sicuro Stripe · Spedizione in tutta Italia</p>
 </section>
  
 <!-- FOOTER -->
@@ -1396,4 +1547,3 @@ document.getElementById('mobileNav').addEventListener('click', function(e) {
  
 </body>
 </html>
- 
