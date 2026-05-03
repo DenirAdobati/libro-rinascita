@@ -1,0 +1,1359 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="theme-color" content="#0d0d0d">
+<title>Rinascita — Daniela Modina · Beautrì</title>
+ 
+<!-- Preconnect per velocità font -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;800;900&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+ 
+<style>
+/* ═══════════════════════════════════════════════
+   RESET + BASE — cross-browser safe
+═══════════════════════════════════════════════ */
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+}
+ 
+:root {
+  --gold:        #C9A227;
+  --gold-t10:    rgba(201,162,39,0.10);
+  --gold-t20:    rgba(201,162,39,0.20);
+  --gold-t35:    rgba(201,162,39,0.35);
+  --black:       #111111;
+  --dark:        #0d0d0d;
+  --dark-card:   #1c1c1c;
+  --dark-card2:  #232323;
+  --white:       #ffffff;
+  --off:         #f5f4f1;
+  --muted:       #666666;
+  --border:      #e2e0db;
+ 
+  /* Spacing scale */
+  --sp-xs:  0.5rem;
+  --sp-sm:  1rem;
+  --sp-md:  1.5rem;
+  --sp-lg:  2.5rem;
+  --sp-xl:  4rem;
+  --sp-2xl: 5.5rem;
+ 
+  /* Font scale — desktop base */
+  --fs-xs:   0.72rem;
+  --fs-sm:   0.82rem;
+  --fs-base: 0.95rem;
+  --fs-md:   1.05rem;
+  --fs-lg:   1.25rem;
+}
+ 
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+ 
+body {
+  font-family: 'Outfit', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  background: var(--white);
+  color: var(--black);
+  overflow-x: hidden;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+ 
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+ 
+a { color: inherit; text-decoration: none; }
+button { cursor: pointer; border: none; background: none; font-family: inherit; }
+ul { list-style: none; }
+ 
+/* ═══════════════════════════════════════════════
+   UTILITIES
+═══════════════════════════════════════════════ */
+.gold { color: var(--gold); }
+ 
+.eyebrow {
+  display: -webkit-flex;
+  display: flex;
+  -webkit-align-items: center;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: var(--fs-xs);
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 0.75rem;
+}
+.eyebrow-line { width: 22px; height: 2px; background: var(--gold); flex-shrink: 0; }
+ 
+.section-title-big {
+  font-family: 'Barlow Condensed', 'Arial Black', sans-serif;
+  font-weight: 900;
+  font-size: clamp(2rem, 5vw, 3.8rem);
+  text-transform: uppercase;
+  line-height: 1.0;
+  letter-spacing: -0.01em;
+}
+ 
+.section-sub-text {
+  font-size: var(--fs-base);
+  color: var(--muted);
+  line-height: 1.75;
+  margin-top: 0.75rem;
+  max-width: 560px;
+}
+ 
+.inner { max-width: 900px; margin: 0 auto; }
+ 
+/* ═══════════════════════════════════════════════
+   NAVBAR
+═══════════════════════════════════════════════ */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 300;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-align-items: center;
+  align-items: center;
+  -webkit-justify-content: space-between;
+  justify-content: space-between;
+  padding: 0.9rem 2.5rem;
+  background: rgba(13,13,13,0.92);
+  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+  /* Fallback per browser senza backdrop-filter */
+  background: rgba(13,13,13,0.97) \9;
+}
+ 
+.nav-logo {
+  display: -webkit-flex;
+  display: flex;
+  -webkit-align-items: center;
+  align-items: center;
+  gap: 0.55rem;
+  text-decoration: none;
+  flex-shrink: 0;
+}
+.nav-logo-bar { width: 20px; height: 2px; background: var(--gold); }
+.nav-logo-text {
+  font-family: 'Barlow Condensed', 'Arial Black', sans-serif;
+  font-weight: 800;
+  font-size: 1.15rem;
+  letter-spacing: 0.1em;
+  color: var(--white);
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.nav-logo-text span { color: var(--gold); }
+ 
+.nav-links {
+  display: -webkit-flex;
+  display: flex;
+  gap: 1.75rem;
+}
+.nav-links a {
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.55);
+  text-decoration: none;
+  white-space: nowrap;
+  -webkit-transition: color 0.2s;
+  transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--white); }
+ 
+.btn-nav {
+  background: var(--gold);
+  color: var(--black);
+  padding: 0.55rem 1.25rem;
+  border-radius: 6px;
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-decoration: none;
+  white-space: nowrap;
+  flex-shrink: 0;
+  display: inline-block;
+  -webkit-transition: opacity 0.2s;
+  transition: opacity 0.2s;
+}
+.btn-nav:hover { opacity: 0.85; }
+ 
+/* Hamburger mobile */
+.nav-hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  padding: 4px;
+  cursor: pointer;
+  background: none;
+  border: none;
+}
+.nav-hamburger span {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: var(--white);
+  -webkit-transition: all 0.25s;
+  transition: all 0.25s;
+  border-radius: 1px;
+}
+ 
+/* Mobile menu overlay */
+.nav-mobile {
+  display: none;
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(13,13,13,0.98);
+  z-index: 299;
+  -webkit-flex-direction: column;
+  flex-direction: column;
+  -webkit-align-items: center;
+  align-items: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  gap: 2rem;
+}
+.nav-mobile.open { display: -webkit-flex; display: flex; }
+.nav-mobile a {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 900;
+  font-size: 2.2rem;
+  text-transform: uppercase;
+  color: var(--white);
+  letter-spacing: 0.05em;
+  -webkit-transition: color 0.2s;
+  transition: color 0.2s;
+}
+.nav-mobile a:hover { color: var(--gold); }
+.nav-mobile .close-btn {
+  position: absolute;
+  top: 1.25rem; right: 1.5rem;
+  font-size: 2rem;
+  color: rgba(255,255,255,0.5);
+  line-height: 1;
+}
+ 
+/* ═══════════════════════════════════════════════
+   HERO
+═══════════════════════════════════════════════ */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  min-height: -webkit-fill-available;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: column;
+  flex-direction: column;
+  -webkit-align-items: center;
+  align-items: center;
+  -webkit-justify-content: flex-end;
+  justify-content: flex-end;
+  padding: 0 1.5rem 4rem;
+  text-align: center;
+  overflow: hidden;
+}
+ 
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  top: 0; left: 0; right: 0; bottom: 0; /* fallback per browser senza inset */
+  background-color: #1a1510;
+  /* background-image: url('TUA-FOTO-QUI.jpg'); */
+  background-size: cover;
+  background-position: center top;
+  background-repeat: no-repeat;
+  z-index: 0;
+}
+ 
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  top: 0; left: 0; right: 0; bottom: 0;
+  z-index: 1;
+  background: -webkit-linear-gradient(top, rgba(10,8,5,0.3) 0%, rgba(10,8,5,0.55) 40%, rgba(10,8,5,0.85) 70%, rgba(10,8,5,0.98) 100%);
+  background: linear-gradient(to bottom, rgba(10,8,5,0.3) 0%, rgba(10,8,5,0.55) 40%, rgba(10,8,5,0.85) 70%, rgba(10,8,5,0.98) 100%);
+}
+ 
+.hero-content {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 860px;
+}
+ 
+.hero-eyebrow {
+  display: -webkit-inline-flex;
+  display: inline-flex;
+  -webkit-align-items: center;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: var(--fs-xs);
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 1rem;
+  -webkit-flex-wrap: wrap;
+  flex-wrap: wrap;
+  -webkit-justify-content: center;
+  justify-content: center;
+}
+.hero-eyebrow-line { width: 24px; height: 2px; background: var(--gold); flex-shrink: 0; }
+ 
+.hero-title {
+  font-family: 'Barlow Condensed', 'Arial Black', sans-serif;
+  font-weight: 900;
+  font-size: clamp(3.2rem, 12vw, 9rem);
+  line-height: 0.92;
+  text-transform: uppercase;
+  color: var(--white);
+  margin-bottom: 1.25rem;
+  letter-spacing: -0.01em;
+  /* Evita overflow su schermi stretti */
+  word-break: break-word;
+  -webkit-hyphens: auto;
+  hyphens: auto;
+}
+.hero-title .gold { color: var(--gold); display: block; }
+ 
+.hero-sub {
+  font-size: clamp(0.9rem, 2vw, 1.05rem);
+  font-weight: 400;
+  line-height: 1.75;
+  color: rgba(255,255,255,0.62);
+  max-width: 540px;
+  margin: 0 auto 2rem;
+}
+ 
+.hero-meta {
+  display: -webkit-flex;
+  display: flex;
+  -webkit-align-items: center;
+  align-items: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  gap: 0.6rem;
+  -webkit-flex-wrap: wrap;
+  flex-wrap: wrap;
+  margin-bottom: 2.5rem;
+}
+.meta-pill {
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 50px;
+  padding: 0.4rem 1rem;
+  font-size: 0.75rem;
+  color: rgba(255,255,255,0.6);
+  display: -webkit-inline-flex;
+  display: inline-flex;
+  -webkit-align-items: center;
+  align-items: center;
+  gap: 0.35rem;
+  white-space: nowrap;
+}
+.meta-pill strong { color: var(--white); font-weight: 600; }
+ 
+.hero-cta {
+  display: -webkit-flex;
+  display: flex;
+  -webkit-align-items: center;
+  align-items: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  gap: 1.5rem;
+  -webkit-flex-wrap: wrap;
+  flex-wrap: wrap;
+}
+ 
+.btn-primary {
+  display: -webkit-inline-flex;
+  display: inline-flex;
+  -webkit-align-items: center;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--gold);
+  color: var(--black);
+  padding: 0.9rem 2rem;
+  border-radius: 8px;
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  text-decoration: none;
+  border: none;
+  white-space: nowrap;
+  -webkit-box-shadow: 0 4px 32px rgba(201,162,39,0.38);
+  box-shadow: 0 4px 32px rgba(201,162,39,0.38);
+  -webkit-transition: opacity 0.2s, -webkit-transform 0.15s;
+  transition: opacity 0.2s, transform 0.15s;
+}
+.btn-primary:hover { opacity: 0.88; -webkit-transform: translateY(-2px); transform: translateY(-2px); }
+.btn-primary:active { -webkit-transform: translateY(0); transform: translateY(0); }
+ 
+.hero-price {
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: column;
+  flex-direction: column;
+  text-align: left;
+}
+.price-label { font-size: 0.65rem; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.38); }
+.price-val {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 900;
+  font-size: 2rem;
+  color: var(--gold);
+  line-height: 1;
+}
+.price-note { font-size: 0.65rem; color: rgba(255,255,255,0.32); }
+ 
+/* ═══════════════════════════════════════════════
+   SEZIONE ACQUISTO
+═══════════════════════════════════════════════ */
+.buy-section { background: var(--dark); padding: var(--sp-2xl) 1.5rem; }
+.buy-inner {
+  max-width: 860px;
+  margin: 0 auto;
+  display: -webkit-flex;
+  display: flex;
+  gap: 3rem;
+  -webkit-align-items: center;
+  align-items: center;
+}
+ 
+.book-art {
+  width: 220px;
+  min-width: 180px;
+  -webkit-flex-shrink: 0;
+  flex-shrink: 0;
+  aspect-ratio: 5/7;
+  background: -webkit-linear-gradient(150deg, #222 0%, #181818 100%);
+  background: linear-gradient(150deg, #222 0%, #181818 100%);
+  border-radius: 10px;
+  border: 1px solid var(--gold-t20);
+  display: -webkit-flex;
+  display: flex;
+  -webkit-align-items: center;
+  align-items: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  padding: 1.5rem 1rem;
+  -webkit-box-shadow: 10px 10px 50px rgba(0,0,0,0.7), -3px 0 0 rgba(201,162,39,0.1);
+  box-shadow: 10px 10px 50px rgba(0,0,0,0.7), -3px 0 0 rgba(201,162,39,0.1);
+  position: relative;
+  overflow: hidden;
+}
+.book-art::before {
+  content: '';
+  position: absolute;
+  inset: 0; top: 0; left: 0; right: 0; bottom: 0;
+  background: -webkit-linear-gradient(150deg, rgba(201,162,39,0.1) 0%, transparent 60%);
+  background: linear-gradient(150deg, rgba(201,162,39,0.1) 0%, transparent 60%);
+}
+.book-art-inner { position: relative; z-index: 1; text-align: center; }
+.ba-ornament { width: 30px; height: 1px; background: var(--gold); margin: 0 auto 0.9rem; }
+.ba-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 900; font-size: 1.7rem; text-transform: uppercase;
+  color: var(--white); line-height: 1; margin-bottom: 0.25rem;
+}
+.ba-sub { font-size: 0.55rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.9rem; }
+.ba-author { font-size: 0.55rem; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255,255,255,0.3); }
+ 
+.buy-info {
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: column;
+  flex-direction: column;
+  gap: 1.25rem;
+  -webkit-flex: 1;
+  flex: 1;
+  min-width: 0; /* fix flex overflow */
+}
+ 
+.buy-badge {
+  display: -webkit-inline-flex;
+  display: inline-flex;
+  -webkit-align-items: center;
+  align-items: center;
+  gap: 0.4rem;
+  background: var(--gold-t10);
+  border: 1px solid var(--gold-t20);
+  border-radius: 50px;
+  padding: 0.3rem 0.85rem;
+  font-size: var(--fs-xs);
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--gold);
+  width: -webkit-fit-content;
+  width: fit-content;
+}
+.buy-badge::before {
+  content: '';
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--gold);
+  -webkit-animation: blink 2s ease-in-out infinite;
+  animation: blink 2s ease-in-out infinite;
+}
+@-webkit-keyframes blink { 0%,100%{opacity:1;} 50%{opacity:0.25;} }
+@keyframes blink { 0%,100%{opacity:1;} 50%{opacity:0.25;} }
+ 
+.buy-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 900;
+  font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+  text-transform: uppercase;
+  color: var(--white);
+  line-height: 1.0;
+}
+.buy-title span { color: var(--gold); }
+ 
+.buy-desc { font-size: var(--fs-base); line-height: 1.75; color: rgba(255,255,255,0.52); }
+ 
+.buy-price-row {
+  display: -webkit-flex;
+  display: flex;
+  -webkit-align-items: center;
+  align-items: center;
+  gap: 1.25rem;
+}
+.big-price {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 900; font-size: clamp(2.2rem, 4vw, 3rem);
+  color: var(--gold); line-height: 1;
+}
+.price-aside { font-size: 0.75rem; color: rgba(255,255,255,0.32); line-height: 1.55; }
+ 
+.trust-row {
+  display: -webkit-flex;
+  display: flex;
+  gap: 1rem;
+  -webkit-flex-wrap: wrap;
+  flex-wrap: wrap;
+  padding-top: 0.9rem;
+  border-top: 1px solid rgba(255,255,255,0.07);
+}
+.trust-item { font-size: 0.75rem; color: rgba(255,255,255,0.38); white-space: nowrap; }
+ 
+/* ═══════════════════════════════════════════════
+   STATS
+═══════════════════════════════════════════════ */
+.stats-section { background: var(--dark); padding: 0 1.5rem var(--sp-xl); }
+.stats-grid {
+  max-width: 860px;
+  margin: 0 auto;
+  display: -webkit-flex;
+  display: flex;
+  gap: 1rem;
+}
+.stat-card {
+  -webkit-flex: 1;
+  flex: 1;
+  background: var(--dark-card);
+  border-radius: 14px;
+  padding: 1.5rem 1rem;
+  text-align: center;
+  border: 1px solid rgba(255,255,255,0.05);
+}
+.stat-num {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 900;
+  font-size: clamp(2rem, 5vw, 3rem);
+  color: var(--gold);
+  line-height: 1;
+  margin-bottom: 0.4rem;
+}
+.stat-label { font-size: 0.78rem; color: rgba(255,255,255,0.42); line-height: 1.5; }
+ 
+/* ═══════════════════════════════════════════════
+   AUTRICE
+═══════════════════════════════════════════════ */
+.author-section { background: var(--off); padding: var(--sp-2xl) 1.5rem; }
+.author-inner {
+  max-width: 860px;
+  margin: 0 auto;
+  display: -webkit-flex;
+  display: flex;
+  gap: 3.5rem;
+  -webkit-align-items: center;
+  align-items: center;
+}
+.author-img-wrap {
+  width: 280px;
+  min-width: 220px;
+  -webkit-flex-shrink: 0;
+  flex-shrink: 0;
+}
+.author-img {
+  width: 100%;
+  aspect-ratio: 3/4;
+  background: var(--dark-card);
+  border-radius: 14px;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-align-items: center;
+  align-items: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  color: rgba(255,255,255,0.2);
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  border: 2px solid var(--border);
+  position: relative;
+  overflow: hidden;
+}
+.author-img::before {
+  content: '';
+  position: absolute; inset: 0; top: 0; left: 0; right: 0; bottom: 0;
+  background: -webkit-linear-gradient(150deg, rgba(201,162,39,0.06), transparent);
+  background: linear-gradient(150deg, rgba(201,162,39,0.06), transparent);
+}
+.author-img span { position: relative; z-index: 1; }
+ 
+.author-text { -webkit-flex: 1; flex: 1; min-width: 0; }
+ 
+.author-title-h2 {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 900;
+  font-size: clamp(2rem, 4vw, 3rem);
+  text-transform: uppercase;
+  line-height: 1.0;
+  margin-bottom: 1.1rem;
+  color: var(--black);
+}
+.author-quote {
+  font-size: clamp(0.9rem, 1.5vw, 1.05rem);
+  font-style: italic;
+  line-height: 1.65;
+  color: var(--black);
+  font-weight: 500;
+  border-left: 3px solid var(--gold);
+  padding-left: 1rem;
+  margin-bottom: 1.1rem;
+}
+.author-bio {
+  font-size: var(--fs-base);
+  line-height: 1.78;
+  color: var(--muted);
+  margin-bottom: 1.25rem;
+}
+.credits { display: -webkit-flex; display: flex; -webkit-flex-direction: column; flex-direction: column; gap: 0.45rem; }
+.credit {
+  display: -webkit-flex;
+  display: flex;
+  -webkit-align-items: center;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: var(--fs-sm);
+  font-weight: 500;
+  color: var(--black);
+}
+.cdot { width: 6px; height: 6px; border-radius: 50%; background: var(--gold); flex-shrink: 0; }
+ 
+/* ═══════════════════════════════════════════════
+   CONTENUTI LIBRO
+═══════════════════════════════════════════════ */
+.contents-section { background: var(--dark); padding: var(--sp-2xl) 1.5rem; }
+.contents-inner { max-width: 860px; margin: 0 auto; }
+.section-heading { margin-bottom: 2.25rem; }
+.section-sub-text-dark { font-size: var(--fs-base); color: rgba(255,255,255,0.42); line-height: 1.75; margin-top: 0.75rem; max-width: 540px; }
+ 
+.contents-grid {
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-wrap: wrap;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+.content-card {
+  -webkit-flex: 1 1 calc(50% - 0.5rem);
+  flex: 1 1 calc(50% - 0.5rem);
+  min-width: 240px;
+  background: var(--dark-card);
+  border-radius: 14px;
+  padding: 1.25rem;
+  display: -webkit-flex;
+  display: flex;
+  gap: 0.9rem;
+  -webkit-align-items: flex-start;
+  align-items: flex-start;
+  border: 1px solid rgba(255,255,255,0.04);
+  -webkit-transition: border-color 0.2s, background 0.2s;
+  transition: border-color 0.2s, background 0.2s;
+}
+.content-card:hover { border-color: var(--gold-t20); background: var(--dark-card2); }
+.content-card.featured {
+  -webkit-flex: 1 1 100%;
+  flex: 1 1 100%;
+  background: -webkit-linear-gradient(135deg, rgba(201,162,39,0.12), rgba(201,162,39,0.04));
+  background: linear-gradient(135deg, rgba(201,162,39,0.12), rgba(201,162,39,0.04));
+  border: 1px solid var(--gold-t20);
+}
+.c-icon {
+  width: 42px; height: 42px;
+  border-radius: 10px;
+  flex-shrink: 0;
+  background: var(--gold-t10);
+  border: 1px solid rgba(201,162,39,0.18);
+  display: -webkit-flex;
+  display: flex;
+  -webkit-align-items: center;
+  align-items: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  font-size: 1.1rem;
+}
+.c-body { min-width: 0; }
+.c-name { font-weight: 700; font-size: 0.92rem; color: var(--white); margin-bottom: 0.25rem; }
+.c-desc { font-size: 0.78rem; color: rgba(255,255,255,0.42); line-height: 1.65; }
+ 
+/* ═══════════════════════════════════════════════
+   TESTIMONIANZE
+═══════════════════════════════════════════════ */
+.testi-section { background: var(--white); padding: var(--sp-2xl) 1.5rem; }
+.testi-inner { max-width: 860px; margin: 0 auto; }
+.testi-grid {
+  display: -webkit-flex;
+  display: flex;
+  gap: 1rem;
+  -webkit-flex-wrap: wrap;
+  flex-wrap: wrap;
+  margin-top: 2.25rem;
+}
+.testi-card {
+  -webkit-flex: 1 1 calc(33.33% - 0.7rem);
+  flex: 1 1 calc(33.33% - 0.7rem);
+  min-width: 240px;
+  background: var(--off);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 1.4rem;
+}
+.stars { color: var(--gold); font-size: 0.88rem; margin-bottom: 0.7rem; }
+.testi-text {
+  font-size: 0.87rem;
+  line-height: 1.72;
+  font-style: italic;
+  color: var(--black);
+  margin-bottom: 1.1rem;
+}
+.testi-author { display: -webkit-flex; display: flex; -webkit-align-items: center; align-items: center; gap: 0.6rem; }
+.av {
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  background: -webkit-linear-gradient(135deg, var(--gold), #7a5c0a);
+  background: linear-gradient(135deg, var(--gold), #7a5c0a);
+  display: -webkit-flex;
+  display: flex;
+  -webkit-align-items: center;
+  align-items: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 900;
+  font-size: 0.95rem;
+  color: var(--black);
+}
+.av-name { font-weight: 700; font-size: 0.83rem; }
+.av-role { font-size: 0.7rem; color: var(--muted); }
+ 
+/* ═══════════════════════════════════════════════
+   FAQ
+═══════════════════════════════════════════════ */
+.faq-section { background: var(--off); padding: var(--sp-2xl) 1.5rem; }
+.faq-inner { max-width: 680px; margin: 0 auto; }
+.faq-list { margin-top: 2.25rem; }
+.faq-item { border-bottom: 1px solid var(--border); }
+.faq-q {
+  display: -webkit-flex;
+  display: flex;
+  -webkit-align-items: flex-start;
+  align-items: flex-start;
+  -webkit-justify-content: space-between;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.1rem 0;
+  font-weight: 600;
+  font-size: 0.93rem;
+  cursor: pointer;
+  -webkit-user-select: none;
+  user-select: none;
+  line-height: 1.45;
+  color: var(--black);
+}
+.faq-q .ico {
+  color: var(--gold);
+  font-size: 1.3rem;
+  font-weight: 300;
+  flex-shrink: 0;
+  line-height: 1;
+  margin-top: 0.05rem;
+  -webkit-transition: -webkit-transform 0.25s;
+  transition: transform 0.25s;
+}
+.faq-a {
+  font-size: 0.87rem;
+  color: var(--muted);
+  line-height: 1.72;
+  max-height: 0;
+  overflow: hidden;
+  -webkit-transition: max-height 0.35s ease, padding-bottom 0.3s;
+  transition: max-height 0.35s ease, padding-bottom 0.3s;
+}
+.faq-item.open .faq-a { max-height: 300px; padding-bottom: 1.1rem; }
+.faq-item.open .ico { -webkit-transform: rotate(45deg); transform: rotate(45deg); }
+ 
+/* ═══════════════════════════════════════════════
+   CTA FINALE
+═══════════════════════════════════════════════ */
+.cta-section {
+  background: var(--dark);
+  padding: var(--sp-2xl) 1.5rem;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.cta-section::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 50%;
+  -webkit-transform: translateX(-50%);
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 700px;
+  height: 300px;
+  background: radial-gradient(ellipse, rgba(201,162,39,0.14), transparent 70%);
+  pointer-events: none;
+}
+.cta-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 900;
+  font-size: clamp(2.6rem, 8vw, 6rem);
+  text-transform: uppercase;
+  line-height: 0.95;
+  color: var(--white);
+  margin-bottom: 1rem;
+  position: relative;
+}
+.cta-title .gold { color: var(--gold); display: block; }
+.cta-sub { font-size: clamp(0.88rem, 1.5vw, 1rem); color: rgba(255,255,255,0.42); margin-bottom: 2.5rem; position: relative; }
+.cta-note { font-size: 0.78rem; color: rgba(255,255,255,0.28); margin-top: 1.25rem; position: relative; }
+.cta-note strong { color: var(--gold); }
+ 
+/* ═══════════════════════════════════════════════
+   FOOTER
+═══════════════════════════════════════════════ */
+footer {
+  background: var(--dark);
+  border-top: 1px solid rgba(255,255,255,0.07);
+  padding: 1.75rem 1.5rem;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-align-items: center;
+  align-items: center;
+  -webkit-justify-content: space-between;
+  justify-content: space-between;
+  -webkit-flex-wrap: wrap;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  font-size: 0.73rem;
+  color: rgba(255,255,255,0.28);
+}
+footer a { color: rgba(255,255,255,0.28); text-decoration: none; -webkit-transition: color 0.2s; transition: color 0.2s; }
+footer a:hover { color: var(--gold); }
+.footer-links { display: -webkit-flex; display: flex; gap: 1.25rem; -webkit-flex-wrap: wrap; flex-wrap: wrap; }
+ 
+/* ═══════════════════════════════════════════════
+   RESPONSIVE — TABLET (768px–1024px)
+═══════════════════════════════════════════════ */
+@media (max-width: 1024px) {
+  nav { padding: 0.85rem 1.75rem; }
+  .nav-links { gap: 1.25rem; }
+ 
+  .hero { padding: 0 1.25rem 3.5rem; }
+ 
+  .buy-inner { gap: 2.5rem; }
+  .book-art { width: 190px; min-width: 160px; }
+ 
+  .author-inner { gap: 2.5rem; }
+  .author-img-wrap { width: 240px; min-width: 200px; }
+}
+ 
+/* ═══════════════════════════════════════════════
+   RESPONSIVE — MOBILE LARGE (480px–767px)
+═══════════════════════════════════════════════ */
+@media (max-width: 767px) {
+  :root {
+    --sp-xl:  2.5rem;
+    --sp-2xl: 3.5rem;
+  }
+ 
+  nav { padding: 0.85rem 1.1rem; }
+  .nav-links { display: none; }
+  .nav-hamburger { display: -webkit-flex; display: flex; }
+ 
+  .hero { padding: 0 1rem 3rem; }
+  .hero-title { font-size: clamp(2.8rem, 14vw, 5rem); }
+ 
+  .buy-section { padding: var(--sp-xl) 1rem; }
+  .buy-inner {
+    -webkit-flex-direction: column;
+    flex-direction: column;
+    -webkit-align-items: center;
+    align-items: center;
+    gap: 2rem;
+  }
+  .book-art {
+    width: 160px;
+    min-width: unset;
+  }
+  .buy-info { -webkit-align-items: center; align-items: center; text-align: center; }
+  .buy-badge { margin: 0 auto; }
+  .buy-price-row { -webkit-justify-content: center; justify-content: center; }
+  .trust-row { -webkit-justify-content: center; justify-content: center; }
+ 
+  .stats-section { padding: 0 1rem var(--sp-xl); }
+  .stats-grid {
+    -webkit-flex-wrap: wrap;
+    flex-wrap: wrap;
+  }
+  .stat-card { -webkit-flex: 1 1 calc(50% - 0.5rem); flex: 1 1 calc(50% - 0.5rem); min-width: 130px; }
+ 
+  .author-section { padding: var(--sp-xl) 1rem; }
+  .author-inner {
+    -webkit-flex-direction: column;
+    flex-direction: column;
+    gap: 2rem;
+  }
+  .author-img-wrap { width: 100%; max-width: 260px; min-width: unset; margin: 0 auto; }
+ 
+  .contents-section { padding: var(--sp-xl) 1rem; }
+  .content-card { -webkit-flex: 1 1 100%; flex: 1 1 100%; min-width: unset; }
+ 
+  .testi-section { padding: var(--sp-xl) 1rem; }
+  .testi-card { -webkit-flex: 1 1 100%; flex: 1 1 100%; min-width: unset; }
+ 
+  .faq-section { padding: var(--sp-xl) 1rem; }
+  .faq-q { font-size: 0.88rem; }
+ 
+  .cta-section { padding: var(--sp-xl) 1rem; }
+  .cta-title { font-size: clamp(2.2rem, 10vw, 3.5rem); }
+ 
+  footer { -webkit-justify-content: center; justify-content: center; text-align: center; }
+}
+ 
+/* ═══════════════════════════════════════════════
+   RESPONSIVE — MOBILE SMALL (< 480px)
+═══════════════════════════════════════════════ */
+@media (max-width: 479px) {
+  :root {
+    --sp-xl:  2rem;
+    --sp-2xl: 3rem;
+  }
+ 
+  nav { padding: 0.8rem 1rem; }
+  .btn-nav { padding: 0.5rem 0.9rem; font-size: 0.73rem; }
+ 
+  .hero { padding: 0 0.9rem 2.5rem; }
+  .hero-title { font-size: clamp(2.4rem, 16vw, 3.8rem); line-height: 0.95; }
+  .hero-eyebrow { font-size: 0.62rem; gap: 0.4rem; }
+  .hero-eyebrow-line { width: 16px; }
+  .meta-pill { font-size: 0.68rem; padding: 0.35rem 0.8rem; }
+  .btn-primary { padding: 0.8rem 1.5rem; font-size: 0.88rem; }
+  .price-val { font-size: 1.7rem; }
+ 
+  .book-art { width: 140px; }
+ 
+  .stats-grid { gap: 0.75rem; }
+  .stat-card { -webkit-flex: 1 1 100%; flex: 1 1 100%; padding: 1.25rem; }
+  .stat-num { font-size: 2.4rem; }
+ 
+  .author-img-wrap { max-width: 220px; }
+ 
+  .buy-title { font-size: 1.6rem; }
+  .big-price { font-size: 2rem; }
+ 
+  .section-title-big { font-size: clamp(1.7rem, 8vw, 2.4rem); }
+ 
+  .faq-q { font-size: 0.83rem; }
+ 
+  .cta-title { font-size: clamp(2rem, 11vw, 3rem); }
+}
+ 
+/* ═══════════════════════════════════════════════
+   PRINT (base)
+═══════════════════════════════════════════════ */
+@media print {
+  nav, .hero-overlay { display: none; }
+  body { background: white; color: black; }
+}
+</style>
+</head>
+<body>
+ 
+<!-- ══════════════════════════════════════════
+     NAVBAR
+═══════════════════════════════════════════ -->
+<nav role="navigation" aria-label="Menu principale">
+  <a href="#" class="nav-logo" aria-label="Beautrì - Homepage">
+    <div class="nav-logo-bar" aria-hidden="true"></div>
+    <div class="nav-logo-text">Beautr<span>ì</span></div>
+  </a>
+ 
+  <ul class="nav-links" aria-label="Link sezioni">
+    <li><a href="#libro">Il Libro</a></li>
+    <li><a href="#daniela">Daniela</a></li>
+    <li><a href="#contenuti">Contenuti</a></li>
+    <li><a href="#testimonianze">Recensioni</a></li>
+  </ul>
+ 
+  <a href="#acquista" class="btn-nav">🛒 Acquista — €14,90</a>
+ 
+  <!-- Hamburger mobile -->
+  <button class="nav-hamburger" aria-label="Apri menu" onclick="document.getElementById('mobileNav').classList.toggle('open')">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+ 
+<!-- Mobile menu overlay -->
+<div id="mobileNav" class="nav-mobile" role="dialog" aria-label="Menu mobile">
+  <button class="close-btn" aria-label="Chiudi menu" onclick="document.getElementById('mobileNav').classList.remove('open')">✕</button>
+  <a href="#libro"         onclick="document.getElementById('mobileNav').classList.remove('open')">Il Libro</a>
+  <a href="#daniela"       onclick="document.getElementById('mobileNav').classList.remove('open')">Daniela</a>
+  <a href="#contenuti"     onclick="document.getElementById('mobileNav').classList.remove('open')">Contenuti</a>
+  <a href="#testimonianze" onclick="document.getElementById('mobileNav').classList.remove('open')">Recensioni</a>
+  <a href="#acquista" class="btn-nav" onclick="document.getElementById('mobileNav').classList.remove('open')">🛒 Acquista — €14,90</a>
+</div>
+ 
+<!-- ══════════════════════════════════════════
+     HERO
+═══════════════════════════════════════════ -->
+<section class="hero" id="libro" aria-label="Hero — Rinascita">
+ 
+  <!-- Sfondo: aggiungi background-image: url('tua-foto.jpg') a .hero-bg nel CSS -->
+  <div class="hero-bg" role="img" aria-label="Sfondo hero"></div>
+  <div class="hero-overlay" aria-hidden="true"></div>
+ 
+  <div class="hero-content">
+ 
+    <div class="hero-eyebrow" aria-hidden="true">
+      <div class="hero-eyebrow-line"></div>
+      Beautrì · Il Libro di Daniela Modina
+      <div class="hero-eyebrow-line"></div>
+    </div>
+ 
+    <h1 class="hero-title">
+      Rinascita
+      <span class="gold">dei tuoi capelli</span>
+    </h1>
+ 
+    <p class="hero-sub">
+      Storie vere di donne che hanno ritrovato sé stesse attraverso la cura dei capelli. Un libro che non parla solo di tricologia — parla di vita.
+    </p>
+ 
+    <div class="hero-meta" aria-label="Informazioni libro">
+      <div class="meta-pill">📅 Pubblicato <strong>2025</strong></div>
+      <div class="meta-pill">✍️ Di <strong>Daniela Modina</strong></div>
+      <div class="meta-pill">📖 Si legge in <strong>una sera</strong></div>
+    </div>
+ 
+    <div class="hero-cta">
+      <a href="#acquista" class="btn-primary">🛒 Acquista il libro</a>
+      <div class="hero-price">
+        <span class="price-label">Prezzo</span>
+        <span class="price-val">€14,90</span>
+        <span class="price-note">spedizione inclusa</span>
+      </div>
+    </div>
+ 
+  </div>
+</section>
+ 
+<!-- ══════════════════════════════════════════
+     SEZIONE ACQUISTO
+═══════════════════════════════════════════ -->
+<section class="buy-section" id="acquista" aria-label="Acquista il libro">
+  <div class="buy-inner">
+ 
+    <!-- Copertina illustrata — sostituire con <img src="copertina.jpg" alt="Copertina Rinascita" style="width:100%;border-radius:10px;"> -->
+    <div class="book-art" role="img" aria-label="Copertina del libro Rinascita">
+      <div class="book-art-inner">
+        <div class="ba-ornament"></div>
+        <div class="ba-title">Rinascita</div>
+        <div class="ba-sub">dei tuoi capelli</div>
+        <div class="ba-ornament" style="margin-top:0.5rem;"></div>
+        <div class="ba-author">Daniela Modina</div>
+      </div>
+    </div>
+ 
+    <div class="buy-info">
+      <div class="buy-badge">Disponibile ora</div>
+      <div class="buy-title">Il libro di<br><span>Daniela Modina</span></div>
+      <p class="buy-desc">Un percorso autentico tra cura, ascolto e trasformazione. Le esperienze reali di Margherita, Sonia, Vittoria e molte altre — raccontate con empatia e il Metodo 80/20 di Daniela.</p>
+      <div class="buy-price-row">
+        <div class="big-price">€14,90</div>
+        <div class="price-aside">Pagamento sicuro<br>via Stripe<br>Spedizione in Italia</div>
+      </div>
+      <a href="INSERISCI_LINK_STRIPE_QUI" class="btn-primary">🛒 Acquista ora</a>
+      <div class="trust-row">
+        <span class="trust-item">⭐ 4.9 / 5</span>
+        <span class="trust-item">🔒 Stripe sicuro</span>
+        <span class="trust-item">📦 Spedizione IT</span>
+        <span class="trust-item">500+ copie vendute</span>
+      </div>
+    </div>
+ 
+  </div>
+</section>
+ 
+<!-- ══════════════════════════════════════════
+     STATS
+═══════════════════════════════════════════ -->
+<section class="stats-section" aria-label="Numeri">
+  <div class="stats-grid">
+    <div class="stat-card">
+      <div class="stat-num">500+</div>
+      <div class="stat-label">Copie vendute<br>in Italia</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num">4.9</div>
+      <div class="stat-label">Valutazione media<br>su 5 stelle</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num">20+</div>
+      <div class="stat-label">Anni di esperienza<br>di Daniela</div>
+    </div>
+  </div>
+</section>
+ 
+<!-- ══════════════════════════════════════════
+     AUTRICE
+═══════════════════════════════════════════ -->
+<section class="author-section" id="daniela" aria-label="L'autrice">
+  <div class="author-inner">
+ 
+    <div class="author-img-wrap">
+      <!-- Sostituire con: <img src="daniela.jpg" alt="Daniela Modina" style="width:100%;border-radius:14px;object-fit:cover;"> -->
+      <div class="author-img" role="img" aria-label="Foto di Daniela Modina">
+        <span>Foto Daniela</span>
+      </div>
+    </div>
+ 
+    <div class="author-text">
+      <div class="eyebrow"><div class="eyebrow-line"></div>L'Autrice</div>
+      <h2 class="author-title-h2">Daniela<br>Modina</h2>
+      <p class="author-quote">"Il capello non è solo estetica. È il segnale più onesto di come stai dentro."</p>
+      <p class="author-bio">Daniela Modina è tricologa, fondatrice del centro Beautrì di Cologno al Serio (BG) e autrice del Metodo 80/20: 80% ascolto, 20% tecnica. Da vent'anni accompagna donne e uomini in percorsi di cura reale — non solo superficiale.</p>
+      <div class="credits">
+        <div class="credit"><span class="cdot"></span>Tricologa certificata</div>
+        <div class="credit"><span class="cdot"></span>Fondatrice di Beautrì · Cologno al Serio, Bergamo</div>
+        <div class="credit"><span class="cdot"></span>Autrice del Metodo 80/20</div>
+        <div class="credit"><span class="cdot"></span>Relatore a convegni di tricologia</div>
+      </div>
+    </div>
+ 
+  </div>
+</section>
+ 
+<!-- ══════════════════════════════════════════
+     CONTENUTI LIBRO
+═══════════════════════════════════════════ -->
+<section class="contents-section" id="contenuti" aria-label="Contenuti del libro">
+  <div class="contents-inner">
+ 
+    <div class="section-heading">
+      <div class="eyebrow"><div class="eyebrow-line"></div><span>Contenuti del libro</span></div>
+      <h2 class="section-title-big" style="color:var(--white);">Cosa trovi in<br><span class="gold">Rinascita</span></h2>
+      <p class="section-sub-text-dark">Non solo un libro sui capelli — un libro su di te. Un viaggio tra tricologia, psicologia e storie autentiche.</p>
+    </div>
+ 
+    <div class="contents-grid">
+      <div class="content-card featured">
+        <div class="c-icon" aria-hidden="true">💛</div>
+        <div class="c-body">
+          <div class="c-name">Le storie vere — il cuore del libro</div>
+          <div class="c-desc">Margherita, Sonia, Vittoria, Sara e Dario. Cinque vite reali, cinque trasformazioni. Raccontate con la stessa delicatezza con cui Daniela le ha vissute in studio.</div>
+        </div>
+      </div>
+      <div class="content-card">
+        <div class="c-icon" aria-hidden="true">🧠</div>
+        <div class="c-body">
+          <div class="c-name">Il Metodo 80/20</div>
+          <div class="c-desc">80% ascolto, 20% tecnica. La filosofia che ha cambiato la vita di centinaia di clienti.</div>
+        </div>
+      </div>
+      <div class="content-card">
+        <div class="c-icon" aria-hidden="true">🔬</div>
+        <div class="c-body">
+          <div class="c-name">Approccio tricologico</div>
+          <div class="c-desc">Capire la radice del problema — non solo il sintomo. La scienza del capello spiegata chiaramente.</div>
+        </div>
+      </div>
+      <div class="content-card">
+        <div class="c-icon" aria-hidden="true">🌱</div>
+        <div class="c-body">
+          <div class="c-name">Il percorso di rinascita</div>
+          <div class="c-desc">Come ritrovare fiducia in sé stesse attraverso i capelli. Un viaggio interiore oltre che esteriore.</div>
+        </div>
+      </div>
+      <div class="content-card">
+        <div class="c-icon" aria-hidden="true">🎗️</div>
+        <div class="c-body">
+          <div class="c-name">Capitolo Chemioterapia</div>
+          <div class="c-desc">Per le donne che affrontano la perdita dei capelli durante le cure oncologiche. Scritto con rispetto, verità e speranza.</div>
+        </div>
+      </div>
+      <div class="content-card">
+        <div class="c-icon" aria-hidden="true">📖</div>
+        <div class="c-body">
+          <div class="c-name">Scrittura ipnotica</div>
+          <div class="c-desc">Un testo che si legge in un respiro. Domande che provocano, risposte che guariscono. Si finisce in una sera.</div>
+        </div>
+      </div>
+    </div>
+ 
+  </div>
+</section>
+ 
+<!-- ══════════════════════════════════════════
+     TESTIMONIANZE
+═══════════════════════════════════════════ -->
+<section class="testi-section" id="testimonianze" aria-label="Testimonianze">
+  <div class="testi-inner">
+    <div class="eyebrow" style="color:var(--gold);"><div class="eyebrow-line"></div>Recensioni</div>
+    <h2 class="section-title-big" style="color:var(--black);">Chi ha già letto<br><span class="gold">Rinascita</span></h2>
+    <div class="testi-grid">
+      <div class="testi-card">
+        <div class="stars" aria-label="5 stelle">★★★★★</div>
+        <p class="testi-text">"Questo libro mi ha fatto capire che i miei capelli non erano il problema — erano il segnale. Daniela scrive in un modo che ti sembra di avere qualcuno accanto."</p>
+        <div class="testi-author">
+          <div class="av" aria-hidden="true">M</div>
+          <div><div class="av-name">Margherita</div><div class="av-role">Cliente Beautrì</div></div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <div class="stars" aria-label="5 stelle">★★★★★</div>
+        <p class="testi-text">"L'ho letto in una sola sera. Non riuscivo a smettere. Ogni pagina era come se parlasse direttamente a me — alla mia storia, alle mie paure."</p>
+        <div class="testi-author">
+          <div class="av" aria-hidden="true">S</div>
+          <div><div class="av-name">Sonia</div><div class="av-role">Cliente Beautrì</div></div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <div class="stars" aria-label="5 stelle">★★★★★</div>
+        <p class="testi-text">"Un regalo che ho fatto a me stessa e poi ho regalato a tre amiche. Non è un libro sui capelli — è un libro sulla vita."</p>
+        <div class="testi-author">
+          <div class="av" aria-hidden="true">V</div>
+          <div><div class="av-name">Vittoria</div><div class="av-role">Cliente Beautrì</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+ 
+<!-- ══════════════════════════════════════════
+     FAQ
+═══════════════════════════════════════════ -->
+<section class="faq-section" aria-label="Domande frequenti">
+  <div class="faq-inner">
+    <div class="eyebrow"><div class="eyebrow-line"></div>Domande frequenti</div>
+    <h2 class="section-title-big" style="color:var(--black); font-size:clamp(1.8rem,5vw,3rem);">Le domande<br>che ci fanno ogni giorno</h2>
+    <div class="faq-list">
+      <div class="faq-item">
+        <div class="faq-q" onclick="this.parentElement.classList.toggle('open')" role="button" aria-expanded="false">
+          Il libro è disponibile anche in versione digitale?
+          <span class="ico" aria-hidden="true">+</span>
+        </div>
+        <div class="faq-a">Al momento il libro è disponibile solo in versione cartacea. La spedizione avviene in tutta Italia entro 3–5 giorni lavorativi.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="this.parentElement.classList.toggle('open')" role="button" aria-expanded="false">
+          È adatto anche a chi non ha problemi ai capelli?
+          <span class="ico" aria-hidden="true">+</span>
+        </div>
+        <div class="faq-a">Assolutamente sì. Rinascita è prima di tutto un libro sulle persone — sulla cura di sé, sull'ascolto, sulla trasformazione. Molte lettrici lo hanno letto senza particolari problemi tricologici, e ne sono uscite con una prospettiva diversa su sé stesse.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="this.parentElement.classList.toggle('open')" role="button" aria-expanded="false">
+          Posso regalarlo?
+          <span class="ico" aria-hidden="true">+</span>
+        </div>
+        <div class="faq-a">È uno dei regali più apprezzati dalle nostre clienti. Puoi indicare l'indirizzo di consegna direttamente al momento del checkout Stripe.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="this.parentElement.classList.toggle('open')" role="button" aria-expanded="false">
+          Il pagamento è sicuro?
+          <span class="ico" aria-hidden="true">+</span>
+        </div>
+        <div class="faq-a">Il pagamento avviene tramite Stripe — il sistema più usato al mondo per i pagamenti online. I tuoi dati non vengono mai condivisi con Beautrì.</div>
+      </div>
+    </div>
+  </div>
+</section>
+ 
+<!-- ══════════════════════════════════════════
+     CTA FINALE
+═══════════════════════════════════════════ -->
+<section class="cta-section" aria-label="Acquista ora">
+  <h2 class="cta-title">
+    Inizia il tuo<br>percorso di
+    <span class="gold">Rinascita</span>
+  </h2>
+  <p class="cta-sub">Un libro che accompagna. Da tenere sul comodino, da regalare a chi ami.</p>
+  <a href="INSERISCI_LINK_STRIPE_QUI" class="btn-primary" style="font-size:1rem; padding:1rem 2.2rem;">
+    🛒 Acquista ora — €14,90
+  </a>
+  <p class="cta-note">Solo <strong>€14,90</strong> · Pagamento sicuro Stripe · Spedizione in tutta Italia</p>
+</section>
+ 
+<!-- FOOTER -->
+<footer role="contentinfo">
+  <span>© 2025 Beautrì · Daniela Modina · Cologno al Serio, BG</span>
+  <div class="footer-links">
+    <a href="#">Privacy Policy</a>
+    <a href="#">Contatti</a>
+    <a href="https://beautri.it">beautri.it</a>
+  </div>
+</footer>
+ 
+<script>
+// FAQ: aggiorna aria-expanded al click
+document.querySelectorAll('.faq-q').forEach(function(btn) {
+  btn.addEventListener('click', function() {
+    var expanded = this.parentElement.classList.contains('open');
+    this.setAttribute('aria-expanded', expanded ? 'true' : 'false');
+  });
+});
+ 
+// Chiudi menu mobile cliccando fuori
+document.getElementById('mobileNav').addEventListener('click', function(e) {
+  if (e.target === this) this.classList.remove('open');
+});
+</script>
+ 
+</body>
+</html>
+ 
