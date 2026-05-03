@@ -849,14 +849,123 @@ nav.nav-hidden {
 .credit {
   display: -webkit-flex;
   display: flex;
-  -webkit-align-items: center;
-  align-items: center;
+  -webkit-align-items: flex-start;
+  align-items: flex-start;
   gap: 0.6rem;
   font-size: var(--fs-sm);
-  font-weight: 500;
+  font-weight: 400;
   color: var(--black);
+  line-height: 1.6;
 }
-.cdot { width: 6px; height: 6px; border-radius: 50%; background: var(--gold); flex-shrink: 0; }
+.cdot { width: 7px; height: 7px; border-radius: 50%; background: var(--gold); flex-shrink: 0; margin-top: 0.38rem; }
+ 
+/* ═══════════════════════════════════════════════
+   MEDIA BAR
+═══════════════════════════════════════════════ */
+.media-bar {
+  background: var(--white);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  padding: 2rem 1.5rem;
+}
+.media-bar-inner {
+  max-width: 860px;
+  margin: 0 auto;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-align-items: center;
+  align-items: center;
+  gap: 2rem;
+  -webkit-flex-wrap: wrap;
+  flex-wrap: wrap;
+  -webkit-justify-content: center;
+  justify-content: center;
+}
+.media-bar-label {
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted);
+  white-space: nowrap;
+  padding-right: 1rem;
+  border-right: 1px solid var(--border);
+}
+.media-logos {
+  display: -webkit-flex;
+  display: flex;
+  -webkit-align-items: center;
+  align-items: center;
+  gap: 1.75rem;
+  -webkit-flex-wrap: wrap;
+  flex-wrap: wrap;
+  -webkit-justify-content: center;
+  justify-content: center;
+}
+.media-logo-item {
+  display: -webkit-flex;
+  display: flex;
+  -webkit-align-items: baseline;
+  align-items: baseline;
+  gap: 0.2rem;
+  opacity: 0.65;
+  -webkit-transition: opacity 0.2s;
+  transition: opacity 0.2s;
+}
+.media-logo-item:hover { opacity: 1; }
+ 
+/* Prima Bergamo */
+.ml-script {
+  font-family: Georgia, 'Times New Roman', serif;
+  font-style: italic;
+  font-size: 1.3rem;
+  font-weight: 400;
+  color: #1a5fa8;
+  letter-spacing: -0.01em;
+}
+.ml-bold {
+  font-family: 'Barlow Condensed', 'Arial Black', sans-serif;
+  font-weight: 900;
+  font-size: 1.2rem;
+  color: #1a5fa8;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+ 
+/* Bergamo News */
+.ml-dark {
+  font-family: 'Barlow Condensed', 'Arial Black', sans-serif;
+  font-weight: 900;
+  font-size: 1.2rem;
+  color: #1a2744;
+  letter-spacing: 0.01em;
+  text-transform: uppercase;
+}
+.ml-red {
+  font-family: 'Barlow Condensed', 'Arial Black', sans-serif;
+  font-weight: 900;
+  font-size: 1.2rem;
+  color: #d94f2b;
+  letter-spacing: 0.01em;
+  text-transform: uppercase;
+}
+ 
+/* Salute e Armonia */
+.ml-magazine {
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #2a6e4a;
+  letter-spacing: 0.02em;
+}
+.ml-magazine em { font-style: italic; font-weight: 400; }
+ 
+.media-divider {
+  width: 1px;
+  height: 24px;
+  background: var(--border);
+  flex-shrink: 0;
+}
  
 /* ═══════════════════════════════════════════════
    CONTENUTI LIBRO
@@ -1130,6 +1239,9 @@ footer a:hover { color: var(--gold); }
   .stat-card { -webkit-flex: 1 1 calc(50% - 0.5rem); flex: 1 1 calc(50% - 0.5rem); min-width: 130px; }
  
   .author-section { padding: var(--sp-xl) 1rem; }
+  .media-bar { padding: 1.5rem 1rem; }
+  .media-bar-label { border-right: none; padding-right: 0; }
+  .media-logos { gap: 1.25rem; }
   .author-inner {
     -webkit-flex-direction: column;
     flex-direction: column;
@@ -1388,12 +1500,13 @@ footer a:hover { color: var(--gold); }
       <div class="eyebrow"><div class="eyebrow-line"></div>L'Autrice</div>
       <h2 class="author-title-h2">Daniela<br>Modina</h2>
       <p class="author-quote">"Il capello non è solo estetica. È il segnale più onesto di come stai dentro."</p>
-      <p class="author-bio">Daniela Modina è tricologa, fondatrice del centro Beautrì di Cologno al Serio (BG) e autrice del Metodo 80/20: 80% ascolto, 20% tecnica. Da vent'anni accompagna donne e uomini in percorsi di cura reale — non solo superficiale.</p>
+      <p class="author-bio">Daniela Modina è tricologa e titolare di Beautrì Parrucchieri a Cologno al Serio (BG) — l'unico salone in Italia con un tecnico tricologo sempre presente. Autrice del Metodo 80/20: 80% ascolto, 20% tecnica.</p>
       <div class="credits">
-        <div class="credit"><span class="cdot"></span>Tricologa certificata</div>
-        <div class="credit"><span class="cdot"></span>Fondatrice di Beautrì · Cologno al Serio, Bergamo</div>
-        <div class="credit"><span class="cdot"></span>Autrice del Metodo 80/20</div>
-        <div class="credit"><span class="cdot"></span>Relatore a convegni di tricologia</div>
+        <div class="credit"><span class="cdot"></span>Titolare di Beautrì Parrucchieri — l'unico salone in Italia con un tecnico tricologo specializzato sempre al tuo servizio.</div>
+        <div class="credit"><span class="cdot"></span>Master di Alta Formazione Tricologica, riconosciuto da Tricoitalia (l'associazione italiana di tricologia).</div>
+        <div class="credit"><span class="cdot"></span>Oltre 40 anni dedicati al benessere della cute e dei capelli — ha già aiutato centinaia di persone a risolvere perdita di capelli, psoriasi e molto altro.</div>
+        <div class="credit"><span class="cdot"></span>Ha accompagnato 280 persone a risolvere i problemi con i loro capelli.</div>
+        <div class="credit"><span class="cdot"></span>Specializzata in coaching oncologico — ideale per chi affronta un percorso chemioterapeutico e vuole prendersi cura dei propri capelli.</div>
       </div>
     </div>
  
@@ -1401,8 +1514,35 @@ footer a:hover { color: var(--gold); }
 </section>
  
 <!-- ══════════════════════════════════════════
-     CONTENUTI LIBRO
+     MEDIA BAR
 ═══════════════════════════════════════════ -->
+<section class="media-bar" aria-label="Apparizioni sui media">
+  <div class="media-bar-inner">
+    <div class="media-bar-label">Daniela è apparsa su</div>
+    <div class="media-logos">
+ 
+      <!-- Prima Bergamo -->
+      <div class="media-logo-item">
+        <span class="ml-script">prima</span><span class="ml-bold">BERGAMO</span>
+      </div>
+ 
+      <div class="media-divider"></div>
+ 
+      <!-- Bergamo News -->
+      <div class="media-logo-item">
+        <span class="ml-dark">BERGAMO</span><span class="ml-red">NEWS</span>
+      </div>
+ 
+      <div class="media-divider"></div>
+ 
+      <!-- Salute e Armonia -->
+      <div class="media-logo-item">
+        <span class="ml-magazine">Salute <em>&amp; Armonia</em></span>
+      </div>
+ 
+    </div>
+  </div>
+</section>
 <section class="contents-section" id="contenuti" aria-label="Contenuti del libro">
   <div class="contents-inner">
  
@@ -1608,3 +1748,4 @@ document.getElementById('mobileNav').addEventListener('click', function(e) {
  
 </body>
 </html>
+ 
