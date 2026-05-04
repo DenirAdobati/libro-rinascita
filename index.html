@@ -1293,6 +1293,191 @@ nav.nav-hidden {
 .c-desc { font-size: 0.78rem; color: rgba(255,255,255,0.42); line-height: 1.65; }
  
 /* ═══════════════════════════════════════════════
+   INDICE DEL LIBRO
+═══════════════════════════════════════════════ */
+.indice-section {
+  background: var(--dark);
+  padding: var(--sp-2xl) 1.5rem;
+}
+.indice-inner { max-width: 760px; margin: 0 auto; }
+.indice-header { margin-bottom: 3rem; }
+ 
+.indice-timeline {
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: column;
+  flex-direction: column;
+  gap: 0;
+}
+ 
+.indice-item {
+  display: -webkit-flex;
+  display: flex;
+  gap: 1.25rem;
+  -webkit-align-items: flex-start;
+  align-items: flex-start;
+  position: relative;
+  padding-bottom: 0.25rem;
+}
+ 
+.indice-dot {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.12);
+  display: -webkit-flex;
+  display: flex;
+  -webkit-align-items: center;
+  align-items: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  flex-shrink: 0;
+  position: relative;
+  z-index: 2;
+}
+.indice-dot-gold {
+  background: rgba(234,179,10,0.15);
+  border-color: rgba(234,179,10,0.35);
+}
+.indice-dot-last {
+  background: var(--gold);
+  border-color: var(--gold);
+}
+.indice-num {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 900;
+  font-size: 0.75rem;
+  color: rgba(255,255,255,0.5);
+  letter-spacing: 0.05em;
+}
+.indice-dot-gold .indice-num { color: var(--gold); }
+.indice-dot-last .indice-num { color: var(--black); }
+ 
+.indice-line {
+  position: absolute;
+  left: 19px;
+  top: 40px;
+  width: 2px;
+  height: calc(100% + 1.5rem);
+  background: rgba(255,255,255,0.07);
+  z-index: 1;
+}
+.indice-line-gold { background: rgba(234,179,10,0.2); }
+ 
+.indice-content {
+  -webkit-flex: 1;
+  flex: 1;
+  padding-bottom: 1.75rem;
+  min-width: 0;
+}
+.indice-page {
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.3);
+  margin-bottom: 0.2rem;
+}
+.indice-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 1.1rem;
+  text-transform: uppercase;
+  color: var(--white);
+  line-height: 1.1;
+  margin-bottom: 0.3rem;
+}
+.indice-featured .indice-title { color: var(--gold); }
+.indice-desc {
+  font-size: 0.8rem;
+  color: rgba(255,255,255,0.4);
+  line-height: 1.6;
+}
+ 
+/* ═══════════════════════════════════════════════
+   ANTEPRIMA PDF
+═══════════════════════════════════════════════ */
+.preview-section {
+  background: var(--off);
+  padding: var(--sp-2xl) 1.5rem;
+}
+.preview-inner { max-width: 760px; margin: 0 auto; }
+ 
+.pdf-viewer-wrap { margin-top: 1.5rem; }
+ 
+.pdf-viewer-frame {
+  position: relative;
+  width: 100%;
+  height: 680px;
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  -webkit-box-shadow: 0 8px 40px rgba(0,0,0,0.12);
+  box-shadow: 0 8px 40px rgba(0,0,0,0.12);
+}
+ 
+.pdf-iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  display: block;
+}
+ 
+/* Gate overlay */
+.pdf-gate {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 55%;
+  background: -webkit-linear-gradient(top, transparent 0%, rgba(245,244,241,0.97) 30%, var(--off) 60%);
+  background: linear-gradient(to bottom, transparent 0%, rgba(245,244,241,0.97) 30%, var(--off) 60%);
+  display: -webkit-flex;
+  display: flex;
+  -webkit-align-items: flex-end;
+  align-items: flex-end;
+  -webkit-justify-content: center;
+  justify-content: center;
+  padding-bottom: 2.5rem;
+  z-index: 10;
+}
+.pdf-gate-content {
+  text-align: center;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: column;
+  flex-direction: column;
+  -webkit-align-items: center;
+  align-items: center;
+  gap: 0.65rem;
+}
+.pdf-gate-icon { font-size: 2rem; }
+.pdf-gate-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 900;
+  font-size: 1.8rem;
+  text-transform: uppercase;
+  color: var(--black);
+  line-height: 1;
+}
+.pdf-gate-sub {
+  font-size: 0.9rem;
+  color: var(--muted);
+  line-height: 1.6;
+}
+ 
+@media (max-width: 767px) {
+  .pdf-viewer-frame { height: 480px; }
+  .indice-section { padding: var(--sp-xl) 1rem; }
+  .preview-section { padding: var(--sp-xl) 1rem; }
+}
+@media (max-width: 479px) {
+  .pdf-viewer-frame { height: 380px; }
+  .indice-dot { width: 34px; height: 34px; }
+  .indice-num { font-size: 0.65rem; }
+  .indice-title { font-size: 0.95rem; }
+}
+ 
+/* ═══════════════════════════════════════════════
    TESTIMONIANZE
 ═══════════════════════════════════════════════ */
 .testi-section { background: var(--white); padding: var(--sp-2xl) 1.5rem; }
@@ -1929,6 +2114,182 @@ footer a:hover { color: var(--gold); }
       </div>
     </div>
  
+  </div>
+</section>
+ 
+<!-- ══════════════════════════════════════════
+     INDICE DEL LIBRO
+═══════════════════════════════════════════ -->
+<section class="indice-section" id="indice" aria-label="Indice del libro">
+  <div class="indice-inner">
+ 
+    <div class="indice-header">
+      <div class="eyebrow" style="color:var(--gold);"><div class="eyebrow-line"></div>Dentro il libro</div>
+      <h2 class="section-title-big" style="color:var(--white);">Il percorso di <span class="gold">Rinascita</span></h2>
+      <p style="font-size:0.95rem;color:rgba(255,255,255,0.45);margin-top:0.75rem;max-width:500px;">12 capitoli. Un viaggio dalla tricologia alle storie vere — fino alla rinascita completa.</p>
+    </div>
+ 
+    <div class="indice-timeline">
+ 
+      <div class="indice-item">
+        <div class="indice-dot"><span class="indice-num">01</span></div>
+        <div class="indice-line"></div>
+        <div class="indice-content">
+          <div class="indice-page">p. 5</div>
+          <div class="indice-title">Prefazione psicologa</div>
+          <div class="indice-desc">Il punto di vista della psicologia sul rapporto tra capelli e identità.</div>
+        </div>
+      </div>
+ 
+      <div class="indice-item">
+        <div class="indice-dot"><span class="indice-num">02</span></div>
+        <div class="indice-line"></div>
+        <div class="indice-content">
+          <div class="indice-page">p. 7</div>
+          <div class="indice-title">Ringraziamenti</div>
+          <div class="indice-desc">Le persone che hanno reso possibile questo libro e questo percorso.</div>
+        </div>
+      </div>
+ 
+      <div class="indice-item">
+        <div class="indice-dot"><span class="indice-num">03</span></div>
+        <div class="indice-line"></div>
+        <div class="indice-content">
+          <div class="indice-page">p. 9</div>
+          <div class="indice-title">Una nuova visione della bellezza</div>
+          <div class="indice-desc">Perché la bellezza autentica parte dalla salute — non dall'apparenza.</div>
+        </div>
+      </div>
+ 
+      <div class="indice-item">
+        <div class="indice-dot"><span class="indice-num">04</span></div>
+        <div class="indice-line"></div>
+        <div class="indice-content">
+          <div class="indice-page">p. 13</div>
+          <div class="indice-title">La tricologia: un aiuto per le persone</div>
+          <div class="indice-desc">Cos'è davvero la tricologia e come può cambiare la vita.</div>
+        </div>
+      </div>
+ 
+      <div class="indice-item indice-featured">
+        <div class="indice-dot indice-dot-gold"><span class="indice-num">05</span></div>
+        <div class="indice-line indice-line-gold"></div>
+        <div class="indice-content">
+          <div class="indice-page" style="color:var(--gold);">p. 17</div>
+          <div class="indice-title">Storie di successo: psoriasi</div>
+          <div class="indice-desc">Quando la cute diventa nemica — e come si può tornare a stare bene.</div>
+        </div>
+      </div>
+ 
+      <div class="indice-item indice-featured">
+        <div class="indice-dot indice-dot-gold"><span class="indice-num">06</span></div>
+        <div class="indice-line indice-line-gold"></div>
+        <div class="indice-content">
+          <div class="indice-page" style="color:var(--gold);">p. 25</div>
+          <div class="indice-title">Storie di successo: diradamento e caduta</div>
+          <div class="indice-desc">Le storie di chi ha perso i capelli e li ha ritrovati — insieme alla propria sicurezza.</div>
+        </div>
+      </div>
+ 
+      <div class="indice-item indice-featured">
+        <div class="indice-dot indice-dot-gold"><span class="indice-num">07</span></div>
+        <div class="indice-line indice-line-gold"></div>
+        <div class="indice-content">
+          <div class="indice-page" style="color:var(--gold);">p. 41</div>
+          <div class="indice-title">Storie di successo: trattamenti chemioterapici</div>
+          <div class="indice-desc">Per chi ha affrontato la chemioterapia: il percorso di cura e speranza.</div>
+        </div>
+      </div>
+ 
+      <div class="indice-item">
+        <div class="indice-dot"><span class="indice-num">08</span></div>
+        <div class="indice-line"></div>
+        <div class="indice-content">
+          <div class="indice-page">p. 61</div>
+          <div class="indice-title">Il metodo isobeautrì</div>
+          <div class="indice-desc">Cura, etica e innovazione per la salute di cute e capelli.</div>
+        </div>
+      </div>
+ 
+      <div class="indice-item">
+        <div class="indice-dot"><span class="indice-num">09</span></div>
+        <div class="indice-line"></div>
+        <div class="indice-content">
+          <div class="indice-page">p. 73</div>
+          <div class="indice-title">Tecniche e trattamenti utilizzati</div>
+          <div class="indice-desc">I protocolli professionali spiegati in modo comprensibile.</div>
+        </div>
+      </div>
+ 
+      <div class="indice-item">
+        <div class="indice-dot"><span class="indice-num">10</span></div>
+        <div class="indice-line"></div>
+        <div class="indice-content">
+          <div class="indice-page">p. 121</div>
+          <div class="indice-title">Consigli, cura e prevenzione</div>
+          <div class="indice-desc">La routine quotidiana di cura dei capelli da seguire ogni giorno.</div>
+        </div>
+      </div>
+ 
+      <div class="indice-item indice-featured">
+        <div class="indice-dot indice-dot-gold"><span class="indice-num">11</span></div>
+        <div class="indice-line indice-line-gold"></div>
+        <div class="indice-content">
+          <div class="indice-page" style="color:var(--gold);">p. 139</div>
+          <div class="indice-title">Storie di rinascita: le testimonianze</div>
+          <div class="indice-desc">Voci vere di persone che hanno vissuto la trasformazione.</div>
+        </div>
+      </div>
+ 
+      <div class="indice-item">
+        <div class="indice-dot indice-dot-last"><span class="indice-num">12</span></div>
+        <div class="indice-content">
+          <div class="indice-page">p. 155</div>
+          <div class="indice-title">Dalla bellezza convenzionale all'accettazione</div>
+          <div class="indice-desc">Il percorso finale di rinascita — dentro e fuori.</div>
+        </div>
+      </div>
+ 
+    </div>
+  </div>
+</section>
+ 
+<!-- ══════════════════════════════════════════
+     ANTEPRIMA PDF — Storia di Alexandra
+═══════════════════════════════════════════ -->
+<section class="preview-section" id="anteprima" aria-label="Anteprima del libro">
+  <div class="preview-inner">
+ 
+    <div class="eyebrow"><div class="eyebrow-line"></div>Leggi un'anteprima</div>
+    <h2 class="section-title-big" style="color:var(--black);">La storia di <span class="gold">Alexandra</span></h2>
+    <p style="font-size:0.92rem;color:var(--muted);margin-top:0.5rem;margin-bottom:2rem;max-width:500px;">Dodicenne, alopecia areata totale. Tre anni di cura, una sfida enorme. Leggi come è andata.</p>
+ 
+    <!-- Viewer PDF con blocco dopo 5 pagine -->
+    <div class="pdf-viewer-wrap">
+ 
+      <div class="pdf-viewer-frame">
+        <iframe
+          id="pdfViewer"
+          src="rinascita.pdf#page=27"
+          class="pdf-iframe"
+          title="Anteprima libro Rinascita — Storia di Alexandra"
+        ></iframe>
+ 
+        <!-- Blocco overlay dopo 5 pagine di scroll -->
+        <div class="pdf-gate" id="pdfGate">
+          <div class="pdf-gate-content">
+            <div class="pdf-gate-icon">📖</div>
+            <h3 class="pdf-gate-title">Vuoi continuare a leggere?</h3>
+            <p class="pdf-gate-sub">Ottieni il libro completo — gratis.<br>Paghi solo €9,99 di spedizione.</p>
+            <a href="#acquista" class="btn-primary" style="font-size:0.9rem;padding:0.85rem 1.75rem;">
+              🛒 Ricevi il libro — solo €9,99
+            </a>
+            <p style="font-size:0.72rem;color:rgba(255,255,255,0.35);margin-top:0.75rem;">Libro GRATIS · Solo spedizione €9,99 · Stripe sicuro</p>
+          </div>
+        </div>
+      </div>
+ 
+    </div>
   </div>
 </section>
  
