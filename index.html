@@ -590,17 +590,32 @@ nav.nav-hidden {
   display: inline-flex;
   -webkit-align-items: center;
   align-items: center;
-  gap: 0.75rem;
+  gap: 0.6rem;
   background: rgba(40,40,40,0.85);
   border: 1px solid rgba(255,255,255,0.1);
   border-radius: 50px;
-  padding: 0.55rem 1.25rem;
+  padding: 0.5rem 1rem;
   margin-bottom: 2rem;
   -webkit-backdrop-filter: blur(8px);
   backdrop-filter: blur(8px);
+  max-width: 100%;
+  overflow: hidden;
 }
-.review-stars { color: #FBBC05; font-size: 0.9rem; letter-spacing: 0.05em; line-height: 1; }
-.review-text { font-size: 0.82rem; color: rgba(255,255,255,0.75); white-space: nowrap; }
+.review-stars {
+  color: #FBBC05;
+  font-size: 0.82rem;
+  letter-spacing: 0.02em;
+  line-height: 1;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.review-text {
+  font-size: 0.75rem;
+  color: rgba(255,255,255,0.75);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
 .review-text strong { color: var(--white); font-weight: 700; }
 .review-google {
   display: -webkit-flex;
@@ -608,11 +623,12 @@ nav.nav-hidden {
   -webkit-align-items: center;
   align-items: center;
   gap: 0.3rem;
-  font-size: 0.72rem;
+  font-size: 0.68rem;
   color: rgba(255,255,255,0.4);
-  padding-left: 0.75rem;
+  padding-left: 0.6rem;
   border-left: 1px solid rgba(255,255,255,0.15);
   white-space: nowrap;
+  flex-shrink: 0;
 }
  
 /* Hero scroll down */
@@ -1445,8 +1461,8 @@ footer a:hover { color: var(--gold); }
   .buy-inner { gap: 2.5rem; }
   .book-art { width: 190px; min-width: 160px; }
  
-  .author-inner { gap: 2.5rem; }
-  .author-img-wrap { width: 240px; min-width: 200px; }
+  /* author-inner rimosso */
+  /* author-img-wrap rimosso */
 }
  
 /* ═══════════════════════════════════════════════
@@ -1464,6 +1480,28 @@ footer a:hover { color: var(--gold); }
  
   .hero { padding: 5rem 1rem 3rem; }
   .hero-title { font-size: clamp(2.2rem, 11vw, 4rem); line-height: 0.97; }
+  /* Reviews: nascondi Google su mobile medio per non andare a capo */
+  .review-google { display: none; }
+  .review-text { font-size: 0.73rem; }
+ 
+  /* Foto Daniela mobile: sopra, testo sotto */
+  .author-section {
+    -webkit-flex-direction: column-reverse;
+    flex-direction: column-reverse;
+    min-height: auto;
+  }
+  .author-text-col { padding: 2.5rem 1.25rem; }
+  .author-text-inner { max-width: 100%; }
+  .author-photo-col {
+    width: 100%; height: 65vw;
+    min-height: 300px; max-height: 450px;
+  }
+  .author-photo-col::before {
+    width: 100%; height: 120px;
+    top: auto; bottom: 0; left: 0;
+    background: -webkit-linear-gradient(top, transparent, var(--off));
+    background: linear-gradient(to bottom, transparent, var(--off));
+  }
  
   .buy-section { padding: var(--sp-xl) 1rem; }
   .buy-inner {
@@ -1490,16 +1528,26 @@ footer a:hover { color: var(--gold); }
   }
   .stat-card { -webkit-flex: 1 1 calc(50% - 0.5rem); flex: 1 1 calc(50% - 0.5rem); min-width: 130px; }
  
-  .author-section { padding: var(--sp-xl) 1rem; }
+  .author-section {
+    -webkit-flex-direction: column-reverse;
+    flex-direction: column-reverse;
+    min-height: auto;
+  }
+  .author-text-col { padding: 2.5rem 1.25rem; }
+  .author-text-inner { max-width: 100%; }
+  .author-photo-col {
+    width: 100%; height: 60vw;
+    min-height: 280px; max-height: 420px;
+  }
+  .author-photo-col::before {
+    width: 100%; height: 100px;
+    top: auto; bottom: 0; left: 0;
+    background: -webkit-linear-gradient(top, transparent, var(--off));
+    background: linear-gradient(to bottom, transparent, var(--off));
+  }
   .media-bar { padding: 1.5rem 1rem; }
   .media-bar-label { border-right: none; padding-right: 0; }
   .media-logos { gap: 1.25rem; }
-  .author-inner {
-    -webkit-flex-direction: column;
-    flex-direction: column;
-    gap: 2rem;
-  }
-  .author-img-wrap { width: 100%; max-width: 260px; min-width: unset; margin: 0 auto; }
  
   .contents-section { padding: var(--sp-xl) 1rem; }
   .content-card { -webkit-flex: 1 1 100%; flex: 1 1 100%; min-width: unset; }
@@ -1532,9 +1580,13 @@ footer a:hover { color: var(--gold); }
   .hero-title { font-size: clamp(2rem, 13vw, 3.2rem); line-height: 0.97; }
   .hero-eyebrow { font-size: 0.62rem; gap: 0.4rem; }
   .hero-eyebrow-line { width: 16px; }
+  /* Reviews: su piccolo mobile mostra solo stelle + rating */
+  .hero-reviews { padding: 0.4rem 0.8rem; gap: 0.4rem; }
+  .review-stars { font-size: 0.7rem; }
+  .review-text { font-size: 0.68rem; }
+  .review-google { display: none; }
   .meta-pill { font-size: 0.68rem; padding: 0.35rem 0.8rem; }
   .btn-primary { padding: 0.8rem 1.5rem; font-size: 0.88rem; }
-  .price-val { font-size: 1.7rem; }
  
   .book-art { width: 140px; }
  
@@ -1542,7 +1594,7 @@ footer a:hover { color: var(--gold); }
   .stat-card { -webkit-flex: 1 1 100%; flex: 1 1 100%; padding: 1.25rem; }
   .stat-num { font-size: 2.4rem; }
  
-  .author-img-wrap { max-width: 220px; }
+  /* author-img-wrap rimosso */
  
   .buy-title { font-size: 1.6rem; }
   .big-price { font-size: 2rem; }
