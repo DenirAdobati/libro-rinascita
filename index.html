@@ -695,7 +695,205 @@ nav.nav-hidden {
 /* Stripe icon in trust widget */
 .tw-icon svg { display: block; }
  
-/* Promo widget */
+/* ─── Come ottenere il libro ─── */
+.how-to-label {
+  font-size: var(--fs-xs);
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.4);
+  margin-bottom: 0.75rem;
+}
+ 
+.options-grid {
+  display: -webkit-flex;
+  display: flex;
+  gap: 1rem;
+  -webkit-flex-wrap: wrap;
+  flex-wrap: wrap;
+}
+ 
+.option-card {
+  -webkit-flex: 1 1 calc(50% - 0.5rem);
+  flex: 1 1 calc(50% - 0.5rem);
+  min-width: 220px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 16px;
+  padding: 1.4rem;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: column;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+ 
+.option-card-special {
+  background: rgba(234,179,10,0.06);
+  border-color: rgba(234,179,10,0.25);
+}
+ 
+.option-header {
+  display: -webkit-flex;
+  display: flex;
+  -webkit-align-items: center;
+  align-items: center;
+  -webkit-justify-content: space-between;
+  justify-content: space-between;
+}
+ 
+.option-icon { font-size: 1.5rem; line-height: 1; }
+ 
+.option-badge {
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  background: rgba(255,255,255,0.08);
+  color: rgba(255,255,255,0.55);
+  border-radius: 50px;
+  padding: 0.25rem 0.65rem;
+}
+.option-badge-gold {
+  background: rgba(234,179,10,0.15);
+  color: var(--gold);
+}
+ 
+.option-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 900;
+  font-size: 1.3rem;
+  text-transform: uppercase;
+  color: var(--white);
+  line-height: 1;
+}
+ 
+.option-price-row {
+  display: -webkit-flex;
+  display: flex;
+  -webkit-align-items: center;
+  align-items: center;
+  gap: 0.5rem;
+  -webkit-flex-wrap: wrap;
+  flex-wrap: wrap;
+  padding: 0.65rem 0;
+  border-top: 1px solid rgba(255,255,255,0.07);
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+}
+.option-book-free {
+  font-size: 0.8rem;
+  color: rgba(255,255,255,0.55);
+}
+.option-book-free strong { color: #22c55e; font-weight: 700; }
+.option-plus { color: rgba(255,255,255,0.25); font-size: 0.8rem; }
+.option-shipping { font-size: 0.8rem; color: rgba(255,255,255,0.55); }
+.option-shipping strong { color: var(--white); font-weight: 700; }
+ 
+.option-desc {
+  font-size: 0.78rem;
+  color: rgba(255,255,255,0.45);
+  line-height: 1.65;
+  -webkit-flex: 1;
+  flex: 1;
+}
+.option-desc strong { color: var(--gold); font-weight: 600; }
+ 
+.option-btn {
+  display: -webkit-flex;
+  display: flex;
+  -webkit-align-items: center;
+  align-items: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.8rem 1.25rem;
+  border-radius: 8px;
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  -webkit-transition: opacity 0.2s, -webkit-transform 0.15s;
+  transition: opacity 0.2s, transform 0.15s;
+  text-align: center;
+}
+.option-btn:hover { opacity: 0.88; -webkit-transform: translateY(-1px); transform: translateY(-1px); }
+.option-btn-gold { background: var(--gold); color: var(--black); }
+.option-btn-outline {
+  background: transparent;
+  border: 1px solid rgba(234,179,10,0.4);
+  color: var(--gold);
+}
+.option-btn-outline:hover { background: rgba(234,179,10,0.08); }
+ 
+/* Stripe badge */
+.option-secure {
+  display: -webkit-flex;
+  display: flex;
+  -webkit-align-items: center;
+  align-items: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+}
+.stripe-badge {
+  display: -webkit-inline-flex;
+  display: inline-flex;
+  -webkit-align-items: center;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 50px;
+  padding: 0.35rem 0.85rem;
+}
+.stripe-circle {
+  width: 22px; height: 22px;
+  border-radius: 50%;
+  background: #635BFF;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-align-items: center;
+  align-items: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.stripe-text {
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.48rem;
+  font-weight: 700;
+  color: var(--white);
+  letter-spacing: 0.02em;
+}
+.stripe-label {
+  font-size: 0.68rem;
+  color: rgba(255,255,255,0.4);
+  white-space: nowrap;
+}
+ 
+/* Perk items */
+.option-perks {
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: column;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+.perk-item {
+  font-size: 0.73rem;
+  color: var(--gold);
+  font-weight: 500;
+}
+ 
+/* Responsive options grid */
+@media (max-width: 580px) {
+  .options-grid { -webkit-flex-direction: column; flex-direction: column; }
+  .option-card { -webkit-flex: 1 1 100%; flex: 1 1 100%; min-width: unset; }
+}
+ 
+/* ─── Promo widget ───
 .promo-widget {
   background: var(--white);
   border: 2px solid #c0392b;
@@ -1465,7 +1663,7 @@ footer a:hover { color: var(--gold); }
 <section class="buy-section" id="acquista" aria-label="Acquista il libro">
   <div class="buy-inner">
  
-    <!-- Copertina illustrata — sostituire con <img src="copertina.jpg" alt="Copertina Rinascita" style="width:100%;border-radius:10px;"> -->
+    <!-- Copertina: sostituire con <img src="copertina.jpg" alt="Copertina Rinascita" style="width:100%;border-radius:10px;"> -->
     <div class="book-art" role="img" aria-label="Copertina del libro Rinascita">
       <div class="book-art-inner">
         <div class="ba-ornament"></div>
@@ -1478,7 +1676,7 @@ footer a:hover { color: var(--gold); }
  
     <div class="buy-info">
  
-      <!-- Badge disponibile — verde -->
+      <!-- Badge disponibile -->
       <div class="buy-badge-green">
         <span class="badge-green-dot"></span>
         Disponibile ora
@@ -1487,55 +1685,58 @@ footer a:hover { color: var(--gold); }
       <div class="buy-title">Il libro di<br><span>Daniela Modina</span></div>
       <p class="buy-desc">Un percorso autentico tra cura, ascolto e trasformazione. Le esperienze reali di Margherita, Sonia, Vittoria e molte altre — raccontate con empatia e il Metodo 80/20 di Daniela.</p>
  
-      <!-- Widget offerta principale -->
-      <div class="promo-widget">
-        <div class="promo-tag">🎁 OFFERTA SPECIALE</div>
-        <div class="promo-main">
-          <div class="promo-book-price">
-            <span class="promo-label">Il libro</span>
-            <span class="promo-free">GRATIS</span>
-          </div>
-          <div class="promo-divider">+</div>
-          <div class="promo-shipping">
-            <span class="promo-label">Paghi solo la spedizione</span>
-            <span class="promo-amount">€9,99</span>
-          </div>
-        </div>
-        <div class="promo-note">Totale: <strong>€9,99</strong> — il libro è completamente gratuito</div>
-      </div>
+      <!-- Come ottenere il libro -->
+      <div class="how-to-label">Come ricevere il libro</div>
  
-      <!-- Widget ritiro in sede -->
-      <div class="pickup-widget">
-        <div class="pickup-icon">📍</div>
-        <div class="pickup-body">
-          <div class="pickup-title">Ritiri in sede? È totalmente gratis.</div>
-          <div class="pickup-desc">Se vieni a ritirare il libro direttamente da <strong>Beautrì</strong> a Cologno al Serio, te lo regaliamo noi — zero spese di spedizione, zero costi.</div>
-        </div>
-      </div>
+      <div class="options-grid">
  
-      <a href="INSERISCI_LINK_STRIPE_QUI" class="btn-primary">🛒 Ricevi il libro — solo €9,99</a>
+        <!-- Opzione 1: Spedizione -->
+        <div class="option-card">
+          <div class="option-header">
+            <div class="option-icon">📦</div>
+            <div class="option-badge">Più scelto</div>
+          </div>
+          <div class="option-title">Ricevilo a casa tua</div>
+          <div class="option-price-row">
+            <span class="option-book-free">Libro <strong>GRATIS</strong></span>
+            <span class="option-plus">+</span>
+            <span class="option-shipping">Spedizione <strong>€9,99</strong></span>
+          </div>
+          <div class="option-desc">Ordina ora, ricevi il libro direttamente a casa tua in tutta Italia entro 3–5 giorni lavorativi.</div>
+          <a href="INSERISCI_LINK_STRIPE_QUI" class="option-btn option-btn-gold">
+            🛒 Ricevi il libro — €9,99
+          </a>
+          <div class="option-secure">
+            <div class="stripe-badge">
+              <div class="stripe-circle">
+                <span class="stripe-text">stripe</span>
+              </div>
+              <span class="stripe-label">Pagamento sicuro</span>
+            </div>
+          </div>
+        </div>
  
-      <!-- Trust widgets -->
-      <div class="trust-widgets">
-        <div class="trust-widget">
-          <div class="tw-icon">
-            <!-- Logo Stripe SVG -->
-            <svg width="36" height="16" viewBox="0 0 60 25" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M59.64 14.28c0-4.69-2.27-8.4-6.6-8.4-4.35 0-6.99 3.71-6.99 8.36 0 5.52 3.12 8.32 7.59 8.32 2.18 0 3.83-.5 5.08-1.19v-3.67c-1.25.63-2.68.99-4.49.99-1.78 0-3.35-.62-3.55-2.78h8.93c0-.24.03-.98.03-1.63zm-9.03-1.74c0-2.06 1.26-2.92 2.41-2.92 1.12 0 2.3.86 2.3 2.92h-4.71zm-14.86-6.66c-1.79 0-2.94.84-3.58 1.43l-.24-1.14H28v21.26l4.03-.86.01-5.16c.66.48 1.63 1.16 3.24 1.16 3.27 0 6.25-2.63 6.25-8.43-.02-5.3-3.03-8.26-6.38-8.26zm-1.12 12.7c-1.08 0-1.71-.38-2.15-.85l-.03-6.72c.47-.53 1.12-.88 2.18-.88 1.67 0 2.82 1.87 2.82 4.22 0 2.4-1.13 4.23-2.82 4.23zM22.27 5.89l4.05-.87V1.57l-4.05.86zm0 1.47h4.05v15.16h-4.05V7.36zm-4.51 1.28-.26-1.28H13.7v15.16h4.03v-10.27c.95-1.24 2.57-1.02 3.07-.86V7.36c-.52-.19-2.42-.55-3.04 1.28zm-9.22-4.99L4.6 4.53l-.02 11.7c0 2.16 1.62 3.75 3.78 3.75 1.2 0 2.07-.22 2.55-.48v-3.27c-.46.19-2.74.85-2.74-1.28V10.8h2.74V7.36H8.17l.01-3.71zM.83 10.36c0-.63.52-.87 1.38-.88 1.23 0 2.79.37 4.02 1.04V6.76C5 6.22 3.76 6 2.21 6-.19 6-1.89 7.37-1.89 9.7c0 3.69 5.09 3.1 5.09 4.69 0 .74-.65 1-1.55 1-1.34 0-3.06-.55-4.42-1.29v3.82c1.5.65 3.02.92 4.42.92 3.38 0 5.7-1.67 5.7-4.45-.02-3.98-5.12-3.27-5.12-4.53z" fill="#635BFF"/>
-            </svg>
+        <!-- Opzione 2: Ritiro in sede -->
+        <div class="option-card option-card-special">
+          <div class="option-header">
+            <div class="option-icon">📍</div>
+            <div class="option-badge option-badge-gold">Esclusivo</div>
           </div>
-          <div class="tw-text">
-            <div class="tw-title">Pagamento sicuro</div>
-            <div class="tw-sub">Protetto da Stripe</div>
+          <div class="option-title">Ritira in sede</div>
+          <div class="option-price-row">
+            <span class="option-book-free">Libro <strong>TOTALMENTE GRATIS</strong></span>
+          </div>
+          <div class="option-desc">Vieni da Beautrì a Cologno al Serio e ritira il tuo libro senza pagare nulla. In più, riceverai un <strong>autografo personalizzato</strong> da Daniela Modina.</div>
+          <a href="https://beautri.it" class="option-btn option-btn-outline">
+            📅 Prenota la tua visita
+          </a>
+          <div class="option-perks">
+            <div class="perk-item">✦ Libro completamente gratuito</div>
+            <div class="perk-item">✦ Autografo personalizzato di Daniela</div>
+            <div class="perk-item">✦ Beautrì · Cologno al Serio (BG)</div>
           </div>
         </div>
-        <div class="trust-widget">
-          <div class="tw-icon">📦</div>
-          <div class="tw-text">
-            <div class="tw-title">Spedizione in Italia</div>
-            <div class="tw-sub">Consegna 3–5 giorni</div>
-          </div>
-        </div>
+ 
       </div>
  
     </div>
@@ -1828,4 +2029,3 @@ document.getElementById('mobileNav').addEventListener('click', function(e) {
  
 </body>
 </html>
- 
