@@ -1029,53 +1029,49 @@ nav.nav-hidden {
 .stat-label { font-size: 0.78rem; color: rgba(255,255,255,0.42); line-height: 1.5; }
  
 /* ═══════════════════════════════════════════════
-   AUTRICE
+   AUTRICE — foto integrata a tutta altezza
 ═══════════════════════════════════════════════ */
-.author-section { background: var(--off); padding: var(--sp-2xl) 1.5rem; }
-.author-inner {
-  max-width: 860px;
-  margin: 0 auto;
+.author-section {
+  background: var(--off);
   display: -webkit-flex;
   display: flex;
-  gap: 3.5rem;
+  min-height: 640px;
+  overflow: hidden;
+}
+.author-text-col {
+  -webkit-flex: 1;
+  flex: 1;
+  display: -webkit-flex;
+  display: flex;
   -webkit-align-items: center;
   align-items: center;
+  padding: var(--sp-2xl) 3rem var(--sp-2xl) clamp(1.5rem, 5vw, 5rem);
 }
-.author-img-wrap {
-  width: 280px;
-  min-width: 220px;
+.author-text-inner { max-width: 480px; }
+.author-photo-col {
+  width: 42%;
   -webkit-flex-shrink: 0;
   flex-shrink: 0;
-}
-.author-img {
-  width: 100%;
-  aspect-ratio: 3/4;
-  background: var(--dark-card);
-  border-radius: 14px;
-  display: -webkit-flex;
-  display: flex;
-  -webkit-align-items: center;
-  align-items: center;
-  -webkit-justify-content: center;
-  justify-content: center;
-  color: rgba(255,255,255,0.2);
-  font-size: 0.72rem;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  border: 2px solid var(--border);
   position: relative;
   overflow: hidden;
 }
-.author-img::before {
-  content: '';
-  position: absolute; inset: 0; top: 0; left: 0; right: 0; bottom: 0;
-  background: -webkit-linear-gradient(150deg, rgba(234,179,10,0.06), transparent);
-  background: linear-gradient(150deg, rgba(234,179,10,0.06), transparent);
+.author-photo-full {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
 }
-.author-img span { position: relative; z-index: 1; }
- 
-.author-text { -webkit-flex: 1; flex: 1; min-width: 0; }
- 
+.author-photo-col::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; bottom: 0;
+  width: 140px;
+  background: -webkit-linear-gradient(right, transparent, var(--off));
+  background: linear-gradient(to left, transparent, var(--off));
+  z-index: 1;
+  pointer-events: none;
+}
 .author-title-h2 {
   font-family: 'Barlow Condensed', sans-serif;
   font-weight: 900;
@@ -1768,16 +1764,10 @@ footer a:hover { color: var(--gold); }
      AUTRICE
 ═══════════════════════════════════════════ -->
 <section class="author-section" id="daniela" aria-label="L'autrice">
-  <div class="author-inner">
  
-    <div class="author-img-wrap">
-      <!-- Sostituire con: <img src="daniela.jpg" alt="Daniela Modina" style="width:100%;border-radius:14px;object-fit:cover;"> -->
-      <div class="author-img" role="img" aria-label="Foto di Daniela Modina">
-        <span>Foto Daniela</span>
-      </div>
-    </div>
- 
-    <div class="author-text">
+  <!-- Colonna testo sinistra -->
+  <div class="author-text-col">
+    <div class="author-text-inner">
       <div class="eyebrow"><div class="eyebrow-line"></div>L'Autrice</div>
       <h2 class="author-title-h2">Daniela<br>Modina</h2>
       <p class="author-quote">"Il capello non è solo estetica. È il segnale più onesto di come stai dentro."</p>
@@ -1790,8 +1780,17 @@ footer a:hover { color: var(--gold); }
         <div class="credit"><span class="cdot"></span>Specializzata in coaching oncologico — ideale per chi affronta un percorso chemioterapeutico e vuole prendersi cura dei propri capelli.</div>
       </div>
     </div>
- 
   </div>
+ 
+  <!-- Colonna foto destra — integrata, niente bordi -->
+  <div class="author-photo-col">
+    <img
+      src="daniela (1).jpg"
+      alt="Daniela Modina — Tricologa, fondatrice di Beautrì"
+      class="author-photo-full"
+    >
+  </div>
+ 
 </section>
  
 <!-- ══════════════════════════════════════════
@@ -2029,3 +2028,4 @@ document.getElementById('mobileNav').addEventListener('click', function(e) {
  
 </body>
 </html>
+ 
