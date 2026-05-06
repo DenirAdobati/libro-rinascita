@@ -1396,51 +1396,101 @@ nav.nav-hidden {
 }
  
 /* ═══════════════════════════════════════════════
-   ANTEPRIMA PDF
+   ANTEPRIMA — Book widget
 ═══════════════════════════════════════════════ */
 .preview-section {
   background: var(--off);
   padding: var(--sp-2xl) 1.5rem;
 }
-.preview-inner { max-width: 760px; margin: 0 auto; }
+.preview-inner { max-width: 680px; margin: 0 auto; }
  
-.pdf-viewer-wrap { margin-top: 1.5rem; }
- 
-.pdf-viewer-frame {
-  position: relative;
-  width: 100%;
-  height: 680px;
-  border-radius: 14px;
-  overflow: hidden;
+.book-widget {
+  background: var(--white);
+  border-radius: 16px;
   border: 1px solid var(--border);
-  -webkit-box-shadow: 0 8px 40px rgba(0,0,0,0.12);
-  box-shadow: 0 8px 40px rgba(0,0,0,0.12);
+  -webkit-box-shadow: 0 12px 50px rgba(0,0,0,0.1);
+  box-shadow: 0 12px 50px rgba(0,0,0,0.1);
+  overflow: hidden;
 }
  
-.pdf-iframe {
-  width: 100%;
-  height: 100%;
-  border: none;
-  display: block;
+.book-pages { position: relative; min-height: 420px; }
+ 
+.book-page {
+  display: none;
+  padding: 3rem 3.5rem;
+  -webkit-animation: pageIn 0.35s ease;
+  animation: pageIn 0.35s ease;
+  position: relative;
+}
+.book-page.active { display: block; }
+ 
+@-webkit-keyframes pageIn { from { opacity:0; -webkit-transform:translateY(8px); } to { opacity:1; -webkit-transform:translateY(0); } }
+@keyframes pageIn { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:translateY(0); } }
+ 
+.book-page-header {
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--border);
+}
+.book-chapter {
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold);
 }
  
-/* Gate overlay */
-.pdf-gate {
+.book-page-title {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+  font-weight: 700;
+  font-style: italic;
+  line-height: 1.35;
+  color: var(--black);
+  margin-bottom: 1.5rem;
+}
+ 
+.book-page-text { display: -webkit-flex; display: flex; -webkit-flex-direction: column; flex-direction: column; gap: 1rem; }
+.book-page-text p {
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: clamp(0.9rem, 1.5vw, 1rem);
+  line-height: 1.85;
+  color: #2a2a2a;
+  text-align: justify;
+}
+ 
+/* Fade sull'ultima pagina prima del gate */
+.book-page-text-fade {
+  -webkit-mask-image: -webkit-linear-gradient(top, black 50%, transparent 100%);
+  mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
+  pointer-events: none;
+}
+ 
+.book-page-num {
+  text-align: center;
+  font-family: Georgia, serif;
+  font-size: 0.78rem;
+  color: rgba(0,0,0,0.25);
+  margin-top: 2rem;
+  letter-spacing: 0.1em;
+}
+ 
+/* Gate sull'ultima pagina */
+.book-gate {
   position: absolute;
   bottom: 0; left: 0; right: 0;
-  height: 55%;
-  background: -webkit-linear-gradient(top, transparent 0%, rgba(245,244,241,0.97) 30%, var(--off) 60%);
-  background: linear-gradient(to bottom, transparent 0%, rgba(245,244,241,0.97) 30%, var(--off) 60%);
+  background: -webkit-linear-gradient(top, transparent 0%, rgba(255,255,255,0.96) 25%, var(--white) 50%);
+  background: linear-gradient(to bottom, transparent 0%, rgba(255,255,255,0.96) 25%, var(--white) 50%);
+  padding: 4rem 3.5rem 2.5rem;
   display: -webkit-flex;
   display: flex;
   -webkit-align-items: flex-end;
   align-items: flex-end;
   -webkit-justify-content: center;
   justify-content: center;
-  padding-bottom: 2.5rem;
-  z-index: 10;
+  min-height: 260px;
 }
-.pdf-gate-content {
+.book-gate-inner {
   text-align: center;
   display: -webkit-flex;
   display: flex;
@@ -1450,46 +1500,191 @@ nav.nav-hidden {
   align-items: center;
   gap: 0.65rem;
 }
-.pdf-gate-icon { font-size: 2rem; }
-.pdf-gate-title {
+.book-gate-icon { font-size: 1.8rem; }
+.book-gate-title {
   font-family: 'Barlow Condensed', sans-serif;
   font-weight: 900;
-  font-size: 1.8rem;
+  font-size: 1.5rem;
   text-transform: uppercase;
   color: var(--black);
-  line-height: 1;
 }
-.pdf-gate-sub {
-  font-size: 0.9rem;
+.book-gate-sub {
+  font-size: 0.85rem;
   color: var(--muted);
   line-height: 1.6;
+  max-width: 340px;
 }
  
+/* Controlli */
+.book-controls {
+  display: -webkit-flex;
+  display: flex;
+  -webkit-align-items: center;
+  align-items: center;
+  -webkit-justify-content: space-between;
+  justify-content: space-between;
+  padding: 1.1rem 2rem;
+  border-top: 1px solid var(--border);
+  background: var(--off);
+}
+.book-btn {
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--muted);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.4rem 0.75rem;
+  border-radius: 6px;
+  -webkit-transition: color 0.2s, background 0.2s;
+  transition: color 0.2s, background 0.2s;
+}
+.book-btn:hover { color: var(--black); background: var(--border); }
+.book-btn:disabled { opacity: 0.3; cursor: default; }
+.book-btn-next { color: var(--black); font-weight: 700; }
+.book-progress {
+  font-size: 0.78rem;
+  color: var(--muted);
+  font-family: 'Outfit', sans-serif;
+}
+ 
+.book-dots {
+  display: -webkit-flex;
+  display: flex;
+  -webkit-justify-content: center;
+  justify-content: center;
+  gap: 0.4rem;
+  padding: 0.85rem;
+  border-top: 1px solid var(--border);
+  background: var(--off);
+}
+.book-dot {
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: rgba(0,0,0,0.15);
+  cursor: pointer;
+  -webkit-transition: background 0.2s, -webkit-transform 0.2s;
+  transition: background 0.2s, transform 0.2s;
+}
+.book-dot.active { background: var(--gold); -webkit-transform: scale(1.3); transform: scale(1.3); }
+ 
 @media (max-width: 767px) {
-  .pdf-viewer-frame { height: 480px; }
+  .book-page { padding: 2rem 1.5rem; }
+  .book-gate { padding: 3rem 1.5rem 2rem; }
+  .book-controls { padding: 0.85rem 1.25rem; }
   .indice-section { padding: var(--sp-xl) 1rem; }
   .preview-section { padding: var(--sp-xl) 1rem; }
 }
 @media (max-width: 479px) {
-  .pdf-viewer-frame { height: 380px; }
+  .book-page { padding: 1.5rem 1.1rem; }
+  .book-page-title { font-size: 1rem; }
+  .book-page-text p { font-size: 0.88rem; line-height: 1.75; }
   .indice-dot { width: 34px; height: 34px; }
-  .indice-num { font-size: 0.65rem; }
-  .indice-title { font-size: 0.95rem; }
 }
  
 /* ═══════════════════════════════════════════════
-   TESTIMONIANZE
+   TESTIMONIANZE — Slider
 ═══════════════════════════════════════════════ */
-.testi-section { background: var(--white); padding: var(--sp-2xl) 1.5rem; }
-.testi-inner { max-width: 860px; margin: 0 auto; }
-.testi-grid {
+.testi-section { background: var(--white); padding: var(--sp-2xl) 0 var(--sp-2xl); }
+.testi-inner { max-width: 860px; margin: 0 auto; padding: 0 1.5rem; }
+ 
+.reviews-slider-wrap {
+  position: relative;
+  margin-top: 2rem;
+  overflow: hidden;
+}
+ 
+.reviews-track {
   display: -webkit-flex;
   display: flex;
-  gap: 1rem;
+  -webkit-transition: -webkit-transform 0.45s cubic-bezier(0.4,0,0.2,1);
+  transition: transform 0.45s cubic-bezier(0.4,0,0.2,1);
+  will-change: transform;
+}
+ 
+.review-slide {
+  min-width: 100%;
+  padding: 0 1.5rem 1rem;
+  max-width: 720px;
+  margin: 0 auto;
+}
+ 
+/* Override testi-text inside slider for nicer look */
+.review-slide .testi-text {
+  font-size: clamp(0.92rem, 1.5vw, 1.05rem);
+  line-height: 1.8;
+  color: var(--black);
+  font-style: italic;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+ 
+.review-slide .stars {
+  text-align: center;
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+}
+ 
+.review-slide .testi-author {
+  -webkit-justify-content: center;
+  justify-content: center;
+}
+ 
+.reviews-controls {
+  display: -webkit-flex;
+  display: flex;
+  -webkit-align-items: center;
+  align-items: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  gap: 1.5rem;
+  padding: 1.5rem 1.5rem 0;
+}
+ 
+.rev-btn {
+  width: 40px; height: 40px;
+  border-radius: 50%;
+  background: var(--off);
+  border: 1px solid var(--border);
+  font-size: 1rem;
+  color: var(--black);
+  cursor: pointer;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-align-items: center;
+  align-items: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-transition: background 0.2s, border-color 0.2s;
+  transition: background 0.2s, border-color 0.2s;
+  -webkit-flex-shrink: 0;
+  flex-shrink: 0;
+}
+.rev-btn:hover { background: var(--gold); border-color: var(--gold); color: var(--black); }
+.rev-btn:disabled { opacity: 0.3; cursor: default; }
+ 
+.rev-dots {
+  display: -webkit-flex;
+  display: flex;
+  gap: 0.4rem;
   -webkit-flex-wrap: wrap;
   flex-wrap: wrap;
-  margin-top: 2.25rem;
+  -webkit-justify-content: center;
+  justify-content: center;
+  max-width: 200px;
 }
+.rev-dot {
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: rgba(0,0,0,0.15);
+  cursor: pointer;
+  -webkit-transition: background 0.2s, -webkit-transform 0.2s;
+  transition: background 0.2s, transform 0.2s;
+  border: none;
+  padding: 0;
+}
+.rev-dot.active { background: var(--gold); -webkit-transform: scale(1.35); transform: scale(1.35); }
 .testi-card {
   -webkit-flex: 1 1 calc(33.33% - 0.7rem);
   flex: 1 1 calc(33.33% - 0.7rem);
@@ -2255,38 +2450,107 @@ footer a:hover { color: var(--gold); }
 </section>
  
 <!-- ══════════════════════════════════════════
-     ANTEPRIMA PDF — Storia di Alexandra
+     ANTEPRIMA — Storia di Alexandra
 ═══════════════════════════════════════════ -->
 <section class="preview-section" id="anteprima" aria-label="Anteprima del libro">
   <div class="preview-inner">
  
-    <div class="eyebrow"><div class="eyebrow-line"></div>Leggi un'anteprima</div>
-    <h2 class="section-title-big" style="color:var(--black);">La storia di <span class="gold">Alexandra</span></h2>
-    <p style="font-size:0.92rem;color:var(--muted);margin-top:0.5rem;margin-bottom:2rem;max-width:500px;">Dodicenne, alopecia areata totale. Tre anni di cura, una sfida enorme. Leggi come è andata.</p>
+    <div class="eyebrow"><div class="eyebrow-line"></div>Un regalo per te</div>
+    <h2 class="section-title-big" style="color:var(--black);">Un piccolo assaggio di <span class="gold">Rinascita</span></h2>
+    <p style="font-size:0.92rem;color:var(--muted);margin-top:0.5rem;margin-bottom:2.5rem;max-width:500px;line-height:1.7;">Sfoglia la storia di Alexandra — esattamente come appare nel libro.</p>
  
-    <!-- Viewer PDF con blocco dopo 5 pagine -->
-    <div class="pdf-viewer-wrap">
+    <!-- Book widget -->
+    <div class="book-widget">
  
-      <div class="pdf-viewer-frame">
-        <iframe
-          id="pdfViewer"
-          src="rinascita.pdf#page=27"
-          class="pdf-iframe"
-          title="Anteprima libro Rinascita — Storia di Alexandra"
-        ></iframe>
+      <!-- Pagine -->
+      <div class="book-pages" id="bookPages">
  
-        <!-- Blocco overlay dopo 5 pagine di scroll -->
-        <div class="pdf-gate" id="pdfGate">
-          <div class="pdf-gate-content">
-            <div class="pdf-gate-icon">📖</div>
-            <h3 class="pdf-gate-title">Vuoi continuare a leggere?</h3>
-            <p class="pdf-gate-sub">Ottieni il libro completo — gratis.<br>Paghi solo €9,99 di spedizione.</p>
-            <a href="#acquista" class="btn-primary" style="font-size:0.9rem;padding:0.85rem 1.75rem;">
-              🛒 Ricevi il libro — solo €9,99
-            </a>
-            <p style="font-size:0.72rem;color:rgba(255,255,255,0.35);margin-top:0.75rem;">Libro GRATIS · Solo spedizione €9,99 · Stripe sicuro</p>
+        <!-- PAGINA 1 -->
+        <div class="book-page active" data-page="1">
+          <div class="book-page-header">
+            <span class="book-chapter">CAPITOLO 4 · STORIE DI SUCCESSO</span>
           </div>
+          <h2 class="book-page-title">Come la grande sfida di Alexandra contro un'alopecia areata totale è diventata il nostro miglior risultato.</h2>
+          <div class="book-page-text">
+            <p>Alexandra, dodicenne, si è presentata da noi come un pulcino bagnato: timida, impacciata, a disagio, molto abbattuta, senza un minimo di energia. Il pulcino nasce tutto bagnato, con una peluria che sembra incollata alla pelle.</p>
+            <p>Un pulcino bagnato perde tutta la sua energia poiché disperde il calore interno, oltre ad avere freddo e sentirsi disorientato in un corpo che non lo rispecchia. Ricordo come fosse ieri il suo volto grigio, lo sguardo basso e la diffidenza nei miei confronti.</p>
+            <p>La testa completamente ricoperta di fermagli, esattamente 110, con cui intrecciava le uniche due ciocche frontali rimaste. Con una maestria che solo una persona disperata può mettere in atto, la sua testa sembrava un'opera d'arte, ma quanto disagio stava vivendo...</p>
+          </div>
+          <div class="book-page-num">— 27 —</div>
         </div>
+ 
+        <!-- PAGINA 2 -->
+        <div class="book-page" data-page="2">
+          <div class="book-page-header">
+            <span class="book-chapter">RINASCITA · Daniela Modina</span>
+          </div>
+          <div class="book-page-text">
+            <p>In consulenza, la mamma mi racconta tutto il passato di Alexandra: visite su visite, ma la situazione continuava a peggiorare e anche l'autostima di Alexandra peggiorava di giorno in giorno. La pediatra che la seguiva e l'aveva indirizzata a diversi specialisti le aveva infine consigliato di optare per qualcosa di diverso e meno invasivo.</p>
+            <p>I farmaci che assumeva avevano numerose controindicazioni, quindi era sconsigliato continuarli. Nelle prime settimane Alexandra mi scrutava in ogni movimento, leggeva ogni mio labiale. La sua insicurezza la rendeva diffidente, ma dopo circa venti giorni è nata una vera empatia.</p>
+            <p>La titubanza ha lasciato il posto ad abbracci, coccole e carezze. Comprendevo bene la mamma, disposta a portarla ovunque pur di ridarle il sorriso, mentre Alexandra si sentiva rimbalzata da un medico all'altro alla ricerca di qualche miglioramento.</p>
+          </div>
+          <div class="book-page-num">— 28 —</div>
+        </div>
+ 
+        <!-- PAGINA 3 -->
+        <div class="book-page" data-page="3">
+          <div class="book-page-header">
+            <span class="book-chapter">RINASCITA · Daniela Modina</span>
+          </div>
+          <div class="book-page-text">
+            <p>"Alopecia Areata da Stress" è stata la diagnosi confermata da ben quattro specialisti, ma nonostante i farmaci e i numerosi esami, i miglioramenti non arrivavano. "Io non vado più da nessuno", mi sussurrava Alexandra, "voglio solo voi!"</p>
+            <p>Ero diventata il suo punto di riferimento, il suo faro, la sua luce. Quando Alexandra entrava in salone, tutti gli occhi erano per lei. La complicità che si era creata era speciale. Con il capo basso, la testa coperta, mi stringeva forte e non mi mollava più.</p>
+            <p>Per sopperire a questa mancanza, indossava felpe e giacche con cappuccio, perfino a scuola o con le amiche. Ciò le permetteva di mantenere una certa tranquillità e di conservare una vita sociale. Le uniche due ciocche che le erano rimaste si assottigliavano piano piano fino a scomparire, come anche le ciglia e le sopracciglia.</p>
+            <p>Nessuna ragazzina di dodici anni dovrebbe vivere una situazione simile, pensavo tra me e me. Non è accettabile che la spensieratezza di quest'età venga negata da un problema così invalidante. Era diventata per me una sfida personale.</p>
+          </div>
+          <div class="book-page-num">— 28 —</div>
+        </div>
+ 
+        <!-- PAGINA 4 — con gate -->
+        <div class="book-page" data-page="4">
+          <div class="book-page-header">
+            <span class="book-chapter">RINASCITA · Daniela Modina</span>
+          </div>
+          <div class="book-page-text book-page-text-fade">
+            <p>Avevo ridato il sorriso a tante persone e non potevo fallire proprio ora. Alexandra aveva il diritto di vivere liberamente la sua adolescenza come tutte le altre ragazzine.</p>
+            <p>Le diagnosi mediche parlavano chiaro: non c'era nulla che potesse impedire un buon risultato. Sapevo bene quanto fosse difficile prevedere l'evoluzione di un'alopecia areata, e infatti dopo una prima fase di miglioramento, la situazione è peggiorata, tanto che abbiamo dovuto ricorrere a una parrucca.</p>
+            <p>Per Alexandra è stato un passaggio molto delicato: quando si guardava allo specchio, non si riconosceva più. Anche lo sguardo della mamma rifletteva il dolore, ma nonostante la continua richiesta di rassicurazioni e certezze...</p>
+          </div>
+          <!-- GATE -->
+          <div class="book-gate">
+            <div class="book-gate-inner">
+              <div class="book-gate-icon">📖</div>
+              <div class="book-gate-title">Vuoi sapere com'è andata?</div>
+              <div class="book-gate-sub">Il finale di Alexandra è nel libro completo.</div>
+              <a href="#acquista" class="btn-primary" style="font-size:0.88rem;padding:0.8rem 1.6rem;">
+                Clicca qui
+              </a>
+            </div>
+          </div>
+          <div class="book-page-num">— 29 —</div>
+        </div>
+ 
+      </div>
+ 
+      <!-- Controlli sfoglia -->
+      <div class="book-controls">
+        <button class="book-btn" id="bookPrev" onclick="changePage(-1)" aria-label="Pagina precedente">
+          ← Precedente
+        </button>
+        <div class="book-progress">
+          <span id="bookCurrent">1</span> / <span id="bookTotal">4</span>
+        </div>
+        <button class="book-btn book-btn-next" id="bookNext" onclick="changePage(1)" aria-label="Pagina successiva">
+          Successiva →
+        </button>
+      </div>
+ 
+      <!-- Indicatori pagina -->
+      <div class="book-dots">
+        <span class="book-dot active" onclick="goToPage(1)"></span>
+        <span class="book-dot" onclick="goToPage(2)"></span>
+        <span class="book-dot" onclick="goToPage(3)"></span>
+        <span class="book-dot" onclick="goToPage(4)"></span>
       </div>
  
     </div>
@@ -2294,37 +2558,66 @@ footer a:hover { color: var(--gold); }
 </section>
  
 <!-- ══════════════════════════════════════════
-     TESTIMONIANZE
+     TESTIMONIANZE — Slider scorrevole
 ═══════════════════════════════════════════ -->
 <section class="testi-section" id="testimonianze" aria-label="Testimonianze">
   <div class="testi-inner">
     <div class="eyebrow" style="color:var(--gold);"><div class="eyebrow-line"></div>Recensioni</div>
-    <h2 class="section-title-big" style="color:var(--black);">Chi ha già letto<br><span class="gold">Rinascita</span></h2>
-    <div class="testi-grid">
-      <div class="testi-card">
-        <div class="stars" aria-label="5 stelle">★★★★★</div>
-        <p class="testi-text">"Questo libro mi ha fatto capire che i miei capelli non erano il problema — erano il segnale. Daniela scrive in un modo che ti sembra di avere qualcuno accanto."</p>
-        <div class="testi-author">
-          <div class="av" aria-hidden="true">M</div>
-          <div><div class="av-name">Margherita</div><div class="av-role">Cliente Beautrì</div></div>
-        </div>
-      </div>
-      <div class="testi-card">
-        <div class="stars" aria-label="5 stelle">★★★★★</div>
-        <p class="testi-text">"L'ho letto in una sola sera. Non riuscivo a smettere. Ogni pagina era come se parlasse direttamente a me — alla mia storia, alle mie paure."</p>
-        <div class="testi-author">
-          <div class="av" aria-hidden="true">S</div>
-          <div><div class="av-name">Sonia</div><div class="av-role">Cliente Beautrì</div></div>
-        </div>
-      </div>
-      <div class="testi-card">
-        <div class="stars" aria-label="5 stelle">★★★★★</div>
-        <p class="testi-text">"Un regalo che ho fatto a me stessa e poi ho regalato a tre amiche. Non è un libro sui capelli — è un libro sulla vita."</p>
-        <div class="testi-author">
-          <div class="av" aria-hidden="true">V</div>
-          <div><div class="av-name">Vittoria</div><div class="av-role">Cliente Beautrì</div></div>
-        </div>
-      </div>
+    <h2 class="section-title-big" style="color:var(--black);">Chi ha già letto <span class="gold">Rinascita</span></h2>
+    <p style="font-size:0.9rem;color:var(--muted);margin-top:0.5rem;margin-bottom:2rem;">Recensioni reali di chi ha letto il libro.</p>
+  </div>
+ 
+  <div class="reviews-slider-wrap">
+    <div class="reviews-track" id="reviewsTrack">
+ 
+      <div class="review-slide"><div class="stars">★★★★★</div><p class="testi-text">"Ho letto il libro tutto d'un fiato. La parte che mi ha colpito maggiormente è quella in cui vengono raccontate le storie di persone che si sono rivolte al salone per problemi riguardanti capelli e cute. Leggendo di questi successi, non si può far altro che essere riconoscenti al team per la SPERANZA che dà a chi sta vivendo le problematiche descritte nel libro e della CERTEZZA che tutto venga affrontato con la massima competenza, testimoniata da reali risultati."</p><div class="testi-author"><div class="av">R</div><div><div class="av-name">Rosa Martinelli</div></div></div></div>
+ 
+      <div class="review-slide"><div class="stars">★★★★☆</div><p class="testi-text">"Buon libro, molto scorrevole e, come sempre, Daniela non lascia niente di incompleto... tutto descritto molto bene."</p><div class="testi-author"><div class="av">M</div><div><div class="av-name">Marisa Albani</div></div></div></div>
+ 
+      <div class="review-slide"><div class="stars">★★★★★</div><p class="testi-text">"Una lettura piacevole scorrevole e realistica, rispecchia pienamente il vissuto delle persone. Anche nel suo libro Daniela rispecchia il suo essere: diretta, chiara e semplice, con i racconti arriva al cuore di tutti!"</p><div class="testi-author"><div class="av">V</div><div><div class="av-name">Vittoria Locatelli</div></div></div></div>
+ 
+      <div class="review-slide"><div class="stars">★★★★★</div><p class="testi-text">"Ho trovato il libro RINASCITA di facile comprensione pur trattando argomenti per niente leggeri. Avendo vissuto tutte le esperienze in prima persona Daniela è riuscita a trasmettere nella lettura tutte le emozioni. È una bellissima idea portare le sue esperienze su carta e farle conoscere e vivere ad altre persone."</p><div class="testi-author"><div class="av">R</div><div><div class="av-name">Rosaria Giovanzana</div></div></div></div>
+ 
+      <div class="review-slide"><div class="stars">★★★★★</div><p class="testi-text">"Il libro RINASCITA mi è piaciuto tantissimo. La storia di Alexandra mi ha colpito in particolare essendo una mamma. Daniela è una persona che descrivere con la parola professionale è una cosa banale, ti sa confortare e aiutare anche nei momenti più difficili. Lo rileggerò come se fosse la prima volta."</p><div class="testi-author"><div class="av">F</div><div><div class="av-name">Francesca Baroni</div></div></div></div>
+ 
+      <div class="review-slide"><div class="stars">★★★★★</div><p class="testi-text">"Bellissimo libro! Contiene molte informazioni utili e importanti per la cura dei capelli e trasmette tutta la passione di Daniela e del team Beautrì. Significative le molte testimonianze di clienti soddisfatte del salone. Complimenti a tutto il team!"</p><div class="testi-author"><div class="av">L</div><div><div class="av-name">Lisa Lanzeni</div></div></div></div>
+ 
+      <div class="review-slide"><div class="stars">★★★★★</div><p class="testi-text">"Ho letto il libro in un paio di serate, è scritto in modo semplice e diretto con molti esempi concreti, molto scorrevole ed interessante. Oltre a consigli pratici sul trattamento dei capelli, dà anche una speranza alla soluzione di situazioni particolarmente problematiche. Complimenti!"</p><div class="testi-author"><div class="av">S</div><div><div class="av-name">Simona Ferri</div></div></div></div>
+ 
+      <div class="review-slide"><div class="stars">★★★★★</div><p class="testi-text">"Questo libro mi ha aiutato molto dal punto di vista informativo ed emozionale. Ho trovato Daniela molto brava ad esprimersi con termini facili e capibili, questo mi dà conferma di essere nelle mani di una persona professionale, molto preparata che è sempre pronta e disponibile ad ascoltare i problemi degli altri."</p><div class="testi-author"><div class="av">E</div><div><div class="av-name">Elia Passi</div></div></div></div>
+ 
+      <div class="review-slide"><div class="stars">★★★★☆</div><p class="testi-text">"Dalla lettura del libro traspare tutto il vissuto di chi ha saputo trasformare un lavoro in una esperienza emozionale. È la trasposizione in un libro di quello che significa venire da voi: andar in un posto dove ti senti accolta da persone competenti che con la loro professionalità sanno regalarti momenti di autenticità e bellezza. Grazie."</p><div class="testi-author"><div class="av">L</div><div><div class="av-name">Lidia Ghilardi</div></div></div></div>
+ 
+      <div class="review-slide"><div class="stars">★★★★★</div><p class="testi-text">"'RINASCITA': scrittura semplice, lineare, chiara, emozionante, senza troppi giri di parole, smaccatamente sincera. Ho ritrovato nel leggerlo proprio le stesse qualità di Daniela. Le esperienze raccontate riescono senza alcun dubbio a farti riflettere e toccarti il cuore. Grazie Daniela."</p><div class="testi-author"><div class="av">C</div><div><div class="av-name">Catia Pomina</div></div></div></div>
+ 
+      <div class="review-slide"><div class="stars">★★★★★</div><p class="testi-text">"Ho letto il libro in tre giorni... è stato molto utile... mi ha fatto capire che se ci si affida alle persone competenti si possono ottenere ottimi risultati."</p><div class="testi-author"><div class="av">D</div><div><div class="av-name">Danilo Cucchi</div></div></div></div>
+ 
+      <div class="review-slide"><div class="stars">★★★★☆</div><p class="testi-text">"Il libro è stata una bella sorpresa, una lettura piacevole e stimolante. È il risultato della passione e della conoscenza di Daniela tangibile in ogni pagina. È stato anche bello leggere le esperienze di ciascun cliente, ci si sente meno soli ad affrontare anomalie legate ai capelli."</p><div class="testi-author"><div class="av">I</div><div><div class="av-name">Ilaria Rossi</div></div></div></div>
+ 
+      <div class="review-slide"><div class="stars">★★★★★</div><p class="testi-text">"È molto emozionante aver scoperto che Daniela ha scritto un libro. Penso che il libro RINASCITA possa essere molto utile a qualsiasi tipo di età, soprattutto a persone che hanno il tipo di disagi di cui parla il libro. Mi è piaciuto molto."</p><div class="testi-author"><div class="av">F</div><div><div class="av-name">Francesca Perego</div></div></div></div>
+ 
+      <div class="review-slide"><div class="stars">★★★★★</div><p class="testi-text">"Ottimo libro, molto preciso e informativo. Ho trovato molto pratico e professionale che ci fosse la spiegazione di alcune parole complicate. Mi è piaciuto molto leggerlo."</p><div class="testi-author"><div class="av">L</div><div><div class="av-name">Lidia Imberti</div></div></div></div>
+ 
+      <div class="review-slide"><div class="stars">★★★★★</div><p class="testi-text">"Ho letto con molto piacere il libro. Mi hanno colpito le testimonianze delle persone, le spiegazioni tecniche molto precise e dettagliate e il continuo migliorarsi di Daniela e dello staff!"</p><div class="testi-author"><div class="av">M</div><div><div class="av-name">Manuele Ferri</div></div></div></div>
+ 
+      <div class="review-slide"><div class="stars">★★★★★</div><p class="testi-text">"Daniela ha scritto un libro interessantissimo che tratta problematiche di cui non immaginavo neanche esistessero. Scritto in modo chiaro e comprensibile, riesce a catturare l'attenzione di chi legge, dando speranza a tante persone con problemi e patologie. Consiglio a tutti di leggerlo. Grazie Daniela!!!"</p><div class="testi-author"><div class="av">P</div><div><div class="av-name">Piera Nozza</div></div></div></div>
+ 
+      <div class="review-slide"><div class="stars">★★★★★</div><p class="testi-text">"Il libro di Daniela esprime in modo chiaro e intenso le svariate emozioni che ogni giorno il cliente vive nella propria quotidianità. Conosco Daniela e il suo staff da tanti anni e vengo travolto da tantissimo affetto, passione e cura. Consiglio a tutti la lettura di questo libro."</p><div class="testi-author"><div class="av">M</div><div><div class="av-name">Matteo Carissimi</div></div></div></div>
+ 
+      <div class="review-slide"><div class="stars">★★★★☆</div><p class="testi-text">"Rinascita è un bellissimo libro, scritto in maniera chiara e semplice da renderlo comprensibile a tutti coloro che non conoscono la tricologia. Oltre a illustrare tutte le problematiche di cute e capelli è corredato dalla testimonianza dei clienti trattati dal salone Beautrì."</p><div class="testi-author"><div class="av">D</div><div><div class="av-name">Dino Bulferetti</div></div></div></div>
+ 
+      <div class="review-slide"><div class="stars">★★★★★</div><p class="testi-text">"Il libro RINASCITA mi è piaciuto tanto. Aver trovato scritto nero su bianco alcune storie che ho anche vissuto personalmente in salone, mi ha fatto sentire coinvolta. È stata una vera scoperta! Leggendolo mi ha trasmesso le stesse emozioni che vivo in salone. Sono molto orgogliosa di lei per aver scritto il libro RINASCITA."</p><div class="testi-author"><div class="av">S</div><div><div class="av-name">Silvana Carrara</div></div></div></div>
+ 
+      <div class="review-slide"><div class="stars">★★★★★</div><p class="testi-text">"Una lettura molto piacevole, ricca di contenuti e sensibilità nei confronti delle/dei clienti. Grazie."</p><div class="testi-author"><div class="av">S</div><div><div class="av-name">Silvia Urani</div></div></div></div>
+ 
+      <div class="review-slide"><div class="stars">★★★★★</div><p class="testi-text">"Ho letto con molto piacere il libro. Mi hanno colpito le testimonianze delle persone e la fiducia che si crea tra cliente e parrucchiere. Ad ogni appuntamento vengo travolto da tantissimo affetto, passione e cura."</p><div class="testi-author"><div class="av">L</div><div><div class="av-name">Loredana Cologni</div></div></div></div>
+ 
+    </div>
+ 
+    <div class="reviews-controls">
+      <button class="rev-btn" id="revPrev" onclick="slideReviews(-1)" aria-label="Precedente">&#8592;</button>
+      <div class="rev-dots" id="revDots"></div>
+      <button class="rev-btn" id="revNext" onclick="slideReviews(1)" aria-label="Successiva">&#8594;</button>
     </div>
   </div>
 </section>
@@ -2395,6 +2688,86 @@ footer a:hover { color: var(--gold); }
 </footer>
  
 <script>
+// Book widget — sfoglia storia Alexandra
+var currentPage = 1;
+var totalPages = 4;
+ 
+function changePage(dir) {
+  var next = currentPage + dir;
+  if (next < 1 || next > totalPages) return;
+  goToPage(next);
+}
+ 
+function goToPage(n) {
+  // Nascondi pagina corrente
+  var pages = document.querySelectorAll('.book-page');
+  var dots = document.querySelectorAll('.book-dot');
+  pages.forEach(function(p) { p.classList.remove('active'); });
+  dots.forEach(function(d) { d.classList.remove('active'); });
+ 
+  // Mostra nuova pagina
+  currentPage = n;
+  pages[n - 1].classList.add('active');
+  dots[n - 1].classList.add('active');
+ 
+  // Aggiorna contatore
+  document.getElementById('bookCurrent').textContent = n;
+ 
+  // Gestisci bottoni
+  document.getElementById('bookPrev').disabled = (n === 1);
+  document.getElementById('bookNext').disabled = (n === totalPages);
+ 
+  // Scroll al widget se si sfoglia
+  if (n > 1) {
+    document.querySelector('.book-widget').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+}
+ 
+// Inizializza stato bottoni
+document.getElementById('bookPrev').disabled = true;
+ 
+// Reviews slider
+(function() {
+  var track = document.getElementById('reviewsTrack');
+  if (!track) return;
+  var slides = track.querySelectorAll('.review-slide');
+  var total = slides.length;
+  var current = 0;
+  var dotsContainer = document.getElementById('revDots');
+ 
+  // Build dots
+  for (var i = 0; i < total; i++) {
+    var d = document.createElement('button');
+    d.className = 'rev-dot' + (i === 0 ? ' active' : '');
+    d.setAttribute('aria-label', 'Recensione ' + (i+1));
+    (function(idx) { d.addEventListener('click', function() { goReview(idx); }); })(i);
+    dotsContainer.appendChild(d);
+  }
+ 
+  function goReview(n) {
+    current = n;
+    track.style.transform = 'translateX(-' + (current * 100) + '%)';
+    dotsContainer.querySelectorAll('.rev-dot').forEach(function(d, i) {
+      d.classList.toggle('active', i === current);
+    });
+    document.getElementById('revPrev').disabled = current === 0;
+    document.getElementById('revNext').disabled = current === total - 1;
+  }
+ 
+  window.slideReviews = function(dir) { goReview(Math.max(0, Math.min(total - 1, current + dir))); };
+ 
+  // Touch swipe
+  var startX = 0;
+  track.addEventListener('touchstart', function(e) { startX = e.touches[0].clientX; }, { passive: true });
+  track.addEventListener('touchend', function(e) {
+    var diff = startX - e.changedTouches[0].clientX;
+    if (Math.abs(diff) > 50) slideReviews(diff > 0 ? 1 : -1);
+  }, { passive: true });
+ 
+  // Init
+  goReview(0);
+})();
+ 
 // FAQ: aggiorna aria-expanded al click
 document.querySelectorAll('.faq-q').forEach(function(btn) {
   btn.addEventListener('click', function() {
