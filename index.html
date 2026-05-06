@@ -1051,21 +1051,11 @@ nav.nav-hidden {
   background: var(--off);
   display: -webkit-flex;
   display: flex;
-  min-height: 640px;
+  min-height: 620px;
   overflow: hidden;
 }
-.author-text-col {
-  -webkit-flex: 1;
-  flex: 1;
-  display: -webkit-flex;
-  display: flex;
-  -webkit-align-items: center;
-  align-items: center;
-  padding: var(--sp-2xl) 3rem var(--sp-2xl) clamp(1.5rem, 5vw, 5rem);
-}
-.author-text-inner { max-width: 480px; }
 .author-photo-col {
-  width: 42%;
+  width: 44%;
   -webkit-flex-shrink: 0;
   flex-shrink: 0;
   position: relative;
@@ -1078,16 +1068,27 @@ nav.nav-hidden {
   object-position: center top;
   display: block;
 }
+/* Sfumatura a DESTRA (foto sinistra → testo destra) */
 .author-photo-col::before {
   content: '';
   position: absolute;
-  top: 0; left: 0; bottom: 0;
+  top: 0; right: 0; bottom: 0;
   width: 140px;
-  background: -webkit-linear-gradient(right, transparent, var(--off));
-  background: linear-gradient(to left, transparent, var(--off));
+  background: -webkit-linear-gradient(left, transparent, var(--off));
+  background: linear-gradient(to right, transparent, var(--off));
   z-index: 1;
   pointer-events: none;
 }
+.author-text-col {
+  -webkit-flex: 1;
+  flex: 1;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-align-items: center;
+  align-items: center;
+  padding: var(--sp-xl) clamp(1.5rem, 4vw, 3.5rem) var(--sp-xl) 1.5rem;
+}
+.author-text-inner { max-width: 460px; }
 .author-title-h2 {
   font-family: 'Barlow Condensed', sans-serif;
   font-weight: 900;
@@ -1297,18 +1298,19 @@ nav.nav-hidden {
 ═══════════════════════════════════════════════ */
 .video-section {
   background: var(--black);
-  padding: 0 1.5rem var(--sp-xl);
+  padding: 0 1.5rem 0;
+  margin-bottom: -4px; /* flush with next section */
 }
-.video-inner { max-width: 860px; margin: 0 auto; }
+.video-inner { max-width: 900px; margin: 0 auto; }
 .video-wrap {
   position: relative;
   width: 100%;
-  padding-bottom: 56.25%; /* 16:9 */
+  padding-bottom: 56.25%;
   height: 0;
   overflow: hidden;
-  border-radius: 16px;
-  -webkit-box-shadow: 0 12px 50px rgba(0,0,0,0.5);
-  box-shadow: 0 12px 50px rgba(0,0,0,0.5);
+  border-radius: 16px 16px 0 0; /* round only top, flush bottom */
+  -webkit-box-shadow: 0 -8px 40px rgba(0,0,0,0.4);
+  box-shadow: 0 -8px 40px rgba(0,0,0,0.4);
 }
 .video-iframe {
   position: absolute;
@@ -1991,18 +1993,18 @@ footer a:hover { color: var(--gold); }
   .stat-card { -webkit-flex: 1 1 calc(50% - 0.5rem); flex: 1 1 calc(50% - 0.5rem); min-width: 130px; }
  
   .author-section {
-    -webkit-flex-direction: column-reverse;
-    flex-direction: column-reverse;
+    -webkit-flex-direction: column;
+    flex-direction: column;
     min-height: auto;
   }
-  .author-text-col { padding: 2.5rem 1.25rem; }
+  .author-text-col { padding: 2rem 1.25rem 2.5rem; }
   .author-text-inner { max-width: 100%; }
   .author-photo-col {
-    width: 100%; height: 60vw;
+    width: 100%; height: 65vw;
     min-height: 280px; max-height: 420px;
   }
   .author-photo-col::before {
-    width: 100%; height: 100px;
+    width: 100%; height: 100px; right: 0;
     top: auto; bottom: 0; left: 0;
     background: -webkit-linear-gradient(top, transparent, var(--off));
     background: linear-gradient(to bottom, transparent, var(--off));
@@ -2253,7 +2255,16 @@ footer a:hover { color: var(--gold); }
 ═══════════════════════════════════════════ -->
 <section class="author-section" id="daniela" aria-label="L'autrice">
  
-  <!-- Colonna testo sinistra -->
+  <!-- Colonna foto SINISTRA -->
+  <div class="author-photo-col">
+    <img
+      src="daniela (1).jpg"
+      alt="Daniela Modina — Tricologa, fondatrice di Beautrì"
+      class="author-photo-full"
+    >
+  </div>
+ 
+  <!-- Colonna testo DESTRA -->
   <div class="author-text-col">
     <div class="author-text-inner">
       <div class="eyebrow"><div class="eyebrow-line"></div>L'Autrice</div>
@@ -2268,15 +2279,6 @@ footer a:hover { color: var(--gold); }
         <div class="credit"><span class="cdot"></span>Specializzata in coaching oncologico — ideale per chi affronta un percorso chemioterapeutico e vuole prendersi cura dei propri capelli.</div>
       </div>
     </div>
-  </div>
- 
-  <!-- Colonna foto destra — integrata, niente bordi -->
-  <div class="author-photo-col">
-    <img
-      src="daniela (1).jpg"
-      alt="Daniela Modina — Tricologa, fondatrice di Beautrì"
-      class="author-photo-full"
-    >
   </div>
  
 </section>
