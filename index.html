@@ -1584,7 +1584,7 @@ nav.nav-hidden {
 }
  
 /* ═══════════════════════════════════════════════
-   TESTIMONIANZE — Slider
+   TESTIMONIANZE — Slider swipe only
 ═══════════════════════════════════════════════ */
 .testi-section { background: var(--white); padding: var(--sp-2xl) 0 var(--sp-2xl); }
 .testi-inner { max-width: 860px; margin: 0 auto; padding: 0 1.5rem; }
@@ -1593,98 +1593,93 @@ nav.nav-hidden {
   position: relative;
   margin-top: 2rem;
   overflow: hidden;
+  cursor: grab;
 }
+.reviews-slider-wrap:active { cursor: grabbing; }
  
 .reviews-track {
   display: -webkit-flex;
   display: flex;
-  -webkit-transition: -webkit-transform 0.45s cubic-bezier(0.4,0,0.2,1);
-  transition: transform 0.45s cubic-bezier(0.4,0,0.2,1);
+  -webkit-transition: -webkit-transform 0.42s cubic-bezier(0.4,0,0.2,1);
+  transition: transform 0.42s cubic-bezier(0.4,0,0.2,1);
   will-change: transform;
 }
  
 .review-slide {
   min-width: 100%;
-  padding: 0 1.5rem 1rem;
-  max-width: 720px;
-  margin: 0 auto;
+  padding: 0 1.5rem 2rem;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-justify-content: center;
+  justify-content: center;
 }
  
-/* Override testi-text inside slider for nicer look */
-.review-slide .testi-text {
+.review-card {
+  background: var(--off);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 2.5rem 2.5rem 2rem;
+  max-width: 680px;
+  width: 100%;
+  text-align: center;
+  -webkit-box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+  box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+}
+ 
+.review-card .stars {
+  font-size: 1.2rem;
+  margin-bottom: 1.25rem;
+  color: var(--gold);
+}
+ 
+.review-card .testi-text {
   font-size: clamp(0.92rem, 1.5vw, 1.05rem);
   line-height: 1.8;
   color: var(--black);
   font-style: italic;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1.75rem;
   text-align: center;
 }
  
-.review-slide .stars {
-  text-align: center;
-  font-size: 1.1rem;
-  margin-bottom: 1rem;
-}
- 
-.review-slide .testi-author {
-  -webkit-justify-content: center;
-  justify-content: center;
-}
- 
-.reviews-controls {
+.review-card .testi-author {
   display: -webkit-flex;
   display: flex;
   -webkit-align-items: center;
   align-items: center;
   -webkit-justify-content: center;
   justify-content: center;
-  gap: 1.5rem;
-  padding: 1.5rem 1.5rem 0;
+  gap: 0.65rem;
 }
  
-.rev-btn {
-  width: 40px; height: 40px;
-  border-radius: 50%;
-  background: var(--off);
-  border: 1px solid var(--border);
-  font-size: 1rem;
-  color: var(--black);
-  cursor: pointer;
+/* Swipe hint dots */
+.swipe-dots {
   display: -webkit-flex;
   display: flex;
-  -webkit-align-items: center;
-  align-items: center;
   -webkit-justify-content: center;
   justify-content: center;
-  -webkit-transition: background 0.2s, border-color 0.2s;
-  transition: background 0.2s, border-color 0.2s;
-  -webkit-flex-shrink: 0;
-  flex-shrink: 0;
-}
-.rev-btn:hover { background: var(--gold); border-color: var(--gold); color: var(--black); }
-.rev-btn:disabled { opacity: 0.3; cursor: default; }
- 
-.rev-dots {
-  display: -webkit-flex;
-  display: flex;
   gap: 0.4rem;
-  -webkit-flex-wrap: wrap;
-  flex-wrap: wrap;
-  -webkit-justify-content: center;
-  justify-content: center;
-  max-width: 200px;
+  padding: 0.5rem 0 0;
 }
-.rev-dot {
+.swipe-dot {
   width: 7px; height: 7px;
   border-radius: 50%;
-  background: rgba(0,0,0,0.15);
+  background: rgba(0,0,0,0.12);
+  border: none;
+  padding: 0;
   cursor: pointer;
   -webkit-transition: background 0.2s, -webkit-transform 0.2s;
   transition: background 0.2s, transform 0.2s;
-  border: none;
-  padding: 0;
 }
-.rev-dot.active { background: var(--gold); -webkit-transform: scale(1.35); transform: scale(1.35); }
+.swipe-dot.active {
+  background: var(--gold);
+  -webkit-transform: scale(1.4);
+  transform: scale(1.4);
+}
+ 
+@media (max-width: 767px) {
+  .review-card { padding: 1.75rem 1.25rem 1.5rem; }
+  .testi-section { padding: var(--sp-xl) 0; }
+}
 .testi-card {
   -webkit-flex: 1 1 calc(33.33% - 0.7rem);
   flex: 1 1 calc(33.33% - 0.7rem);
@@ -2013,7 +2008,7 @@ footer a:hover { color: var(--gold); }
     <li><a href="#acquista">Acquista</a></li>
   </ul>
  
-  <a href="#acquista" class="btn-nav">🛒 Acquista — €14,90</a>
+  <a href="INSERISCI_LINK_TYPEFORM_QUI" class="btn-nav" target="_blank">📖 Voglio il libro</a>
  
   <!-- Hamburger mobile -->
   <button class="nav-hamburger" aria-label="Apri menu" onclick="document.getElementById('mobileNav').classList.toggle('open')">
@@ -2126,22 +2121,10 @@ footer a:hover { color: var(--gold); }
           </div>
           <div class="option-title">Ricevilo a casa tua</div>
           <div class="option-price-row">
-            <span class="option-book-free">Libro <strong>GRATIS</strong></span>
-            <span class="option-plus">+</span>
-            <span class="option-shipping">Spedizione <strong>€9,99</strong></span>
+            <span class="option-book-free">Il libro è <strong>GRATIS</strong></span>
           </div>
-          <div class="option-desc">Ordina ora, ricevi il libro direttamente a casa tua in tutta Italia entro 3–5 giorni lavorativi.</div>
-          <a href="INSERISCI_LINK_STRIPE_QUI" class="option-btn option-btn-gold">
-            🛒 Ricevi il libro — €9,99
-          </a>
-          <div class="option-secure">
-            <div class="stripe-badge">
-              <div class="stripe-circle">
-                <span class="stripe-text">stripe</span>
-              </div>
-              <span class="stripe-label">Pagamento sicuro</span>
-            </div>
-          </div>
+          <div class="option-desc">Compila il modulo, ricevi il libro direttamente a casa tua in tutta Italia.</div>
+          <a href="INSERISCI_LINK_TYPEFORM_QUI" class="option-btn option-btn-gold" target="_blank">📖 Voglio il libro</a>
         </div>
  
         <!-- Opzione 2: Ritiro in sede -->
@@ -2522,9 +2505,7 @@ footer a:hover { color: var(--gold); }
               <div class="book-gate-icon">📖</div>
               <div class="book-gate-title">Vuoi sapere com'è andata?</div>
               <div class="book-gate-sub">Il finale di Alexandra è nel libro completo.</div>
-              <a href="#acquista" class="btn-primary" style="font-size:0.88rem;padding:0.8rem 1.6rem;">
-                Clicca qui
-              </a>
+              <a href="INSERISCI_LINK_TYPEFORM_QUI" class="btn-primary" style="font-size:0.88rem;padding:0.8rem 1.6rem;" target="_blank">Clicca qui</a>
             </div>
           </div>
           <div class="book-page-num">— 29 —</div>
@@ -2570,56 +2551,51 @@ footer a:hover { color: var(--gold); }
   <div class="reviews-slider-wrap">
     <div class="reviews-track" id="reviewsTrack">
  
-      <div class="review-slide"><div class="stars">★★★★★</div><p class="testi-text">"Ho letto il libro tutto d'un fiato. La parte che mi ha colpito maggiormente è quella in cui vengono raccontate le storie di persone che si sono rivolte al salone per problemi riguardanti capelli e cute. Leggendo di questi successi, non si può far altro che essere riconoscenti al team per la SPERANZA che dà a chi sta vivendo le problematiche descritte nel libro e della CERTEZZA che tutto venga affrontato con la massima competenza, testimoniata da reali risultati."</p><div class="testi-author"><div class="av">R</div><div><div class="av-name">Rosa Martinelli</div></div></div></div>
+      <div class="review-slide"><div class="review-card"><div class="stars">★★★★★</div><p class="testi-text">"Ho letto il libro tutto d'un fiato. La parte che mi ha colpito maggiormente è quella in cui vengono raccontate le storie di persone che si sono rivolte al salone per problemi riguardanti capelli e cute. Leggendo di questi successi, non si può far altro che essere riconoscenti al team per la SPERANZA che dà a chi sta vivendo le problematiche descritte nel libro e della CERTEZZA che tutto venga affrontato con la massima competenza, testimoniata da reali risultati."</p><div class="testi-author"><div class="av">R</div><div><div class="av-name">Rosa Martinelli</div></div></div></div></div>
  
-      <div class="review-slide"><div class="stars">★★★★☆</div><p class="testi-text">"Buon libro, molto scorrevole e, come sempre, Daniela non lascia niente di incompleto... tutto descritto molto bene."</p><div class="testi-author"><div class="av">M</div><div><div class="av-name">Marisa Albani</div></div></div></div>
+      <div class="review-slide"><div class="review-card"><div class="stars">★★★★☆</div><p class="testi-text">"Buon libro, molto scorrevole e, come sempre, Daniela non lascia niente di incompleto... tutto descritto molto bene."</p><div class="testi-author"><div class="av">M</div><div><div class="av-name">Marisa Albani</div></div></div></div></div>
  
-      <div class="review-slide"><div class="stars">★★★★★</div><p class="testi-text">"Una lettura piacevole scorrevole e realistica, rispecchia pienamente il vissuto delle persone. Anche nel suo libro Daniela rispecchia il suo essere: diretta, chiara e semplice, con i racconti arriva al cuore di tutti!"</p><div class="testi-author"><div class="av">V</div><div><div class="av-name">Vittoria Locatelli</div></div></div></div>
+      <div class="review-slide"><div class="review-card"><div class="stars">★★★★★</div><p class="testi-text">"Una lettura piacevole scorrevole e realistica, rispecchia pienamente il vissuto delle persone. Anche nel suo libro Daniela rispecchia il suo essere: diretta, chiara e semplice, con i racconti arriva al cuore di tutti!"</p><div class="testi-author"><div class="av">V</div><div><div class="av-name">Vittoria Locatelli</div></div></div></div></div>
  
-      <div class="review-slide"><div class="stars">★★★★★</div><p class="testi-text">"Ho trovato il libro RINASCITA di facile comprensione pur trattando argomenti per niente leggeri. Avendo vissuto tutte le esperienze in prima persona Daniela è riuscita a trasmettere nella lettura tutte le emozioni. È una bellissima idea portare le sue esperienze su carta e farle conoscere e vivere ad altre persone."</p><div class="testi-author"><div class="av">R</div><div><div class="av-name">Rosaria Giovanzana</div></div></div></div>
+      <div class="review-slide"><div class="review-card"><div class="stars">★★★★★</div><p class="testi-text">"Ho trovato il libro RINASCITA di facile comprensione pur trattando argomenti per niente leggeri. Avendo vissuto tutte le esperienze in prima persona Daniela è riuscita a trasmettere nella lettura tutte le emozioni. È una bellissima idea portare le sue esperienze su carta e farle conoscere e vivere ad altre persone."</p><div class="testi-author"><div class="av">R</div><div><div class="av-name">Rosaria Giovanzana</div></div></div></div></div>
  
-      <div class="review-slide"><div class="stars">★★★★★</div><p class="testi-text">"Il libro RINASCITA mi è piaciuto tantissimo. La storia di Alexandra mi ha colpito in particolare essendo una mamma. Daniela è una persona che descrivere con la parola professionale è una cosa banale, ti sa confortare e aiutare anche nei momenti più difficili. Lo rileggerò come se fosse la prima volta."</p><div class="testi-author"><div class="av">F</div><div><div class="av-name">Francesca Baroni</div></div></div></div>
+      <div class="review-slide"><div class="review-card"><div class="stars">★★★★★</div><p class="testi-text">"Il libro RINASCITA mi è piaciuto tantissimo. La storia di Alexandra mi ha colpito in particolare essendo una mamma. Daniela è una persona che descrivere con la parola professionale è una cosa banale, ti sa confortare e aiutare anche nei momenti più difficili. Lo rileggerò come se fosse la prima volta."</p><div class="testi-author"><div class="av">F</div><div><div class="av-name">Francesca Baroni</div></div></div></div></div>
  
-      <div class="review-slide"><div class="stars">★★★★★</div><p class="testi-text">"Bellissimo libro! Contiene molte informazioni utili e importanti per la cura dei capelli e trasmette tutta la passione di Daniela e del team Beautrì. Significative le molte testimonianze di clienti soddisfatte del salone. Complimenti a tutto il team!"</p><div class="testi-author"><div class="av">L</div><div><div class="av-name">Lisa Lanzeni</div></div></div></div>
+      <div class="review-slide"><div class="review-card"><div class="stars">★★★★★</div><p class="testi-text">"Bellissimo libro! Contiene molte informazioni utili e importanti per la cura dei capelli e trasmette tutta la passione di Daniela e del team Beautrì. Significative le molte testimonianze di clienti soddisfatte del salone. Complimenti a tutto il team!"</p><div class="testi-author"><div class="av">L</div><div><div class="av-name">Lisa Lanzeni</div></div></div></div></div>
  
-      <div class="review-slide"><div class="stars">★★★★★</div><p class="testi-text">"Ho letto il libro in un paio di serate, è scritto in modo semplice e diretto con molti esempi concreti, molto scorrevole ed interessante. Oltre a consigli pratici sul trattamento dei capelli, dà anche una speranza alla soluzione di situazioni particolarmente problematiche. Complimenti!"</p><div class="testi-author"><div class="av">S</div><div><div class="av-name">Simona Ferri</div></div></div></div>
+      <div class="review-slide"><div class="review-card"><div class="stars">★★★★★</div><p class="testi-text">"Ho letto il libro in un paio di serate, è scritto in modo semplice e diretto con molti esempi concreti, molto scorrevole ed interessante. Oltre a consigli pratici sul trattamento dei capelli, dà anche una speranza alla soluzione di situazioni particolarmente problematiche. Complimenti!"</p><div class="testi-author"><div class="av">S</div><div><div class="av-name">Simona Ferri</div></div></div></div></div>
  
-      <div class="review-slide"><div class="stars">★★★★★</div><p class="testi-text">"Questo libro mi ha aiutato molto dal punto di vista informativo ed emozionale. Ho trovato Daniela molto brava ad esprimersi con termini facili e capibili, questo mi dà conferma di essere nelle mani di una persona professionale, molto preparata che è sempre pronta e disponibile ad ascoltare i problemi degli altri."</p><div class="testi-author"><div class="av">E</div><div><div class="av-name">Elia Passi</div></div></div></div>
+      <div class="review-slide"><div class="review-card"><div class="stars">★★★★★</div><p class="testi-text">"Questo libro mi ha aiutato molto dal punto di vista informativo ed emozionale. Ho trovato Daniela molto brava ad esprimersi con termini facili e capibili, questo mi dà conferma di essere nelle mani di una persona professionale, molto preparata che è sempre pronta e disponibile ad ascoltare i problemi degli altri."</p><div class="testi-author"><div class="av">E</div><div><div class="av-name">Elia Passi</div></div></div></div></div>
  
-      <div class="review-slide"><div class="stars">★★★★☆</div><p class="testi-text">"Dalla lettura del libro traspare tutto il vissuto di chi ha saputo trasformare un lavoro in una esperienza emozionale. È la trasposizione in un libro di quello che significa venire da voi: andar in un posto dove ti senti accolta da persone competenti che con la loro professionalità sanno regalarti momenti di autenticità e bellezza. Grazie."</p><div class="testi-author"><div class="av">L</div><div><div class="av-name">Lidia Ghilardi</div></div></div></div>
+      <div class="review-slide"><div class="review-card"><div class="stars">★★★★☆</div><p class="testi-text">"Dalla lettura del libro traspare tutto il vissuto di chi ha saputo trasformare un lavoro in una esperienza emozionale. È la trasposizione in un libro di quello che significa venire da voi: andar in un posto dove ti senti accolta da persone competenti che con la loro professionalità sanno regalarti momenti di autenticità e bellezza. Grazie."</p><div class="testi-author"><div class="av">L</div><div><div class="av-name">Lidia Ghilardi</div></div></div></div></div>
  
-      <div class="review-slide"><div class="stars">★★★★★</div><p class="testi-text">"'RINASCITA': scrittura semplice, lineare, chiara, emozionante, senza troppi giri di parole, smaccatamente sincera. Ho ritrovato nel leggerlo proprio le stesse qualità di Daniela. Le esperienze raccontate riescono senza alcun dubbio a farti riflettere e toccarti il cuore. Grazie Daniela."</p><div class="testi-author"><div class="av">C</div><div><div class="av-name">Catia Pomina</div></div></div></div>
+      <div class="review-slide"><div class="review-card"><div class="stars">★★★★★</div><p class="testi-text">"'RINASCITA': scrittura semplice, lineare, chiara, emozionante, senza troppi giri di parole, smaccatamente sincera. Ho ritrovato nel leggerlo proprio le stesse qualità di Daniela. Le esperienze raccontate riescono senza alcun dubbio a farti riflettere e toccarti il cuore. Grazie Daniela."</p><div class="testi-author"><div class="av">C</div><div><div class="av-name">Catia Pomina</div></div></div></div></div>
  
-      <div class="review-slide"><div class="stars">★★★★★</div><p class="testi-text">"Ho letto il libro in tre giorni... è stato molto utile... mi ha fatto capire che se ci si affida alle persone competenti si possono ottenere ottimi risultati."</p><div class="testi-author"><div class="av">D</div><div><div class="av-name">Danilo Cucchi</div></div></div></div>
+      <div class="review-slide"><div class="review-card"><div class="stars">★★★★★</div><p class="testi-text">"Ho letto il libro in tre giorni... è stato molto utile... mi ha fatto capire che se ci si affida alle persone competenti si possono ottenere ottimi risultati."</p><div class="testi-author"><div class="av">D</div><div><div class="av-name">Danilo Cucchi</div></div></div></div></div>
  
-      <div class="review-slide"><div class="stars">★★★★☆</div><p class="testi-text">"Il libro è stata una bella sorpresa, una lettura piacevole e stimolante. È il risultato della passione e della conoscenza di Daniela tangibile in ogni pagina. È stato anche bello leggere le esperienze di ciascun cliente, ci si sente meno soli ad affrontare anomalie legate ai capelli."</p><div class="testi-author"><div class="av">I</div><div><div class="av-name">Ilaria Rossi</div></div></div></div>
+      <div class="review-slide"><div class="review-card"><div class="stars">★★★★☆</div><p class="testi-text">"Il libro è stata una bella sorpresa, una lettura piacevole e stimolante. È il risultato della passione e della conoscenza di Daniela tangibile in ogni pagina. È stato anche bello leggere le esperienze di ciascun cliente, ci si sente meno soli ad affrontare anomalie legate ai capelli."</p><div class="testi-author"><div class="av">I</div><div><div class="av-name">Ilaria Rossi</div></div></div></div></div>
  
-      <div class="review-slide"><div class="stars">★★★★★</div><p class="testi-text">"È molto emozionante aver scoperto che Daniela ha scritto un libro. Penso che il libro RINASCITA possa essere molto utile a qualsiasi tipo di età, soprattutto a persone che hanno il tipo di disagi di cui parla il libro. Mi è piaciuto molto."</p><div class="testi-author"><div class="av">F</div><div><div class="av-name">Francesca Perego</div></div></div></div>
+      <div class="review-slide"><div class="review-card"><div class="stars">★★★★★</div><p class="testi-text">"È molto emozionante aver scoperto che Daniela ha scritto un libro. Penso che il libro RINASCITA possa essere molto utile a qualsiasi tipo di età, soprattutto a persone che hanno il tipo di disagi di cui parla il libro. Mi è piaciuto molto."</p><div class="testi-author"><div class="av">F</div><div><div class="av-name">Francesca Perego</div></div></div></div></div>
  
-      <div class="review-slide"><div class="stars">★★★★★</div><p class="testi-text">"Ottimo libro, molto preciso e informativo. Ho trovato molto pratico e professionale che ci fosse la spiegazione di alcune parole complicate. Mi è piaciuto molto leggerlo."</p><div class="testi-author"><div class="av">L</div><div><div class="av-name">Lidia Imberti</div></div></div></div>
+      <div class="review-slide"><div class="review-card"><div class="stars">★★★★★</div><p class="testi-text">"Ottimo libro, molto preciso e informativo. Ho trovato molto pratico e professionale che ci fosse la spiegazione di alcune parole complicate. Mi è piaciuto molto leggerlo."</p><div class="testi-author"><div class="av">L</div><div><div class="av-name">Lidia Imberti</div></div></div></div></div>
  
-      <div class="review-slide"><div class="stars">★★★★★</div><p class="testi-text">"Ho letto con molto piacere il libro. Mi hanno colpito le testimonianze delle persone, le spiegazioni tecniche molto precise e dettagliate e il continuo migliorarsi di Daniela e dello staff!"</p><div class="testi-author"><div class="av">M</div><div><div class="av-name">Manuele Ferri</div></div></div></div>
+      <div class="review-slide"><div class="review-card"><div class="stars">★★★★★</div><p class="testi-text">"Ho letto con molto piacere il libro. Mi hanno colpito le testimonianze delle persone, le spiegazioni tecniche molto precise e dettagliate e il continuo migliorarsi di Daniela e dello staff!"</p><div class="testi-author"><div class="av">M</div><div><div class="av-name">Manuele Ferri</div></div></div></div></div>
  
-      <div class="review-slide"><div class="stars">★★★★★</div><p class="testi-text">"Daniela ha scritto un libro interessantissimo che tratta problematiche di cui non immaginavo neanche esistessero. Scritto in modo chiaro e comprensibile, riesce a catturare l'attenzione di chi legge, dando speranza a tante persone con problemi e patologie. Consiglio a tutti di leggerlo. Grazie Daniela!!!"</p><div class="testi-author"><div class="av">P</div><div><div class="av-name">Piera Nozza</div></div></div></div>
+      <div class="review-slide"><div class="review-card"><div class="stars">★★★★★</div><p class="testi-text">"Daniela ha scritto un libro interessantissimo che tratta problematiche di cui non immaginavo neanche esistessero. Scritto in modo chiaro e comprensibile, riesce a catturare l'attenzione di chi legge, dando speranza a tante persone con problemi e patologie. Consiglio a tutti di leggerlo. Grazie Daniela!!!"</p><div class="testi-author"><div class="av">P</div><div><div class="av-name">Piera Nozza</div></div></div></div></div>
  
-      <div class="review-slide"><div class="stars">★★★★★</div><p class="testi-text">"Il libro di Daniela esprime in modo chiaro e intenso le svariate emozioni che ogni giorno il cliente vive nella propria quotidianità. Conosco Daniela e il suo staff da tanti anni e vengo travolto da tantissimo affetto, passione e cura. Consiglio a tutti la lettura di questo libro."</p><div class="testi-author"><div class="av">M</div><div><div class="av-name">Matteo Carissimi</div></div></div></div>
+      <div class="review-slide"><div class="review-card"><div class="stars">★★★★★</div><p class="testi-text">"Il libro di Daniela esprime in modo chiaro e intenso le svariate emozioni che ogni giorno il cliente vive nella propria quotidianità. Conosco Daniela e il suo staff da tanti anni e vengo travolto da tantissimo affetto, passione e cura. Consiglio a tutti la lettura di questo libro."</p><div class="testi-author"><div class="av">M</div><div><div class="av-name">Matteo Carissimi</div></div></div></div></div>
  
-      <div class="review-slide"><div class="stars">★★★★☆</div><p class="testi-text">"Rinascita è un bellissimo libro, scritto in maniera chiara e semplice da renderlo comprensibile a tutti coloro che non conoscono la tricologia. Oltre a illustrare tutte le problematiche di cute e capelli è corredato dalla testimonianza dei clienti trattati dal salone Beautrì."</p><div class="testi-author"><div class="av">D</div><div><div class="av-name">Dino Bulferetti</div></div></div></div>
+      <div class="review-slide"><div class="review-card"><div class="stars">★★★★☆</div><p class="testi-text">"Rinascita è un bellissimo libro, scritto in maniera chiara e semplice da renderlo comprensibile a tutti coloro che non conoscono la tricologia. Oltre a illustrare tutte le problematiche di cute e capelli è corredato dalla testimonianza dei clienti trattati dal salone Beautrì."</p><div class="testi-author"><div class="av">D</div><div><div class="av-name">Dino Bulferetti</div></div></div></div></div>
  
-      <div class="review-slide"><div class="stars">★★★★★</div><p class="testi-text">"Il libro RINASCITA mi è piaciuto tanto. Aver trovato scritto nero su bianco alcune storie che ho anche vissuto personalmente in salone, mi ha fatto sentire coinvolta. È stata una vera scoperta! Leggendolo mi ha trasmesso le stesse emozioni che vivo in salone. Sono molto orgogliosa di lei per aver scritto il libro RINASCITA."</p><div class="testi-author"><div class="av">S</div><div><div class="av-name">Silvana Carrara</div></div></div></div>
+      <div class="review-slide"><div class="review-card"><div class="stars">★★★★★</div><p class="testi-text">"Il libro RINASCITA mi è piaciuto tanto. Aver trovato scritto nero su bianco alcune storie che ho anche vissuto personalmente in salone, mi ha fatto sentire coinvolta. È stata una vera scoperta! Leggendolo mi ha trasmesso le stesse emozioni che vivo in salone. Sono molto orgogliosa di lei per aver scritto il libro RINASCITA."</p><div class="testi-author"><div class="av">S</div><div><div class="av-name">Silvana Carrara</div></div></div></div></div>
  
-      <div class="review-slide"><div class="stars">★★★★★</div><p class="testi-text">"Una lettura molto piacevole, ricca di contenuti e sensibilità nei confronti delle/dei clienti. Grazie."</p><div class="testi-author"><div class="av">S</div><div><div class="av-name">Silvia Urani</div></div></div></div>
+      <div class="review-slide"><div class="review-card"><div class="stars">★★★★★</div><p class="testi-text">"Una lettura molto piacevole, ricca di contenuti e sensibilità nei confronti delle/dei clienti. Grazie."</p><div class="testi-author"><div class="av">S</div><div><div class="av-name">Silvia Urani</div></div></div></div></div>
  
-      <div class="review-slide"><div class="stars">★★★★★</div><p class="testi-text">"Ho letto con molto piacere il libro. Mi hanno colpito le testimonianze delle persone e la fiducia che si crea tra cliente e parrucchiere. Ad ogni appuntamento vengo travolto da tantissimo affetto, passione e cura."</p><div class="testi-author"><div class="av">L</div><div><div class="av-name">Loredana Cologni</div></div></div></div>
+      <div class="review-slide"><div class="review-card"><div class="stars">★★★★★</div><p class="testi-text">"Ho letto con molto piacere il libro. Mi hanno colpito le testimonianze delle persone e la fiducia che si crea tra cliente e parrucchiere. Ad ogni appuntamento vengo travolto da tantissimo affetto, passione e cura."</p><div class="testi-author"><div class="av">L</div><div><div class="av-name">Loredana Cologni</div></div></div></div></div>
  
-    </div>
- 
-    <div class="reviews-controls">
-      <button class="rev-btn" id="revPrev" onclick="slideReviews(-1)" aria-label="Precedente">&#8592;</button>
-      <div class="rev-dots" id="revDots"></div>
-      <button class="rev-btn" id="revNext" onclick="slideReviews(1)" aria-label="Successiva">&#8594;</button>
-    </div>
-  </div>
+    </div><!-- end track -->
+    <div class="swipe-dots" id="swipeDots"></div>
+  </div><!-- end slider-wrap -->
 </section>
  
 <!-- ══════════════════════════════════════════
@@ -2670,11 +2646,11 @@ footer a:hover { color: var(--gold); }
     Inizia il tuo<br>percorso di
     <span class="gold">Rinascita</span>
   </h2>
-  <p class="cta-sub">Il libro è <strong style="color:var(--gold);">completamente gratuito</strong> — paghi solo €9,99 di spedizione.</p>
-  <a href="INSERISCI_LINK_STRIPE_QUI" class="btn-primary" style="font-size:1rem; padding:1rem 2.2rem;">
-    🛒 Ricevi il libro — solo €9,99
+  <p class="cta-sub">Il libro è <strong style="color:var(--gold);">completamente gratuito</strong>. Compila il modulo e te lo spediamo.</p>
+  <a href="INSERISCI_LINK_TYPEFORM_QUI" class="btn-primary" style="font-size:1rem; padding:1rem 2.2rem;" target="_blank">
+    📖 Voglio il libro
   </a>
-  <p class="cta-note">Libro <strong>GRATIS</strong> · Solo €9,99 di spedizione · Pagamento sicuro Stripe · Spedizione in tutta Italia</p>
+  
 </section>
  
 <!-- FOOTER -->
@@ -2726,46 +2702,56 @@ function goToPage(n) {
 // Inizializza stato bottoni
 document.getElementById('bookPrev').disabled = true;
  
-// Reviews slider
+// Reviews slider — swipe + mouse drag only
 (function() {
   var track = document.getElementById('reviewsTrack');
   if (!track) return;
   var slides = track.querySelectorAll('.review-slide');
   var total = slides.length;
   var current = 0;
-  var dotsContainer = document.getElementById('revDots');
+  var dotsWrap = document.getElementById('swipeDots');
  
   // Build dots
+  var dots = [];
   for (var i = 0; i < total; i++) {
     var d = document.createElement('button');
-    d.className = 'rev-dot' + (i === 0 ? ' active' : '');
-    d.setAttribute('aria-label', 'Recensione ' + (i+1));
-    (function(idx) { d.addEventListener('click', function() { goReview(idx); }); })(i);
-    dotsContainer.appendChild(d);
+    d.className = 'swipe-dot' + (i === 0 ? ' active' : '');
+    d.setAttribute('aria-label', 'Recensione ' + (i + 1));
+    (function(idx) { d.addEventListener('click', function() { goTo(idx); }); })(i);
+    dotsWrap.appendChild(d);
+    dots.push(d);
   }
  
-  function goReview(n) {
-    current = n;
+  function goTo(n) {
+    current = Math.max(0, Math.min(total - 1, n));
     track.style.transform = 'translateX(-' + (current * 100) + '%)';
-    dotsContainer.querySelectorAll('.rev-dot').forEach(function(d, i) {
-      d.classList.toggle('active', i === current);
-    });
-    document.getElementById('revPrev').disabled = current === 0;
-    document.getElementById('revNext').disabled = current === total - 1;
+    dots.forEach(function(d, i) { d.classList.toggle('active', i === current); });
   }
- 
-  window.slideReviews = function(dir) { goReview(Math.max(0, Math.min(total - 1, current + dir))); };
  
   // Touch swipe
-  var startX = 0;
-  track.addEventListener('touchstart', function(e) { startX = e.touches[0].clientX; }, { passive: true });
+  var startX = 0, startY = 0, dragging = false;
+  track.addEventListener('touchstart', function(e) {
+    startX = e.touches[0].clientX;
+    startY = e.touches[0].clientY;
+  }, { passive: true });
   track.addEventListener('touchend', function(e) {
-    var diff = startX - e.changedTouches[0].clientX;
-    if (Math.abs(diff) > 50) slideReviews(diff > 0 ? 1 : -1);
+    var dx = startX - e.changedTouches[0].clientX;
+    var dy = Math.abs(startY - e.changedTouches[0].clientY);
+    if (Math.abs(dx) > 40 && Math.abs(dx) > dy) goTo(current + (dx > 0 ? 1 : -1));
   }, { passive: true });
  
-  // Init
-  goReview(0);
+  // Mouse drag
+  var mouseStart = 0;
+  track.addEventListener('mousedown', function(e) { mouseStart = e.clientX; dragging = true; e.preventDefault(); });
+  window.addEventListener('mousemove', function(e) { if (dragging) e.preventDefault(); });
+  window.addEventListener('mouseup', function(e) {
+    if (!dragging) return;
+    var dx = mouseStart - e.clientX;
+    if (Math.abs(dx) > 40) goTo(current + (dx > 0 ? 1 : -1));
+    dragging = false;
+  });
+ 
+  goTo(0);
 })();
  
 // FAQ: aggiorna aria-expanded al click
