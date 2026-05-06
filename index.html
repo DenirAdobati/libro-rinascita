@@ -903,11 +903,6 @@ nav.nav-hidden {
   font-weight: 500;
 }
  
-/* Responsive options grid */
-@media (max-width: 580px) {
-  .options-grid { -webkit-flex-direction: column; flex-direction: column; }
-  .option-card { -webkit-flex: 1 1 100%; flex: 1 1 100%; min-width: unset; }
-}
  
 /* ─── Promo widget ───
 .promo-widget {
@@ -1369,17 +1364,6 @@ nav.nav-hidden {
 }
 .gift-desc strong { color: var(--gold); font-weight: 600; }
  
-@media (max-width: 600px) {
-  .gift-widget {
-    -webkit-flex-direction: column;
-    flex-direction: column;
-    text-align: center;
-    padding: 1.75rem 1.25rem;
-    gap: 1.25rem;
-  }
-  .gift-body { -webkit-align-items: center; align-items: center; }
-  .video-section { padding: 0 1rem var(--sp-xl); }
-}
  
 /* ═══════════════════════════════════════════════
    COSA OTTERRAI
@@ -1451,10 +1435,6 @@ nav.nav-hidden {
   line-height: 1.72;
 }
  
-@media (max-width: 767px) {
-  .outcomes-section { padding: var(--sp-xl) 1rem; }
-  .outcome-card { -webkit-flex: 1 1 100%; flex: 1 1 100%; min-width: unset; }
-}
  
 /* ═══════════════════════════════════════════════
    INDICE DEL LIBRO
@@ -1733,19 +1713,8 @@ nav.nav-hidden {
 }
 .book-dot.active { background: var(--gold); -webkit-transform: scale(1.3); transform: scale(1.3); }
  
-@media (max-width: 767px) {
-  .book-page { padding: 2rem 1.5rem; }
-  .book-gate { padding: 3rem 1.5rem 2rem; }
-  .book-controls { padding: 0.85rem 1.25rem; }
-  .indice-section { padding: var(--sp-xl) 1rem; }
-  .preview-section { padding: var(--sp-xl) 1rem; }
-}
-@media (max-width: 479px) {
-  .book-page { padding: 1.5rem 1.1rem; }
-  .book-page-title { font-size: 1rem; }
-  .book-page-text p { font-size: 0.88rem; line-height: 1.75; }
-  .indice-dot { width: 34px; height: 34px; }
-}
+ 
+ 
  
 /* ═══════════════════════════════════════════════
    TESTIMONIANZE — Slider swipe only
@@ -1840,10 +1809,7 @@ nav.nav-hidden {
   transform: scale(1.4);
 }
  
-@media (max-width: 767px) {
-  .review-card { padding: 1.75rem 1.25rem 1.5rem; }
-  .testi-section { padding: var(--sp-xl) 0; }
-}
+ 
 .testi-card {
   -webkit-flex: 1 1 calc(33.33% - 0.7rem);
   flex: 1 1 calc(33.33% - 0.7rem);
@@ -1994,99 +1960,198 @@ footer a:hover { color: var(--gold); }
 @media (max-width: 1024px) {
   nav { padding: 0.85rem 1.75rem; }
   .nav-links { gap: 1.25rem; }
- 
-  .hero { padding: 0 1.25rem 3.5rem; }
- 
+  .hero { padding: 5rem 1.25rem 3.5rem; }
   .buy-inner { gap: 2.5rem; }
   .book-art { width: 190px; min-width: 160px; }
- 
-  /* author-inner rimosso */
-  /* author-img-wrap rimosso */
+  .author-photo-col { width: 46%; }
+  .gift-widget { padding: 1.75rem 1.75rem; }
 }
  
 /* ═══════════════════════════════════════════════
-   RESPONSIVE — MOBILE LARGE (480px–767px)
+   RESPONSIVE — MOBILE (max 767px)
 ═══════════════════════════════════════════════ */
 @media (max-width: 767px) {
   :root {
-    --sp-xl:  2.5rem;
-    --sp-2xl: 3.5rem;
+    --sp-xl:  2rem;
+    --sp-2xl: 3rem;
+    --fs-base: 0.92rem;
   }
  
-  nav { padding: 0.85rem 1.1rem; }
+  /* NAV */
+  nav { padding: 0.85rem 1rem; }
   .nav-links { display: none; }
   .nav-hamburger { display: -webkit-flex; display: flex; }
+  .btn-nav { padding: 0.5rem 1rem; font-size: 0.78rem; }
  
-  .hero { padding: 5rem 1rem 3rem; }
-  .hero-title { font-size: clamp(2.2rem, 11vw, 4rem); line-height: 0.97; }
-  /* Reviews: nascondi Google su mobile medio per non andare a capo */
+  /* HERO */
+  .hero { padding: 5rem 1rem 3rem; min-height: 100vh; }
+  .hero-title { font-size: clamp(2.4rem, 12vw, 4rem); line-height: 0.95; }
+  .hero-eyebrow { font-size: 0.62rem; gap: 0.4rem; }
+  .hero-eyebrow-line { width: 16px; }
+  .hero-author-line { font-size: 0.82rem; }
+  .hero-reviews { padding: 0.4rem 0.85rem; gap: 0.5rem; }
+  .review-stars { font-size: 0.75rem; }
+  .review-text { font-size: 0.72rem; }
   .review-google { display: none; }
-  .review-text { font-size: 0.73rem; }
+  .hero-cta { gap: 0.75rem; }
+  .btn-primary { padding: 0.85rem 1.5rem; font-size: 0.88rem; width: 100%; -webkit-justify-content: center; justify-content: center; }
  
-  /* Foto Daniela mobile: sopra, testo sotto */
-  .author-section {
-    -webkit-flex-direction: column-reverse;
-    flex-direction: column-reverse;
-    min-height: auto;
-  }
-  .author-text-col { padding: 2.5rem 1.25rem; }
-  .author-text-inner { max-width: 100%; }
-  .author-photo-col {
-    width: 100%; height: 65vw;
-    min-height: 300px; max-height: 450px;
-  }
-  .author-photo-col::before {
-    width: 100%; height: 120px;
-    top: auto; bottom: 0; left: 0;
-    background: -webkit-linear-gradient(top, transparent, var(--off));
-    background: linear-gradient(to bottom, transparent, var(--off));
-  }
+  /* VIDEO */
+  .video-section { padding: 2rem 0.75rem 2rem; }
+  .video-wrap { border-radius: 12px; }
  
+  /* BUY SECTION */
   .buy-section { padding: var(--sp-xl) 1rem; }
   .buy-inner {
     -webkit-flex-direction: column;
     flex-direction: column;
     -webkit-align-items: center;
     align-items: center;
-    gap: 2rem;
+    gap: 1.5rem;
   }
-  .book-art {
-    width: 160px;
-    min-width: unset;
+  .book-art { width: 150px; min-width: unset; }
+  .buy-info { -webkit-align-items: center; align-items: center; text-align: center; width: 100%; }
+  .buy-badge-green { margin: 0 auto; }
+  .buy-title { font-size: 1.8rem; }
+  .buy-desc { font-size: 0.85rem; }
+  .gift-widget {
+    -webkit-flex-direction: column;
+    flex-direction: column;
+    text-align: center;
+    padding: 1.5rem 1rem;
+    gap: 1rem;
   }
-  .buy-info { -webkit-align-items: center; align-items: center; text-align: center; }
-  .buy-badge { margin: 0 auto; }
-  .buy-price-row { -webkit-justify-content: center; justify-content: center; }
-  .trust-widgets { -webkit-justify-content: center; justify-content: center; }
-  .trust-widget { -webkit-flex: 1 1 100%; flex: 1 1 100%; }
+  .gift-body { -webkit-align-items: center; align-items: center; }
+  .gift-title { font-size: 1.4rem; }
+  .gift-emoji { font-size: 3rem; }
  
-  .stats-section { padding: 0 1rem var(--sp-xl); }
-  .stats-grid {
-    -webkit-flex-wrap: wrap;
-    flex-wrap: wrap;
-  }
-  .stat-card { -webkit-flex: 1 1 calc(50% - 0.5rem); flex: 1 1 calc(50% - 0.5rem); min-width: 130px; }
- 
+  /* DANIELA */
   .author-section {
     -webkit-flex-direction: column;
     flex-direction: column;
     min-height: auto;
   }
-  .author-text-col { padding: 2rem 1.25rem 2.5rem; }
-  .author-text-inner { max-width: 100%; }
   .author-photo-col {
-    width: 100%; height: 65vw;
-    min-height: 280px; max-height: 420px;
+    width: 100%; height: 70vw;
+    min-height: 260px; max-height: 400px;
   }
   .author-photo-col::before {
-    width: 100%; height: 100px; right: 0;
-    top: auto; bottom: 0; left: 0;
+    width: 100%; height: 100px;
+    top: auto; bottom: 0; right: 0; left: 0;
     background: -webkit-linear-gradient(top, transparent, var(--off));
     background: linear-gradient(to bottom, transparent, var(--off));
   }
-  .media-bar { padding: 1.5rem 1rem; }
+  .author-text-col { padding: 1.75rem 1rem 2rem; }
+  .author-text-inner { max-width: 100%; }
+  .author-title-h2 { font-size: 2.2rem; }
+ 
+  /* MEDIA BAR */
+  .media-bar { padding: 1.25rem 1rem; }
+  .media-bar-inner { gap: 1rem; }
+  .media-bar-label { border-right: none; padding-right: 0; font-size: 0.6rem; }
+  .media-logos { gap: 1rem; }
+  .ml-script { font-size: 1rem; }
+  .ml-bold { font-size: 0.95rem; }
+  .ml-dark, .ml-red { font-size: 0.95rem; }
+  .ml-magazine { font-size: 0.88rem; }
+ 
+  /* OUTCOMES */
+  .outcomes-section { padding: var(--sp-xl) 1rem; }
+  .outcome-card { -webkit-flex: 1 1 100%; flex: 1 1 100%; min-width: unset; }
+ 
+  /* INDICE */
+  .indice-section { padding: var(--sp-xl) 1rem; }
+  .indice-title { font-size: 0.9rem; }
+  .indice-dot { width: 34px; height: 34px; }
+  .indice-num { font-size: 0.65rem; }
+  .indice-content { padding-bottom: 1.25rem; }
+ 
+  /* ANTEPRIMA LIBRO */
+  .preview-section { padding: var(--sp-xl) 1rem; }
+  .book-page { padding: 1.5rem 1.1rem; }
+  .book-page-title { font-size: 1rem; }
+  .book-page-text p { font-size: 0.88rem; line-height: 1.75; text-align: left; }
+  .book-gate { padding: 3rem 1.25rem 2rem; }
+  .book-gate-title { font-size: 1.3rem; }
+  .book-controls { padding: 0.75rem 1rem; }
+ 
+  /* RECENSIONI */
+  .testi-section { padding: var(--sp-xl) 0; }
+  .review-slide { padding: 0 0.75rem 1.5rem; }
+  .review-card { padding: 1.5rem 1.1rem 1.25rem; border-radius: 14px; }
+  .review-card .testi-text { font-size: 0.88rem; line-height: 1.72; }
+ 
+  /* FAQ */
+  .faq-section { padding: var(--sp-xl) 1rem; }
+  .faq-q { font-size: 0.88rem; padding: 1rem 0; }
+ 
+  /* CTA */
+  .cta-section { padding: var(--sp-xl) 1rem; }
+  .cta-title { font-size: clamp(2rem, 10vw, 3rem); }
+  .cta-sub { font-size: 0.88rem; margin-bottom: 1.75rem; }
+ 
+  /* FOOTER */
+  footer { -webkit-justify-content: center; justify-content: center; text-align: center; padding: 1.5rem 1rem; }
+  .footer-links { -webkit-justify-content: center; justify-content: center; }
+}
+ 
+/* ═══════════════════════════════════════════════
+   RESPONSIVE — MOBILE SMALL (max 479px)
+═══════════════════════════════════════════════ */
+@media (max-width: 479px) {
+  :root { --sp-xl: 1.75rem; --sp-2xl: 2.5rem; }
+ 
+  /* NAV */
+  .btn-nav { padding: 0.45rem 0.85rem; font-size: 0.72rem; }
+  .nav-logo-text { font-size: 1rem; }
+ 
+  /* HERO */
+  .hero { padding: 4.5rem 0.85rem 2.5rem; }
+  .hero-title { font-size: clamp(2rem, 14vw, 3.2rem); }
+  .hero-reviews { padding: 0.35rem 0.7rem; gap: 0.35rem; }
+  .review-stars { font-size: 0.65rem; }
+  .review-text { font-size: 0.65rem; }
+ 
+  /* BUY */
+  .buy-title { font-size: 1.5rem; }
+  .gift-title { font-size: 1.2rem; }
+  .gift-desc { font-size: 0.82rem; }
+ 
+  /* DANIELA */
+  .author-photo-col { height: 80vw; max-height: 340px; }
+  .author-title-h2 { font-size: 1.9rem; }
+  .author-quote { font-size: 0.88rem; }
+  .author-bio { font-size: 0.82rem; }
+  .credit { font-size: 0.78rem; }
+ 
+  /* CONTENTS */
+  .contents-section { padding: var(--sp-xl) 0.85rem; }
+  .c-name { font-size: 0.88rem; }
+  .c-desc { font-size: 0.75rem; }
+ 
+  /* INDICE */
+  .indice-section { padding: var(--sp-xl) 0.85rem; }
+ 
+  /* BOOK */
+  .book-page { padding: 1.25rem 0.9rem; }
+  .book-controls { padding: 0.65rem 0.9rem; }
+  .book-btn { font-size: 0.75rem; padding: 0.35rem 0.5rem; }
+ 
+  /* MEDIA */
+  .media-bar-inner { -webkit-flex-direction: column; flex-direction: column; gap: 0.75rem; text-align: center; }
   .media-bar-label { border-right: none; padding-right: 0; }
-  .media-logos { gap: 1.25rem; }
+  .media-logos { gap: 0.75rem; }
+ 
+  /* OUTCOMES */
+  .outcome-title { font-size: 1rem; }
+  .outcome-desc { font-size: 0.8rem; }
+ 
+  /* FAQ */
+  .faq-q { font-size: 0.83rem; }
+ 
+  /* SECTION TITLES */
+  .section-title-big { font-size: clamp(1.6rem, 8vw, 2.2rem); }
+}
  
   .contents-section { padding: var(--sp-xl) 1rem; }
   .content-card { -webkit-flex: 1 1 100%; flex: 1 1 100%; min-width: unset; }
@@ -2106,44 +2171,7 @@ footer a:hover { color: var(--gold); }
 /* ═══════════════════════════════════════════════
    RESPONSIVE — MOBILE SMALL (< 480px)
 ═══════════════════════════════════════════════ */
-@media (max-width: 479px) {
-  :root {
-    --sp-xl:  2rem;
-    --sp-2xl: 3rem;
-  }
  
-  nav { padding: 0.8rem 1rem; }
-  .btn-nav { padding: 0.5rem 0.9rem; font-size: 0.73rem; }
- 
-  .hero { padding: 4.5rem 0.9rem 2.5rem; }
-  .hero-title { font-size: clamp(2rem, 13vw, 3.2rem); line-height: 0.97; }
-  .hero-eyebrow { font-size: 0.62rem; gap: 0.4rem; }
-  .hero-eyebrow-line { width: 16px; }
-  /* Reviews: su piccolo mobile mostra solo stelle + rating */
-  .hero-reviews { padding: 0.4rem 0.8rem; gap: 0.4rem; }
-  .review-stars { font-size: 0.7rem; }
-  .review-text { font-size: 0.68rem; }
-  .review-google { display: none; }
-  .meta-pill { font-size: 0.68rem; padding: 0.35rem 0.8rem; }
-  .btn-primary { padding: 0.8rem 1.5rem; font-size: 0.88rem; }
- 
-  .book-art { width: 140px; }
- 
-  .stats-grid { gap: 0.75rem; }
-  .stat-card { -webkit-flex: 1 1 100%; flex: 1 1 100%; padding: 1.25rem; }
-  .stat-num { font-size: 2.4rem; }
- 
-  /* author-img-wrap rimosso */
- 
-  .buy-title { font-size: 1.6rem; }
-  .big-price { font-size: 2rem; }
- 
-  .section-title-big { font-size: clamp(1.7rem, 8vw, 2.4rem); }
- 
-  .faq-q { font-size: 0.83rem; }
- 
-  .cta-title { font-size: clamp(2rem, 11vw, 3rem); }
-}
  
 /* ═══════════════════════════════════════════════
    PRINT (base)
