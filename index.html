@@ -1293,6 +1293,93 @@ nav.nav-hidden {
 .c-desc { font-size: 0.78rem; color: rgba(255,255,255,0.42); line-height: 1.65; }
  
 /* ═══════════════════════════════════════════════
+   VIDEO
+═══════════════════════════════════════════════ */
+.video-section {
+  background: var(--black);
+  padding: 0 1.5rem var(--sp-xl);
+}
+.video-inner { max-width: 860px; margin: 0 auto; }
+.video-wrap {
+  position: relative;
+  width: 100%;
+  padding-bottom: 56.25%; /* 16:9 */
+  height: 0;
+  overflow: hidden;
+  border-radius: 16px;
+  -webkit-box-shadow: 0 12px 50px rgba(0,0,0,0.5);
+  box-shadow: 0 12px 50px rgba(0,0,0,0.5);
+}
+.video-iframe {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  border: none;
+  border-radius: 16px;
+}
+ 
+/* ═══════════════════════════════════════════════
+   GIFT WIDGET
+═══════════════════════════════════════════════ */
+.gift-widget {
+  display: -webkit-flex;
+  display: flex;
+  -webkit-align-items: center;
+  align-items: center;
+  gap: 1.75rem;
+  background: rgba(234,179,10,0.07);
+  border: 1px solid rgba(234,179,10,0.25);
+  border-radius: 20px;
+  padding: 2rem 2.5rem;
+  margin-top: 0;
+}
+.gift-emoji {
+  font-size: 4rem;
+  line-height: 1;
+  flex-shrink: 0;
+  -webkit-animation: giftFloat 3s ease-in-out infinite;
+  animation: giftFloat 3s ease-in-out infinite;
+}
+@-webkit-keyframes giftFloat { 0%,100%{-webkit-transform:translateY(0) rotate(-3deg);} 50%{-webkit-transform:translateY(-6px) rotate(3deg);} }
+@keyframes giftFloat { 0%,100%{transform:translateY(0) rotate(-3deg);} 50%{transform:translateY(-6px) rotate(3deg);} }
+ 
+.gift-body {
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: column;
+  flex-direction: column;
+  gap: 0.75rem;
+  -webkit-flex: 1;
+  flex: 1;
+}
+.gift-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 900;
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  text-transform: uppercase;
+  color: var(--white);
+  line-height: 1.05;
+}
+.gift-desc {
+  font-size: 0.88rem;
+  color: rgba(255,255,255,0.55);
+  line-height: 1.7;
+}
+.gift-desc strong { color: var(--gold); font-weight: 600; }
+ 
+@media (max-width: 600px) {
+  .gift-widget {
+    -webkit-flex-direction: column;
+    flex-direction: column;
+    text-align: center;
+    padding: 1.75rem 1.25rem;
+    gap: 1.25rem;
+  }
+  .gift-body { -webkit-align-items: center; align-items: center; }
+  .video-section { padding: 0 1rem var(--sp-xl); }
+}
+ 
+/* ═══════════════════════════════════════════════
    INDICE DEL LIBRO
 ═══════════════════════════════════════════════ */
 .indice-section {
@@ -2080,6 +2167,25 @@ footer a:hover { color: var(--gold); }
   </div>
 </section>
  
+ 
+<!-- ══════════════════════════════════════════
+     VIDEO
+═══════════════════════════════════════════ -->
+<section class="video-section" aria-label="Video">
+  <div class="video-inner">
+    <div class="video-wrap">
+      <iframe
+        src="https://www.youtube.com/embed/JChLUlU1hps?rel=0&modestbranding=1"
+        title="Rinascita — Daniela Modina"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen
+        class="video-iframe"
+      ></iframe>
+    </div>
+  </div>
+</section>
+ 
 <!-- ══════════════════════════════════════════
      SEZIONE ACQUISTO
 ═══════════════════════════════════════════ -->
@@ -2108,46 +2214,13 @@ footer a:hover { color: var(--gold); }
       <div class="buy-title">Il libro di<br><span>Daniela Modina</span></div>
       <p class="buy-desc">Un percorso autentico tra cura, ascolto e trasformazione. Le esperienze reali di Margherita, Sonia, Vittoria e molte altre — raccontate con empatia e il Metodo 80/20 di Daniela.</p>
  
-      <!-- Come ottenere il libro -->
-      <div class="how-to-label">Come ricevere il libro</div>
- 
-      <div class="options-grid">
- 
-        <!-- Opzione 1: Spedizione -->
-        <div class="option-card">
-          <div class="option-header">
-            <div class="option-icon">📦</div>
-            <div class="option-badge">Più scelto</div>
-          </div>
-          <div class="option-title">Ricevilo a casa tua</div>
-          <div class="option-price-row">
-            <span class="option-book-free">Il libro è <strong>GRATIS</strong></span>
-          </div>
-          <div class="option-desc">Compila il modulo, ricevi il libro direttamente a casa tua in tutta Italia.</div>
-          <a href="INSERISCI_LINK_TYPEFORM_QUI" class="option-btn option-btn-gold" target="_blank">📖 Voglio il libro</a>
+      <div class="gift-widget">
+        <div class="gift-emoji">🎁</div>
+        <div class="gift-body">
+          <div class="gift-title">Il libro è tuo.<br>Te lo regaliamo noi.</div>
+          <div class="gift-desc">Compila il modulo con i tuoi dati e ti spediamo <strong>Rinascita</strong> completamente gratis — direttamente a casa tua.</div>
+          <a href="INSERISCI_LINK_TYPEFORM_QUI" class="btn-primary" target="_blank">📖 Voglio il libro</a>
         </div>
- 
-        <!-- Opzione 2: Ritiro in sede -->
-        <div class="option-card option-card-special">
-          <div class="option-header">
-            <div class="option-icon">📍</div>
-            <div class="option-badge option-badge-gold">Esclusivo</div>
-          </div>
-          <div class="option-title">Ritira in sede</div>
-          <div class="option-price-row">
-            <span class="option-book-free">Libro <strong>TOTALMENTE GRATIS</strong></span>
-          </div>
-          <div class="option-desc">Vieni da Beautrì a Cologno al Serio e ritira il tuo libro senza pagare nulla. In più, riceverai un <strong>autografo personalizzato</strong> da Daniela Modina.</div>
-          <a href="https://beautri.it" class="option-btn option-btn-outline">
-            📅 Prenota la tua visita
-          </a>
-          <div class="option-perks">
-            <div class="perk-item">✦ Libro completamente gratuito</div>
-            <div class="perk-item">✦ Autografo personalizzato di Daniela</div>
-            <div class="perk-item">✦ Beautrì · Cologno al Serio (BG)</div>
-          </div>
-        </div>
- 
       </div>
  
     </div>
@@ -2156,7 +2229,7 @@ footer a:hover { color: var(--gold); }
 </section>
  
 <!-- ══════════════════════════════════════════
-     STATS
+     AUTRICE
 ═══════════════════════════════════════════ -->
 <section class="stats-section" aria-label="Numeri">
   <div class="stats-grid">
