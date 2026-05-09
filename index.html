@@ -1319,14 +1319,48 @@ nav.nav-hidden {
 .c-desc { font-size: 0.78rem; color: rgba(255,255,255,0.42); line-height: 1.65; }
  
 /* ═══════════════════════════════════════════════
-   VIDEO
+   VIDEO — Premium presentation
 ═══════════════════════════════════════════════ */
 .video-section {
-  background: #1a1a1a;
-  padding: 3.5rem 1.5rem 3.5rem;
-  margin-bottom: 0;
+  background: var(--dark);
+  padding: 4rem 1.5rem 3rem;
+  position: relative;
+  overflow: hidden;
 }
-.video-inner { max-width: 900px; margin: 0 auto; }
+/* Glow dorato di sfondo */
+.video-section::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 50%;
+  -webkit-transform: translateX(-50%);
+  transform: translateX(-50%);
+  width: 600px; height: 200px;
+  background: radial-gradient(ellipse, rgba(234,179,10,0.12), transparent 70%);
+  pointer-events: none;
+}
+ 
+.video-intro {
+  text-align: center;
+  margin-bottom: 2rem;
+  position: relative;
+}
+.video-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 900;
+  font-size: clamp(1.8rem, 4vw, 3rem);
+  text-transform: uppercase;
+  color: var(--white);
+  line-height: 1.05;
+  margin: 0.5rem 0;
+}
+.video-sub {
+  font-size: 0.9rem;
+  color: rgba(255,255,255,0.45);
+  margin-top: 0.5rem;
+  line-height: 1.6;
+}
+ 
+.video-inner { max-width: 820px; margin: 0 auto; position: relative; }
 .video-wrap {
   position: relative;
   width: 100%;
@@ -1334,15 +1368,116 @@ nav.nav-hidden {
   height: 0;
   overflow: hidden;
   border-radius: 16px;
-  -webkit-box-shadow: 0 16px 60px rgba(0,0,0,0.6);
-  box-shadow: 0 16px 60px rgba(0,0,0,0.6);
+  -webkit-box-shadow: 0 24px 80px rgba(0,0,0,0.7), 0 0 0 1px rgba(234,179,10,0.15);
+  box-shadow: 0 24px 80px rgba(0,0,0,0.7), 0 0 0 1px rgba(234,179,10,0.15);
 }
+ 
+/* Thumbnail click-to-play */
+.video-thumbnail {
+  position: absolute;
+  inset: 0; top: 0; left: 0; right: 0; bottom: 0;
+  cursor: pointer;
+  border-radius: 16px;
+  overflow: hidden;
+}
+.video-thumb-img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  display: block;
+  -webkit-transition: -webkit-transform 0.4s ease;
+  transition: transform 0.4s ease;
+}
+.video-thumbnail:hover .video-thumb-img { -webkit-transform: scale(1.03); transform: scale(1.03); }
+ 
+.video-overlay {
+  position: absolute;
+  inset: 0; top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.35);
+  -webkit-transition: background 0.3s;
+  transition: background 0.3s;
+}
+.video-thumbnail:hover .video-overlay { background: rgba(0,0,0,0.2); }
+ 
+.video-play-btn {
+  position: absolute;
+  top: 50%; left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: column;
+  flex-direction: column;
+  -webkit-align-items: center;
+  align-items: center;
+  gap: 0.75rem;
+  pointer-events: none;
+}
+.play-circle {
+  width: 72px; height: 72px;
+  border-radius: 50%;
+  background: var(--gold);
+  display: -webkit-flex;
+  display: flex;
+  -webkit-align-items: center;
+  align-items: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-box-shadow: 0 8px 32px rgba(234,179,10,0.5);
+  box-shadow: 0 8px 32px rgba(234,179,10,0.5);
+  -webkit-transition: -webkit-transform 0.2s, -webkit-box-shadow 0.2s;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.video-thumbnail:hover .play-circle {
+  -webkit-transform: scale(1.1);
+  transform: scale(1.1);
+  -webkit-box-shadow: 0 12px 48px rgba(234,179,10,0.7);
+  box-shadow: 0 12px 48px rgba(234,179,10,0.7);
+}
+.play-label {
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--white);
+  text-shadow: 0 1px 8px rgba(0,0,0,0.5);
+}
+ 
 .video-iframe {
   position: absolute;
   top: 0; left: 0;
   width: 100%; height: 100%;
   border: none;
   border-radius: 16px;
+}
+ 
+/* Badge sotto */
+.video-badges {
+  display: -webkit-flex;
+  display: flex;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-flex-wrap: wrap;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-top: 1.75rem;
+}
+.video-badge {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 50px;
+  padding: 0.4rem 1rem;
+  font-size: 0.75rem;
+  color: rgba(255,255,255,0.55);
+  white-space: nowrap;
+}
+ 
+@media (max-width: 767px) {
+  .video-section { padding: 2.5rem 0.85rem 2rem; }
+  .play-circle { width: 56px; height: 56px; }
+  .play-circle svg { width: 22px; height: 22px; }
+  .video-wrap { border-radius: 12px; }
+  .video-thumbnail { border-radius: 12px; }
 }
  
 /* ═══════════════════════════════════════════════
@@ -1570,181 +1705,100 @@ nav.nav-hidden {
 }
  
 /* ═══════════════════════════════════════════════
-   ANTEPRIMA — Book widget
+   ANTEPRIMA — Book slider swipe
 ═══════════════════════════════════════════════ */
-.preview-section {
-  background: var(--off);
-  padding: var(--sp-2xl) 1.5rem;
-}
+.preview-section { background: var(--off); padding: var(--sp-2xl) 1.5rem; }
 .preview-inner { max-width: 680px; margin: 0 auto; }
  
 .book-widget {
   background: var(--white);
-  border-radius: 16px;
+  border-radius: 20px;
   border: 1px solid var(--border);
   -webkit-box-shadow: 0 12px 50px rgba(0,0,0,0.1);
   box-shadow: 0 12px 50px rgba(0,0,0,0.1);
   overflow: hidden;
+  -webkit-user-select: none;
+  user-select: none;
 }
- 
-.book-pages { position: relative; min-height: 420px; }
- 
-.book-page {
-  display: none;
-  padding: 3rem 3.5rem;
-  -webkit-animation: pageIn 0.35s ease;
-  animation: pageIn 0.35s ease;
+.book-slider-wrap { overflow: hidden; cursor: grab; position: relative; }
+.book-slider-wrap:active { cursor: grabbing; }
+.book-track {
+  display: -webkit-flex;
+  display: flex;
+  -webkit-transition: -webkit-transform 0.42s cubic-bezier(0.4,0,0.2,1);
+  transition: transform 0.42s cubic-bezier(0.4,0,0.2,1);
+  will-change: transform;
+}
+.book-slide {
+  min-width: 100%;
+  padding: 2.5rem 3rem;
   position: relative;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
 }
-.book-page.active { display: block; }
- 
-@-webkit-keyframes pageIn { from { opacity:0; -webkit-transform:translateY(8px); } to { opacity:1; -webkit-transform:translateY(0); } }
-@keyframes pageIn { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:translateY(0); } }
- 
-.book-page-header {
-  margin-bottom: 1.5rem;
-  padding-bottom: 1rem;
-  border-bottom: 1px solid var(--border);
-}
-.book-chapter {
-  font-size: 0.65rem;
-  font-weight: 700;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--gold);
-}
- 
+.book-slide-gate { padding-bottom: 1.5rem; }
+.book-page-header { margin-bottom: 1.5rem; padding-bottom: 0.85rem; border-bottom: 1px solid var(--border); }
+.book-chapter { font-size: 0.65rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); }
 .book-page-title {
   font-family: 'Playfair Display', Georgia, serif;
-  font-size: clamp(1.1rem, 2.5vw, 1.4rem);
-  font-weight: 700;
-  font-style: italic;
-  line-height: 1.35;
-  color: var(--black);
-  margin-bottom: 1.5rem;
+  font-size: clamp(1.05rem, 2vw, 1.3rem);
+  font-weight: 700; font-style: italic; line-height: 1.4;
+  color: var(--black); margin-bottom: 1.5rem;
 }
- 
 .book-page-text { display: -webkit-flex; display: flex; -webkit-flex-direction: column; flex-direction: column; gap: 1rem; }
 .book-page-text p {
   font-family: Georgia, 'Times New Roman', serif;
-  font-size: clamp(0.9rem, 1.5vw, 1rem);
-  line-height: 1.85;
-  color: #2a2a2a;
-  text-align: justify;
+  font-size: clamp(0.92rem, 1.5vw, 1rem);
+  line-height: 1.85; color: #2a2a2a; text-align: justify;
 }
- 
-/* Fade sull'ultima pagina prima del gate */
 .book-page-text-fade {
-  -webkit-mask-image: -webkit-linear-gradient(top, black 50%, transparent 100%);
-  mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
-  pointer-events: none;
+  -webkit-mask-image: -webkit-linear-gradient(top, black 40%, transparent 100%);
+  mask-image: linear-gradient(to bottom, black 40%, transparent 100%);
 }
- 
 .book-page-num {
-  text-align: center;
-  font-family: Georgia, serif;
-  font-size: 0.78rem;
-  color: rgba(0,0,0,0.25);
-  margin-top: 2rem;
-  letter-spacing: 0.1em;
+  text-align: center; font-family: Georgia, serif;
+  font-size: 0.78rem; color: rgba(0,0,0,0.22);
+  margin-top: 1.75rem; letter-spacing: 0.1em;
 }
- 
-/* Gate sull'ultima pagina */
+.book-swipe-hint {
+  text-align: center; font-size: 0.68rem; font-weight: 600;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: rgba(0,0,0,0.25); margin-top: 0.5rem;
+  -webkit-animation: hintPulse 2.5s ease-in-out infinite;
+  animation: hintPulse 2.5s ease-in-out infinite;
+}
+@-webkit-keyframes hintPulse { 0%,100%{opacity:0.35;} 50%{opacity:1;} }
+@keyframes hintPulse { 0%,100%{opacity:0.35;} 50%{opacity:1;} }
 .book-gate {
-  position: absolute;
-  bottom: 0; left: 0; right: 0;
+  position: absolute; bottom: 0; left: 0; right: 0;
   background: -webkit-linear-gradient(top, transparent 0%, rgba(255,255,255,0.96) 25%, var(--white) 50%);
   background: linear-gradient(to bottom, transparent 0%, rgba(255,255,255,0.96) 25%, var(--white) 50%);
-  padding: 4rem 3.5rem 2.5rem;
-  display: -webkit-flex;
-  display: flex;
-  -webkit-align-items: flex-end;
-  align-items: flex-end;
-  -webkit-justify-content: center;
-  justify-content: center;
-  min-height: 260px;
+  padding: 4rem 3rem 2rem; min-height: 240px;
+  display: -webkit-flex; display: flex;
+  -webkit-align-items: flex-end; align-items: flex-end;
+  -webkit-justify-content: center; justify-content: center;
 }
 .book-gate-inner {
-  text-align: center;
-  display: -webkit-flex;
-  display: flex;
-  -webkit-flex-direction: column;
-  flex-direction: column;
-  -webkit-align-items: center;
-  align-items: center;
-  gap: 0.65rem;
+  text-align: center; display: -webkit-flex; display: flex;
+  -webkit-flex-direction: column; flex-direction: column;
+  -webkit-align-items: center; align-items: center; gap: 0.6rem;
 }
 .book-gate-icon { font-size: 1.8rem; }
-.book-gate-title {
-  font-family: 'Barlow Condensed', sans-serif;
-  font-weight: 900;
-  font-size: 1.5rem;
-  text-transform: uppercase;
-  color: var(--black);
-}
-.book-gate-sub {
-  font-size: 0.85rem;
-  color: var(--muted);
-  line-height: 1.6;
-  max-width: 340px;
-}
- 
-/* Controlli */
-.book-controls {
-  display: -webkit-flex;
-  display: flex;
-  -webkit-align-items: center;
-  align-items: center;
-  -webkit-justify-content: space-between;
-  justify-content: space-between;
-  padding: 1.1rem 2rem;
-  border-top: 1px solid var(--border);
-  background: var(--off);
-}
-.book-btn {
-  font-family: 'Outfit', sans-serif;
-  font-size: 0.82rem;
-  font-weight: 600;
-  color: var(--muted);
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 0.4rem 0.75rem;
-  border-radius: 6px;
-  -webkit-transition: color 0.2s, background 0.2s;
-  transition: color 0.2s, background 0.2s;
-}
-.book-btn:hover { color: var(--black); background: var(--border); }
-.book-btn:disabled { opacity: 0.3; cursor: default; }
-.book-btn-next { color: var(--black); font-weight: 700; }
-.book-progress {
-  font-size: 0.78rem;
-  color: var(--muted);
-  font-family: 'Outfit', sans-serif;
-}
- 
+.book-gate-title { font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: 1.5rem; text-transform: uppercase; color: var(--black); }
+.book-gate-sub { font-size: 0.85rem; color: var(--muted); }
 .book-dots {
-  display: -webkit-flex;
-  display: flex;
-  -webkit-justify-content: center;
-  justify-content: center;
-  gap: 0.4rem;
-  padding: 0.85rem;
-  border-top: 1px solid var(--border);
-  background: var(--off);
+  display: -webkit-flex; display: flex;
+  -webkit-justify-content: center; justify-content: center;
+  gap: 0.4rem; padding: 1rem;
+  border-top: 1px solid var(--border); background: var(--off);
 }
-.book-dot {
-  width: 7px; height: 7px;
-  border-radius: 50%;
-  background: rgba(0,0,0,0.15);
-  cursor: pointer;
+.book-dot-btn {
+  width: 7px; height: 7px; border-radius: 50%;
+  background: rgba(0,0,0,0.15); border: none; padding: 0; cursor: pointer;
   -webkit-transition: background 0.2s, -webkit-transform 0.2s;
   transition: background 0.2s, transform 0.2s;
 }
-.book-dot.active { background: var(--gold); -webkit-transform: scale(1.3); transform: scale(1.3); }
- 
- 
- 
+.book-dot-btn.active { background: var(--gold); -webkit-transform: scale(1.4); transform: scale(1.4); }
  
 /* ═══════════════════════════════════════════════
    TESTIMONIANZE — Slider swipe only
@@ -2027,9 +2081,7 @@ footer a:hover { color: var(--gold); }
   .hero-cta { gap: 0.75rem; }
   .btn-primary { padding: 0.85rem 1.5rem; font-size: 0.88rem; width: 100%; -webkit-justify-content: center; justify-content: center; }
  
-  /* VIDEO */
-  .video-section { padding: 2rem 0.75rem 2rem; }
-  .video-wrap { border-radius: 12px; }
+  /* VIDEO — gestito nel CSS del componente */
  
   /* BUY SECTION */
   .buy-section { padding: var(--sp-xl) 1rem; }
@@ -2309,18 +2361,60 @@ footer a:hover { color: var(--gold); }
      VIDEO
 ═══════════════════════════════════════════ -->
 <section class="video-section" aria-label="Video">
+ 
+  <!-- Testo introduttivo -->
+  <div class="video-intro">
+    <div class="eyebrow" style="color:var(--gold);-webkit-justify-content:center;justify-content:center;">
+      <div class="eyebrow-line"></div>
+      Guarda il video
+      <div class="eyebrow-line"></div>
+    </div>
+    <h2 class="video-title">L'evento di lancio di <span class="gold">Rinascita</span></h2>
+    <p class="video-sub">Una serata speciale dedicata al libro, alle storie e alle persone che le hanno vissute.</p>
+  </div>
+ 
+  <!-- Player -->
   <div class="video-inner">
     <div class="video-wrap">
+      <!-- Thumbnail click-to-play per performance migliore -->
+      <div class="video-thumbnail" id="videoThumb" onclick="playVideo()" role="button" tabindex="0" aria-label="Riproduci video">
+        <img
+          src="https://img.youtube.com/vi/JChLUlU1hps/maxresdefault.jpg"
+          alt="Rinascita Event — Beautrì"
+          class="video-thumb-img"
+          onerror="this.src='https://img.youtube.com/vi/JChLUlU1hps/hqdefault.jpg'"
+        >
+        <div class="video-overlay"></div>
+        <div class="video-play-btn" aria-hidden="true">
+          <div class="play-circle">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="white">
+              <path d="M8 5v14l11-7z"/>
+            </svg>
+          </div>
+          <span class="play-label">Guarda il video</span>
+        </div>
+      </div>
       <iframe
-        src="https://www.youtube.com/embed/JChLUlU1hps?rel=0&modestbranding=1"
+        id="videoFrame"
+        src=""
+        data-src="https://www.youtube.com/embed/JChLUlU1hps?rel=0&modestbranding=1&autoplay=1"
         title="Rinascita — Daniela Modina"
         frameborder="0"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
         allowfullscreen
         class="video-iframe"
+        style="display:none;"
       ></iframe>
     </div>
   </div>
+ 
+  <!-- Badge sotto video -->
+  <div class="video-badges">
+    <div class="video-badge">📖 Presentazione del libro</div>
+    <div class="video-badge">💛 Cologno al Serio, Bergamo</div>
+    <div class="video-badge">🎤 Daniela Modina</div>
+  </div>
+ 
 </section>
  
 <!-- ══════════════════════════════════════════
@@ -2685,94 +2779,78 @@ footer a:hover { color: var(--gold); }
     <!-- Book widget -->
     <div class="book-widget">
  
-      <!-- Pagine -->
-      <div class="book-pages" id="bookPages">
+      <!-- Track scorrevole — swipe sinistra/destra -->
+      <div class="book-slider-wrap" id="bookSliderWrap">
+        <div class="book-track" id="bookTrack">
  
-        <!-- PAGINA 1 -->
-        <div class="book-page active" data-page="1">
-          <div class="book-page-header">
-            <span class="book-chapter">CAPITOLO 4 · STORIE DI SUCCESSO</span>
-          </div>
-          <h2 class="book-page-title">Come la grande sfida di Alexandra contro un'alopecia areata totale è diventata il nostro miglior risultato.</h2>
-          <div class="book-page-text">
-            <p>Alexandra, dodicenne, si è presentata da noi come un pulcino bagnato: timida, impacciata, a disagio, molto abbattuta, senza un minimo di energia. Il pulcino nasce tutto bagnato, con una peluria che sembra incollata alla pelle.</p>
-            <p>Un pulcino bagnato perde tutta la sua energia poiché disperde il calore interno, oltre ad avere freddo e sentirsi disorientato in un corpo che non lo rispecchia. Ricordo come fosse ieri il suo volto grigio, lo sguardo basso e la diffidenza nei miei confronti.</p>
-            <p>La testa completamente ricoperta di fermagli, esattamente 110, con cui intrecciava le uniche due ciocche frontali rimaste. Con una maestria che solo una persona disperata può mettere in atto, la sua testa sembrava un'opera d'arte, ma quanto disagio stava vivendo...</p>
-          </div>
-          <div class="book-page-num">— 27 —</div>
-        </div>
- 
-        <!-- PAGINA 2 -->
-        <div class="book-page" data-page="2">
-          <div class="book-page-header">
-            <span class="book-chapter">RINASCITA · Daniela Modina</span>
-          </div>
-          <div class="book-page-text">
-            <p>In consulenza, la mamma mi racconta tutto il passato di Alexandra: visite su visite, ma la situazione continuava a peggiorare e anche l'autostima di Alexandra peggiorava di giorno in giorno. La pediatra che la seguiva e l'aveva indirizzata a diversi specialisti le aveva infine consigliato di optare per qualcosa di diverso e meno invasivo.</p>
-            <p>I farmaci che assumeva avevano numerose controindicazioni, quindi era sconsigliato continuarli. Nelle prime settimane Alexandra mi scrutava in ogni movimento, leggeva ogni mio labiale. La sua insicurezza la rendeva diffidente, ma dopo circa venti giorni è nata una vera empatia.</p>
-            <p>La titubanza ha lasciato il posto ad abbracci, coccole e carezze. Comprendevo bene la mamma, disposta a portarla ovunque pur di ridarle il sorriso, mentre Alexandra si sentiva rimbalzata da un medico all'altro alla ricerca di qualche miglioramento.</p>
-          </div>
-          <div class="book-page-num">— 28 —</div>
-        </div>
- 
-        <!-- PAGINA 3 -->
-        <div class="book-page" data-page="3">
-          <div class="book-page-header">
-            <span class="book-chapter">RINASCITA · Daniela Modina</span>
-          </div>
-          <div class="book-page-text">
-            <p>"Alopecia Areata da Stress" è stata la diagnosi confermata da ben quattro specialisti, ma nonostante i farmaci e i numerosi esami, i miglioramenti non arrivavano. "Io non vado più da nessuno", mi sussurrava Alexandra, "voglio solo voi!"</p>
-            <p>Ero diventata il suo punto di riferimento, il suo faro, la sua luce. Quando Alexandra entrava in salone, tutti gli occhi erano per lei. La complicità che si era creata era speciale. Con il capo basso, la testa coperta, mi stringeva forte e non mi mollava più.</p>
-            <p>Per sopperire a questa mancanza, indossava felpe e giacche con cappuccio, perfino a scuola o con le amiche. Ciò le permetteva di mantenere una certa tranquillità e di conservare una vita sociale. Le uniche due ciocche che le erano rimaste si assottigliavano piano piano fino a scomparire, come anche le ciglia e le sopracciglia.</p>
-            <p>Nessuna ragazzina di dodici anni dovrebbe vivere una situazione simile, pensavo tra me e me. Non è accettabile che la spensieratezza di quest'età venga negata da un problema così invalidante. Era diventata per me una sfida personale.</p>
-          </div>
-          <div class="book-page-num">— 28 —</div>
-        </div>
- 
-        <!-- PAGINA 4 — con gate -->
-        <div class="book-page" data-page="4">
-          <div class="book-page-header">
-            <span class="book-chapter">RINASCITA · Daniela Modina</span>
-          </div>
-          <div class="book-page-text book-page-text-fade">
-            <p>Avevo ridato il sorriso a tante persone e non potevo fallire proprio ora. Alexandra aveva il diritto di vivere liberamente la sua adolescenza come tutte le altre ragazzine.</p>
-            <p>Le diagnosi mediche parlavano chiaro: non c'era nulla che potesse impedire un buon risultato. Sapevo bene quanto fosse difficile prevedere l'evoluzione di un'alopecia areata, e infatti dopo una prima fase di miglioramento, la situazione è peggiorata, tanto che abbiamo dovuto ricorrere a una parrucca.</p>
-            <p>Per Alexandra è stato un passaggio molto delicato: quando si guardava allo specchio, non si riconosceva più. Anche lo sguardo della mamma rifletteva il dolore, ma nonostante la continua richiesta di rassicurazioni e certezze...</p>
-          </div>
-          <!-- GATE -->
-          <div class="book-gate">
-            <div class="book-gate-inner">
-              <div class="book-gate-icon">📖</div>
-              <div class="book-gate-title">Vuoi sapere com'è andata?</div>
-              <div class="book-gate-sub">Il finale di Alexandra è nel libro completo.</div>
-              <a href="INSERISCI_LINK_TYPEFORM_QUI" class="btn-primary" style="font-size:0.88rem;padding:0.8rem 1.6rem;" target="_blank">Clicca qui</a>
+          <!-- PAGINA 1 -->
+          <div class="book-slide">
+            <div class="book-page-header">
+              <span class="book-chapter">CAPITOLO 4 · STORIE DI SUCCESSO</span>
             </div>
+            <h2 class="book-page-title">Come la grande sfida di Alexandra contro un'alopecia areata totale è diventata il nostro miglior risultato.</h2>
+            <div class="book-page-text">
+              <p>Alexandra, dodicenne, si è presentata da noi come un pulcino bagnato: timida, impacciata, a disagio, molto abbattuta, senza un minimo di energia. Il pulcino nasce tutto bagnato, con una peluria che sembra incollata alla pelle.</p>
+              <p>Un pulcino bagnato perde tutta la sua energia poiché disperde il calore interno, oltre ad avere freddo e sentirsi disorientato in un corpo che non lo rispecchia. Ricordo come fosse ieri il suo volto grigio, lo sguardo basso e la diffidenza nei miei confronti.</p>
+              <p>La testa completamente ricoperta di fermagli, esattamente 110, con cui intrecciava le uniche due ciocche frontali rimaste. Con una maestria che solo una persona disperata può mettere in atto, la sua testa sembrava un'opera d'arte, ma quanto disagio stava vivendo...</p>
+            </div>
+            <div class="book-page-num">— 27 —</div>
+            <div class="book-swipe-hint">Scorri → per continuare</div>
           </div>
-          <div class="book-page-num">— 29 —</div>
-        </div>
  
-      </div>
+          <!-- PAGINA 2 -->
+          <div class="book-slide">
+            <div class="book-page-header">
+              <span class="book-chapter">RINASCITA · Daniela Modina</span>
+            </div>
+            <div class="book-page-text">
+              <p>In consulenza, la mamma mi racconta tutto il passato di Alexandra: visite su visite, ma la situazione continuava a peggiorare e anche l'autostima di Alexandra peggiorava di giorno in giorno. La pediatra che la seguiva e l'aveva indirizzata a diversi specialisti le aveva infine consigliato di optare per qualcosa di diverso e meno invasivo.</p>
+              <p>I farmaci che assumeva avevano numerose controindicazioni, quindi era sconsigliato continuarli. Nelle prime settimane Alexandra mi scrutava in ogni movimento, leggeva ogni mio labiale. La sua insicurezza la rendeva diffidente, ma dopo circa venti giorni è nata una vera empatia.</p>
+              <p>La titubanza ha lasciato il posto ad abbracci, coccole e carezze. Comprendevo bene la mamma, disposta a portarla ovunque pur di ridarle il sorriso, mentre Alexandra si sentiva rimbalzata da un medico all'altro alla ricerca di qualche miglioramento.</p>
+            </div>
+            <div class="book-page-num">— 28 —</div>
+          </div>
  
-      <!-- Controlli sfoglia -->
-      <div class="book-controls">
-        <button class="book-btn" id="bookPrev" onclick="changePage(-1)" aria-label="Pagina precedente">
-          ← Precedente
-        </button>
-        <div class="book-progress">
-          <span id="bookCurrent">1</span> / <span id="bookTotal">4</span>
-        </div>
-        <button class="book-btn book-btn-next" id="bookNext" onclick="changePage(1)" aria-label="Pagina successiva">
-          Successiva →
-        </button>
-      </div>
+          <!-- PAGINA 3 -->
+          <div class="book-slide">
+            <div class="book-page-header">
+              <span class="book-chapter">RINASCITA · Daniela Modina</span>
+            </div>
+            <div class="book-page-text">
+              <p>"Alopecia Areata da Stress" è stata la diagnosi confermata da ben quattro specialisti, ma nonostante i farmaci e i numerosi esami, i miglioramenti non arrivavano. "Io non vado più da nessuno", mi sussurrava Alexandra, "voglio solo voi!"</p>
+              <p>Ero diventata il suo punto di riferimento, il suo faro, la sua luce. Quando Alexandra entrava in salone, tutti gli occhi erano per lei. La complicità che si era creata era speciale. Con il capo basso, la testa coperta, mi stringeva forte e non mi mollava più.</p>
+              <p>Per sopperire a questa mancanza, indossava felpe e giacche con cappuccio, perfino a scuola o con le amiche. Ciò le permetteva di mantenere una certa tranquillità e di conservare una vita sociale. Le uniche due ciocche che le erano rimaste si assottigliavano piano piano fino a scomparire, come anche le ciglia e le sopracciglia.</p>
+              <p>Nessuna ragazzina di dodici anni dovrebbe vivere una situazione simile, pensavo tra me e me. Non è accettabile che la spensieratezza di quest'età venga negata da un problema così invalidante. Era diventata per me una sfida personale.</p>
+            </div>
+            <div class="book-page-num">— 28 —</div>
+          </div>
  
-      <!-- Indicatori pagina -->
-      <div class="book-dots">
-        <span class="book-dot active" onclick="goToPage(1)"></span>
-        <span class="book-dot" onclick="goToPage(2)"></span>
-        <span class="book-dot" onclick="goToPage(3)"></span>
-        <span class="book-dot" onclick="goToPage(4)"></span>
-      </div>
+          <!-- PAGINA 4 — gate -->
+          <div class="book-slide book-slide-gate">
+            <div class="book-page-header">
+              <span class="book-chapter">RINASCITA · Daniela Modina</span>
+            </div>
+            <div class="book-page-text book-page-text-fade">
+              <p>Avevo ridato il sorriso a tante persone e non potevo fallire proprio ora. Alexandra aveva il diritto di vivere liberamente la sua adolescenza come tutte le altre ragazzine.</p>
+              <p>Le diagnosi mediche parlavano chiaro: non c'era nulla che potesse impedire un buon risultato. Sapevo bene quanto fosse difficile prevedere l'evoluzione di un'alopecia areata, e infatti dopo una prima fase di miglioramento, la situazione è peggiorata, tanto che abbiamo dovuto ricorrere a una parrucca.</p>
+              <p>Per Alexandra è stato un passaggio molto delicato: quando si guardava allo specchio, non si riconosceva più. Anche lo sguardo della mamma rifletteva il dolore, ma nonostante la continua richiesta di rassicurazioni e certezze...</p>
+            </div>
+            <div class="book-gate">
+              <div class="book-gate-inner">
+                <div class="book-gate-icon">📖</div>
+                <div class="book-gate-title">Vuoi sapere com'è andata?</div>
+                <div class="book-gate-sub">Il finale di Alexandra è nel libro completo.</div>
+                <a href="INSERISCI_LINK_TYPEFORM_QUI" class="btn-primary" style="font-size:0.88rem;padding:0.8rem 1.6rem;" target="_blank">Clicca qui</a>
+              </div>
+            </div>
+            <div class="book-page-num">— 29 —</div>
+          </div>
+ 
+        </div><!-- end track -->
+      </div><!-- end slider-wrap -->
+ 
+      <!-- Solo i dot indicatori, niente bottoni -->
+      <div class="book-dots" id="bookDots"></div>
  
     </div>
   </div>
@@ -2904,43 +2982,64 @@ footer a:hover { color: var(--gold); }
 </footer>
  
 <script>
-// Book widget — sfoglia storia Alexandra
-var currentPage = 1;
-var totalPages = 4;
- 
-function changePage(dir) {
-  var next = currentPage + dir;
-  if (next < 1 || next > totalPages) return;
-  goToPage(next);
+// Click-to-play video
+function playVideo() {
+  var thumb = document.getElementById('videoThumb');
+  var frame = document.getElementById('videoFrame');
+  if (!thumb || !frame) return;
+  frame.src = frame.getAttribute('data-src');
+  frame.style.display = 'block';
+  thumb.style.display = 'none';
 }
+(function() {
+  var track = document.getElementById('bookTrack');
+  if (!track) return;
+  var slides = track.querySelectorAll('.book-slide');
+  var total = slides.length;
+  var current = 0;
+  var dotsWrap = document.getElementById('bookDots');
+  var dots = [];
  
-function goToPage(n) {
-  // Nascondi pagina corrente
-  var pages = document.querySelectorAll('.book-page');
-  var dots = document.querySelectorAll('.book-dot');
-  pages.forEach(function(p) { p.classList.remove('active'); });
-  dots.forEach(function(d) { d.classList.remove('active'); });
- 
-  // Mostra nuova pagina
-  currentPage = n;
-  pages[n - 1].classList.add('active');
-  dots[n - 1].classList.add('active');
- 
-  // Aggiorna contatore
-  document.getElementById('bookCurrent').textContent = n;
- 
-  // Gestisci bottoni
-  document.getElementById('bookPrev').disabled = (n === 1);
-  document.getElementById('bookNext').disabled = (n === totalPages);
- 
-  // Scroll al widget se si sfoglia
-  if (n > 1) {
-    document.querySelector('.book-widget').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  // Build dots
+  for (var i = 0; i < total; i++) {
+    var d = document.createElement('button');
+    d.className = 'book-dot-btn' + (i === 0 ? ' active' : '');
+    d.setAttribute('aria-label', 'Pagina ' + (i + 1));
+    (function(idx) { d.addEventListener('click', function() { goBook(idx); }); })(i);
+    dotsWrap.appendChild(d);
+    dots.push(d);
   }
-}
  
-// Inizializza stato bottoni
-document.getElementById('bookPrev').disabled = true;
+  function goBook(n) {
+    current = Math.max(0, Math.min(total - 1, n));
+    track.style.transform = 'translateX(-' + (current * 100) + '%)';
+    dots.forEach(function(d, i) { d.classList.toggle('active', i === current); });
+  }
+ 
+  // Touch swipe
+  var tStartX = 0, tStartY = 0;
+  track.addEventListener('touchstart', function(e) {
+    tStartX = e.touches[0].clientX;
+    tStartY = e.touches[0].clientY;
+  }, { passive: true });
+  track.addEventListener('touchend', function(e) {
+    var dx = tStartX - e.changedTouches[0].clientX;
+    var dy = Math.abs(tStartY - e.changedTouches[0].clientY);
+    if (Math.abs(dx) > 40 && Math.abs(dx) > dy) goBook(current + (dx > 0 ? 1 : -1));
+  }, { passive: true });
+ 
+  // Mouse drag
+  var mStart = 0, dragging = false;
+  track.addEventListener('mousedown', function(e) { mStart = e.clientX; dragging = true; e.preventDefault(); });
+  window.addEventListener('mouseup', function(e) {
+    if (!dragging) return;
+    var dx = mStart - e.clientX;
+    if (Math.abs(dx) > 40) goBook(current + (dx > 0 ? 1 : -1));
+    dragging = false;
+  });
+ 
+  goBook(0);
+})();
  
 // Reviews slider — swipe + mouse drag only
 (function() {
